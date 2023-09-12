@@ -18,8 +18,8 @@ class CreateAppointmentsTable extends Migration
             $table->date("appointment_date");
             $table->time("appointment_start");
             $table->time("appointment_end");
-            $table->enum("payment", ["Cash, Credit, Trade"]);
-            $table->enum("order_status", ["Proses, Credit, Trade"]);
+            $table->enum("payment", ["Cash", "Credit", "Trade"]);
+            $table->enum("order_status", ["Processed", "Finished", "Cancelled"]);
             $table->unsignedBigInteger("user_id");
             $table->timestamps();
 

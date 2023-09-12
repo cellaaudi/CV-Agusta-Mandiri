@@ -18,7 +18,12 @@ class CreateEmployeesTable extends Migration
             $table->string('name');
             $table->text('photo');
             $table->string('contact');
+            $table->unsignedBigInteger('department_id');
+            $table->unsignedBigInteger('position_id');
             $table->timestamps();
+
+            $table->foreign('department_id')->references('id')->on('departments');
+            $table->foreign('position_id')->references('id')->on('positions');
         });
     }
 

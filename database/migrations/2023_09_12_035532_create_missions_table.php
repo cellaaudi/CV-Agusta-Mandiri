@@ -16,10 +16,10 @@ class CreateMissionsTable extends Migration
         Schema::create('missions', function (Blueprint $table) {
             $table->id();
             $table->text("mission");
-            $table->unsignedBigInteger("companies_id");
+            $table->unsignedBigInteger("company_id");
             $table->timestamps();
 
-            $table->foreign("companies_id")->references("id")->on("companies");
+            $table->foreign("company_id")->references("id")->on("companies");
         });
     }
 

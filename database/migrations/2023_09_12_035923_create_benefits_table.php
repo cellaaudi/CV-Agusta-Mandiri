@@ -16,10 +16,10 @@ class CreateBenefitsTable extends Migration
         Schema::create('benefits', function (Blueprint $table) {
             $table->id();
             $table->text("benefit");
-            $table->unsignedBigInteger("companies_id");
+            $table->unsignedBigInteger("company_id");
             $table->timestamps();
 
-            $table->foreign("companies_id")->references("id")->on("companies");
+            $table->foreign("company_id")->references("id")->on("companies");
         });
     }
 

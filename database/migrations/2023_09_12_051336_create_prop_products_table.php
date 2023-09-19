@@ -24,7 +24,7 @@ class CreatePropProductsTable extends Migration
             $table->integer('bathroom')->nullable();
             $table->integer('story')->nullable();
             $table->integer('electricity')->nullable();
-            $table->enum('certification', ['SHM', 'AJB', 'SHGB', 'Petok']);
+            $table->enum('certification', ['SHM', 'PBB', 'IMB', 'Adat']);
             $table->longtext("description");
             $table->enum('status', ['Available', 'Sold'])->default('Available');
             $table->unsignedBigInteger('prop_category_id');

@@ -17,6 +17,7 @@ class CreateAdvProductsTable extends Migration
             $table->id();
             $table->string("name");
             $table->text("photo");
+            $table->enum('category', ['Indoor', 'Outdoor', 'IO']);
             $table->timestamps();
         });
     }

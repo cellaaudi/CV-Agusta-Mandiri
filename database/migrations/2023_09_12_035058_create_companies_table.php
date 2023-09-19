@@ -18,6 +18,14 @@ class CreateCompaniesTable extends Migration
             $table->string("name");
             $table->longtext("about_us");
             $table->text("vision");
+            $table->string('telephone_1');
+            $table->string('telephone_2')->nullable();
+            $table->string('instagram')->nullable();
+            $table->string('facebook')->nullable();
+            $table->string('email');
+            $table->string('website')->nullable();
+            $table->longText('address_1');
+            $table->longText('address_2')->nullable();
             $table->timestamps();
         });
     }

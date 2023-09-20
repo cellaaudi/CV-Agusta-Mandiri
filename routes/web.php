@@ -21,6 +21,6 @@ Route::get('/dash', function () {
     return view('admin.index');
 });
 
-Route::get('/admin', function () {
-    return view('admin.index');
-});
+Route::get('/advertising', function () {
+    return view('admin.adv');
+})->name('advertising');

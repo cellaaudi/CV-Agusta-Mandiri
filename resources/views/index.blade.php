@@ -70,7 +70,8 @@
             </ul>
           </li>
           <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
-          <li><a class="getstarted scrollto" href="#about">Get Started</a></li>
+          <li><a class="getstarted scrollto" href="#about">Daftar</a></li>
+          <li><a class="getstarted scrollto" href="#about">Masuk</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
@@ -86,7 +87,7 @@
         <div class="col-xl-5 col-lg-6 pt-3 pt-lg-0 order-2 order-lg-1 d-flex flex-column justify-content-center">
           <h1>CV Agusta Mandiri</h1>
           <h2>Perusahaan yang bergerak di bidang advertising, otomotif, dan properti di Bali</h2>
-          <div><a href="#about" class="btn-get-started scrollto">Get Started</a></div>
+          <div><a href="#about" class="btn-get-started scrollto">Login</a></div>
         </div>
         <div class="col-xl-4 col-lg-6 order-1 order-lg-2 hero-img" data-aos="zoom-in" data-aos-delay="150">
           <img src="assets/img/hero-img.png" class="img-fluid animated" alt="">

@@ -37,4 +37,22 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    
+    public function getRedirect()
+    {
+        $role = $this->role;
+
+        if($role == "Customer"){
+            return "customer/home";
+        }
+        else{
+            return "admin/home";
+        }
+    }
+
+    public function appoinments()
+    {
+        return $this->hasMany("App\Models\Appointment", "user_id");
+    }
+
 }

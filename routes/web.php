@@ -23,9 +23,9 @@ Route::get('/', function () {
 Route::get('/dash', function () {
     return view('admin.index');
 });
-// Route::get('/login', function () {
-//     return view('auth.login');
-// });
+Route::get('/login2', function () {
+    return view('layouts.auth');
+});
 Route::get('/login', [LoginController::class, 'index']);
 Route::get('/register', [RegisterController::class, 'index']);
 Route::post('/register', [RegisterController::class, 'store']);

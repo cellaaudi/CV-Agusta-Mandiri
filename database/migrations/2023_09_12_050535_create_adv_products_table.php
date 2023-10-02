@@ -15,7 +15,6 @@ class CreateAdvProductsTable extends Migration
     {
         Schema::create('adv_products', function (Blueprint $table) {
             $table->id();
-            $table->string("code");
             $table->string("name");
             $table->enum('category', ['Indoor', 'Outdoor', 'IO']);
             $table->timestamps();

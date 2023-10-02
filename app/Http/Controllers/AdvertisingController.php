@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Advertising;
+use App\Models\AdvertisingPhoto;
 use Illuminate\Http\Request;
 
 class AdvertisingController extends Controller
@@ -13,7 +15,7 @@ class AdvertisingController extends Controller
      */
     public function index()
     {
-        return view ('admin.adv');
+        return view('admin.adv');
     }
 
     /**
@@ -23,7 +25,7 @@ class AdvertisingController extends Controller
      */
     public function create()
     {
-        return view ('admin.advcreate');
+        return view('admin.advcreate');
     }
 
     /**
@@ -34,13 +36,42 @@ class AdvertisingController extends Controller
      */
     public function store(Request $request)
     {
-        return $request->file('image')->store('images');
-        
-        $validation = $request->validate([
+        $this->validate($request, [
             'name' => 'required',
-            'filename' => 'required',
-            'filename' => 'image|mimes:jpeg,png,jpg,gif,svg|max:5120'
+            'category' => 'required',
+            'photos' => 'required'
         ]);
+        
+        $name = $request->get('name');
+        $category = $request->input('category');
+
+        if ($request->hasFile('photos')) {
+            $allowedExt = ['jpeg', 'jpg', 'png', 'svg'];
+            $files = $request->file('photos');
+
+            foreach ($files as $file) {
+                $filename = $file->getClientOriginalName();
+                $extension = $file->getClientOriginalExtension();
+                $valid = in_array($extension, $allowedExt);
+
+                if ($valid) {
+                    $product = Advertising::create([
+                        'name' => $name,
+                        'category' => $category
+                    ]);
+
+                    foreach($request->photos as $photo) {
+                        $filename = $photo->store('photos');
+                        AdvertisingPhoto::create([
+                            'adv_product_id' => $product->id,
+                            'url' => $filename
+                        ]);
+                    }
+                }
+            }
+        }
+
+        return redirect('/advertising')->with('status', 'Produk berhasil ditambahkan');
     }
 
     /**

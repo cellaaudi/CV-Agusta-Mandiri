@@ -70,8 +70,8 @@
             </ul>
           </li>
           <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
-          <li><a class="getstarted scrollto" href="#about">Daftar</a></li>
-          <li><a class="getstarted scrollto" href="#about">Masuk</a></li>
+          <li><a class="getstarted scrollto" href="/register">Daftar</a></li>
+          <li><a class="getstarted scrollto" href="/login">Masuk</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->

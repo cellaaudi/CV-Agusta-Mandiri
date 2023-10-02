@@ -32,7 +32,8 @@
     <div class="col-12">
         <div class="card">
             <div class="card-body">
-                <form class="mt-3 form-horizontal">
+                <form class="mt-3 form-horizontal" method="POST" enctype="multipart/form-data">
+                    @csrf
                     <div class="form-body">
                         <div class="form-group mb-3 row">
                             <label for="inputHorizontal" class="col-sm-2 col-form-label">Nama produk</label>
@@ -45,7 +46,7 @@
                             <div class="col-sm-10">
                                 <div class="input-group flex-nowrap">
                                     <div class="custom-file w-100">
-                                        <input class="form-control" type="file" id="formFile" require>
+                                        <input class="form-control" type="file" name="filename[]" require>
                                     </div>
                                     <button class="btn btn-outline-secondary btnAddPhoto" type="button">
                                         <i class="fas fa-plus"></i>
@@ -71,7 +72,7 @@
 <script>
     $(document).ready(function() {
         $('.btnAddPhoto').click(function() {
-            $('#photos').append('<div class="col-sm-2 col-form-label"></div><div class="col-sm-10 mt-2"><div class="input-group flex-nowrap"><div class="custom-file w-100"><input class="form-control" type="file" id="formFile"></div><button class="btn btn-outline-danger btnDelPhoto" type="button"><i class="fas fa-minus"></i></button></div></div>');
+            $('#photos').append('<div class="col-sm-2 col-form-label"></div><div class="col-sm-10 mt-2"><div class="input-group flex-nowrap"><div class="custom-file w-100"><input class="form-control" type="file" name="filename[]"></div><button class="btn btn-outline-danger btnDelPhoto" type="button"><i class="fas fa-minus"></i></button></div></div>');
         })
 
         $(document).on('click', '.btnDelPhoto', function() {

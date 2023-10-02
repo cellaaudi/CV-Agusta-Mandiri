@@ -34,7 +34,13 @@ class AdvertisingController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return $request->file('image')->store('images');
+        
+        $validation = $request->validate([
+            'name' => 'required',
+            'filename' => 'required',
+            'filename' => 'image|mimes:jpeg,png,jpg,gif,svg|max:5120'
+        ]);
     }
 
     /**

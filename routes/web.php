@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdvertisingController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,6 +22,4 @@ Route::get('/dash', function () {
     return view('admin.index');
 });
 
-Route::get('/advertising', function () {
-    return view('admin.adv');
-})->name('advertising');
+Route::resource('/advertising', AdvertisingController::class);

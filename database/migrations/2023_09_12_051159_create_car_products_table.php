@@ -15,8 +15,8 @@ class CreateCarProductsTable extends Migration
     {
         Schema::create('car_products', function (Blueprint $table) {
             $table->id();
+            $table->string("code");
             $table->string("title");
-            $table->text("photo");
             $table->year("year");
             $table->double("price");
             $table->double("kilometre");

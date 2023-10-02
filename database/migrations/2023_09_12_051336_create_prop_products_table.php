@@ -15,8 +15,8 @@ class CreatePropProductsTable extends Migration
     {
         Schema::create('prop_products', function (Blueprint $table) {
             $table->id();
+            $table->string("code");
             $table->string('title');
-            $table->text('photo');
             $table->double('price');
             $table->integer('land_area');
             $table->integer('building_area')->nullable();

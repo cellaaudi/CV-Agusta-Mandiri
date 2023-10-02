@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAdvProductsTable extends Migration
+class CreatePropPhotosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,13 @@ class CreateAdvProductsTable extends Migration
      */
     public function up()
     {
-        Schema::create('adv_products', function (Blueprint $table) {
+        Schema::create('prop_photos', function (Blueprint $table) {
             $table->id();
-            $table->string("code");
-            $table->string("name");
-            $table->enum('category', ['Indoor', 'Outdoor', 'IO']);
+            $table->string('url');
+            $table->unsignedBigInteger("prop_product_id");
             $table->timestamps();
+
+            $table->foreign("prop_product_id")->references("id")->on("prop_products");
         });
     }
 
@@ -29,6 +30,6 @@ class CreateAdvProductsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('adv_products');
+        Schema::dropIfExists('prop_photos');
     }
 }

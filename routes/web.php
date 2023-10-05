@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdvertisingController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\CarController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -29,4 +30,7 @@ Route::get('/login2', function () {
 Route::get('/login', [LoginController::class, 'index']);
 Route::get('/register', [RegisterController::class, 'index']);
 Route::post('/register', [RegisterController::class, 'store']);
+
+// ADMIN
 Route::resource('/advertising', AdvertisingController::class);
+Route::resource('/car', CarController::class);

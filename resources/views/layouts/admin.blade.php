@@ -231,10 +231,10 @@
                         <li class="list-divider"></li>
                         <li class="nav-small-cap"><span class="hide-menu">Layanan</span></li>
 
-                        <li class="sidebar-item"> <a class="sidebar-link" href="ticket-list.html" aria-expanded="false"><i data-feather="trending-up" class="feather-icon"></i><span class="hide-menu">Agusta Advertising
+                        <li class="sidebar-item"> <a class="sidebar-link" href="{{ route('advertising.index') }}" aria-expanded="false"><i data-feather="trending-up" class="feather-icon"></i><span class="hide-menu">Agusta Advertising
                                 </span></a>
                         </li>
-                        <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="app-chat.html" aria-expanded="false"><i data-feather="message-square" class="feather-icon"></i><span class="hide-menu">Agusta Motor</span></a></li>
+                        <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="{{ route('car.index') }}" aria-expanded="false"><i data-feather="message-square" class="feather-icon"></i><span class="hide-menu">Agusta Motor</span></a></li>
                         <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="app-calendar.html" aria-expanded="false"><i data-feather="home" class="feather-icon"></i><span class="hide-menu">Agusta Properti</span></a></li>
 
                         <li class="list-divider"></li>

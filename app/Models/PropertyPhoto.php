@@ -10,6 +10,6 @@ class PropertyPhoto extends Model
     use HasFactory;
     public function property()
     {
-        return $this->hasMany("App\Models\Property", "prop_photo_id");
+        return $this->belongsTo("App\Models\Property", "prop_photo_id")->withTrashed();
     }
 }

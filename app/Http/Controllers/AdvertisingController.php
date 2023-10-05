@@ -15,7 +15,9 @@ class AdvertisingController extends Controller
      */
     public function index()
     {
-        return view('admin.adv');
+        $advs = Advertising::all();
+
+        return view('admin.adv.adv', compact('advs'));
     }
 
     /**
@@ -25,7 +27,7 @@ class AdvertisingController extends Controller
      */
     public function create()
     {
-        return view('admin.advcreate');
+        return view('admin.adv.advcreate');
     }
 
     /**
@@ -41,13 +43,18 @@ class AdvertisingController extends Controller
             'category' => 'required',
             'photos' => 'required'
         ]);
-        
+
         $name = $request->get('name');
-        $category = $request->input('category');
+        $category = $request->category;
 
         if ($request->hasFile('photos')) {
             $allowedExt = ['jpeg', 'jpg', 'png', 'svg'];
             $files = $request->file('photos');
+
+            $product = Advertising::create([
+                'name' => $name,
+                'category' => $category
+            ]);
 
             foreach ($files as $file) {
                 $filename = $file->getClientOriginalName();
@@ -55,18 +62,11 @@ class AdvertisingController extends Controller
                 $valid = in_array($extension, $allowedExt);
 
                 if ($valid) {
-                    $product = Advertising::create([
-                        'name' => $name,
-                        'category' => $category
+                    $filename = $file->store('photos');
+                    AdvertisingPhoto::create([
+                        'adv_product_id' => $product->id,
+                        'url' => $filename
                     ]);
-
-                    foreach($request->photos as $photo) {
-                        $filename = $photo->store('photos');
-                        AdvertisingPhoto::create([
-                            'adv_product_id' => $product->id,
-                            'url' => $filename
-                        ]);
-                    }
                 }
             }
         }

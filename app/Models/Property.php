@@ -19,6 +19,6 @@ class Property extends Model
     }
     public function property_photo()
     {
-        return $this->belongsTo("App\Models\PropertyPhoto", "prop_photo_id")->withTrashed();
+        return $this->hasMany("App\Models\PropertyPhoto", "prop_photo_id");
     }
 }

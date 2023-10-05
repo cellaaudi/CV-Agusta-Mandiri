@@ -4,13 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Advertising extends Model
 {
     use HasFactory;
 
     protected $table = 'adv_products';
-    protected $fillable = ['name'];
+    protected $guarded = ['id'];
 
     public function appointment()
     {
@@ -19,6 +20,6 @@ class Advertising extends Model
 
     public function advertising_photo()
     {
-        return $this->belongsTo("App\Models\AdvertisingPhoto", "adv_photo_id")->withTrashed();
+        return $this->hasMany("App\Models\AdvertisingPhoto", "adv_photo_id");
     }
 }

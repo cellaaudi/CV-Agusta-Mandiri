@@ -4,10 +4,10 @@
 @endsection
 
 @section('breadcrumb')
-<!-- <div class="page-breadcrumb">
+<div class="page-breadcrumb">
     <div class="row">
         <div class="col-7 align-self-center">
-            <h4 class="page-title text-truncate text-dark font-weight-medium mb-1">Agusta Advertising</h4>
+            <h4 class="page-title text-truncate text-dark font-weight-medium mb-1">Tambah Produk Advertising</h4>
             <div class="d-flex align-items-center">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb m-0 p-0">
@@ -17,13 +17,8 @@
                 </nav>
             </div>
         </div>
-        <div class="col-5 align-self-center">
-            <div class="customize-input float-end">
-                <button type="button" class="btn btn-primary btn-rounded"><i class="fas fa-plus"></i> Tambah Produk</button>
-            </div>
-        </div>
     </div>
-</div> -->
+</div>
 @endsection
 
 @section('content')

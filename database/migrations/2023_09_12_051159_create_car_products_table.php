@@ -21,7 +21,7 @@ class CreateCarProductsTable extends Migration
             $table->double("kilometre");
             $table->enum("transmission", ["Manual", "Automatic", "Hybrid"]);
             $table->integer("capacity");
-            $table->enum("fuel", ["Petrol", "Diesel", "Electricity"]);
+            $table->enum("fuel", ["Petrol", "Diesel", "Electricity", "Hybrid"]);
             $table->longtext("description");
             $table->enum('status', ['Sell', 'Buy']);
             $table->enum("sell_status", ["Available", "Sold"])->default("Available")->nullable();

@@ -48,7 +48,7 @@ class AdvertisingController extends Controller
         $category = $request->category;
 
         if ($request->hasFile('photos')) {
-            $allowedExt = ['jpeg', 'jpg', 'png', 'svg'];
+            $allowed = ['jpeg', 'jpg', 'png', 'svg', 'gif'];
             $files = $request->file('photos');
 
             $product = Advertising::create([
@@ -59,7 +59,7 @@ class AdvertisingController extends Controller
             foreach ($files as $file) {
                 $filename = $file->getClientOriginalName();
                 $extension = $file->getClientOriginalExtension();
-                $valid = in_array($extension, $allowedExt);
+                $valid = in_array($extension, $allowed);
 
                 if ($valid) {
                     $filename = $file->store('photos');
@@ -71,7 +71,7 @@ class AdvertisingController extends Controller
             }
         }
 
-        return redirect('/advertising')->with('status', 'Produk berhasil ditambahkan');
+        return redirect()->route('admin.advertising.index')->with('status', 'Produk berhasil ditambahkan');
     }
 
     /**
@@ -82,7 +82,10 @@ class AdvertisingController extends Controller
      */
     public function show($id)
     {
-        //
+        $adv = Advertising::find($id);
+        $photos = AdvertisingPhoto::where('adv_product_id', $id)->get();
+
+        return view('admin.adv.advshow', compact('adv', 'photos'));
     }
 
     /**
@@ -93,7 +96,10 @@ class AdvertisingController extends Controller
      */
     public function edit($id)
     {
-        //
+        $adv = Advertising::find($id);
+        $photos = AdvertisingPhoto::where('adv_product_id', $id)->get();
+
+        return view('admin.adv.advedit', compact('adv', 'photos'));
     }
 
     /**

@@ -14,7 +14,7 @@
 <div class="page-breadcrumb">
     <div class="row">
         <div class="col-7 align-self-center">
-            <h4 class="page-title text-truncate text-dark font-weight-medium mb-1">Agusta Motor</h4>
+            <h4 class="page-title text-truncate text-dark font-weight-medium mb-1">Agusta Properti</h4>
             <div class="d-flex align-items-center">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb m-0 p-0">
@@ -26,7 +26,7 @@
         </div>
         <div class="col-5 align-self-center">
             <div class="customize-input float-end">
-                <a href="{{ route('admin.car.create') }}" class="btn btn-primary btn-rounded"><i class="fas fa-plus"></i>     Tambah Produk</a>
+                <a href="{{ route('admin.property.create') }}" class="btn btn-primary btn-rounded"><i class="fas fa-plus"></i>     Tambah Produk</a>
             </div>
         </div>
     </div>
@@ -45,19 +45,35 @@
                             <tr>
                                 <th>ID</th>
                                 <th>Judul</th>
-                                <th>Tahun</th>
                                 <th>Harga</th>
-                                <th>Kilometer</th>
-                                <th>Transmisi</th>
-                                <th>Kapasitas Mesin</th>
-                                <th>Bahan Bakar</th>
+                                <th>Luas Tanah</th>
+                                <th>Luas Bangunan</th>
+                                <th>Kamar</th>
+                                <th>Kamar Mandi</th>
+                                <th>Lantai</th>
+                                <th>Listrik</th>
+                                <th>Sertifikasi</th>
+                                <th>Deskripsi</th>
+                                <th>Status</th>
+                                <th>Kategori</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($cars as $car)
+                            @foreach($props as $prop)
                             <tr>
-                                <td>{{ $car -> id }}</td>
-                                <td>{{ $car -> title }}</td>
+                                <td>{{ $prop -> id }}</td>
+                                <td>{{ $prop -> title }}</td>
+                                <td>{{ $prop -> price }}</td>
+                                <td>{{ $prop -> land_area }}m<sup>2</sup></td>
+                                <td>{{ $prop -> building_area }}m<sup>2</sup></td>
+                                <td>{{ $prop -> bedroom }}</td>
+                                <td>{{ $prop -> bathroom }}</td>
+                                <td>{{ $prop -> story }}</td>
+                                <td>{{ $prop -> electricity }} Watt</td>
+                                <td>{{ $prop -> certificate }}</td>
+                                <td>{{ $prop -> description }}</td>
+                                <td>{{ $prop -> status }}</td>
+                                <td>{{ $prop -> property_category -> category }}</td>
                             </tr>
                             @endforeach
                         </tbody>

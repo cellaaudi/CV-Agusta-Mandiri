@@ -42,10 +42,13 @@ Route::resource('/car', CarController::class);
 
 Route::middleware(['auth'])->group(function(){
     Route::get('/', [HomeController::class, 'index']);
-    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+    Route::get('/home', [HomeController::class, 'index'])->name('home');
     
     Route::middleware("can:admin")->group(function(){
         // nanti route admin masuk sini
+        Route::get('/homeadmin', function () {
+            return view('admin.index');
+        })->name("admin.home");
     });
     Route::middleware("can:customer")->group(function(){
         // route customer

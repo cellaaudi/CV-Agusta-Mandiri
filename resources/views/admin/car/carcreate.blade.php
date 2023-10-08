@@ -27,7 +27,7 @@
     <div class="col-12">
         <div class="card">
             <div class="card-body">
-                <form class="mt-3 form-horizontal" method="post" enctype="multipart/form-data" action="{{ route('advertising.store') }}">
+                <form class="mt-3 form-horizontal" method="post" enctype="multipart/form-data" action="{{ route('admin.advertising.store') }}">
                     @csrf
                     <div class="form-body">
                         <div class="form-group mb-3 row">
@@ -163,7 +163,7 @@
                     <div class="form-actions">
                         <div class="text-end">
                             <button type="reset" class="btn btn-outline-danger btn-rounded">Hapus</button>
-                            <button type="submit" class="btn btn-primary btn-rounded">Tambah Iklan</button>
+                            <button type="submit" class="btn btn-primary btn-rounded">Simpan</button>
                         </div>
                     </div>
                 </form>

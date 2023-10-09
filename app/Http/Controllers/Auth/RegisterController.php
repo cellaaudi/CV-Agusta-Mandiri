@@ -6,10 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
-use Illuminate\Http\Client\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\Log;
 
 class RegisterController extends Controller
 {
@@ -55,7 +53,8 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'telephone' => ['required', 'string']
+            'telephone' => ['required', 'string'],
+            'role' => ['required', 'string'],
         ]);
     }
 
@@ -65,36 +64,15 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \App\Models\User
      */
-    // protected function register(Request $request){
-    //     // dd("asda");
-    // }
-    
     protected function create(array $data)
     {
-        // dd($data);
-        $user =  User::create([
+        dd($data);
+        return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
             'telephone' => $data['telephone'],
+            'role' => 'Customer'
         ]);
-        return $user;
-        // try {
-        //     $user = User::create([
-        //         'name' => $data['name'],
-        //         'email' => $data['email'],
-        //         'password' => Hash::make($data['password']),
-        //         'telephone' => $data['telephone'],
-        //         'role' => 'Customer'
-        //     ]);
-
-        //     return $user;
-        // } catch (\Exception $e) {
-        //     // Log the error message for debugging
-        //     Log::error('Error creating user: ' . $e->getMessage());
-
-        //     // You can also return an error response if needed
-        //     return redirect()->back()->with('error', 'Failed to register user.');
-        // }
     }
 }

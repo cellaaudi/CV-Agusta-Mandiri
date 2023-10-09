@@ -9,10 +9,7 @@
       <div class="col-xl-5 col-lg-6 pt-3 pt-lg-0 order-2 order-lg-1 d-flex flex-column justify-content-center">
         <h1>CV Agusta Mandiri</h1>
         <h2>Perusahaan yang bergerak di bidang advertising, otomotif, dan properti di Bali</h2>
-        <div>
-          <a href="{{ route('login') }}" class="btn-get-started">Masuk</a>
-          <a href="{{ route('register') }}" class="btn-get-started">Daftar</a>
-        </div>
+        <div><a href="{{ route('login') }}" class="btn-get-started scrollto">Login</a></div>
         <!-- <form action="" method="POST">
           @csrf
           <button type="submit">

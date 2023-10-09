@@ -17,20 +17,31 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
+Route::get('/', function() {
+    // return redirect()->route('home');
     return view('index');
 });
 
-Route::get('/dash', function () {
-    return view('admin.index');
-});
-Route::get('/login2', function () {
-    return view('layouts.auth');
-});
-Route::get('/login', [LoginController::class, 'index']);
-Route::get('/register', [RegisterController::class, 'index']);
-Route::post('/register', [RegisterController::class, 'store']);
+// Route::get('/home', [HomeController::class, 'index'])->name('home');
 
-// ADMIN
-Route::resource('/advertising', AdvertisingController::class);
-Route::resource('/car', CarController::class);
+Route::get('/login', [LoginController::class, 'index'])->name('login');
+Route::post('/login', [LoginController::class, 'login']);
+Route::get('/register', [RegisterController::class, 'index'])->name('register');
+Route::post('/register', [RegisterController::class, 'register']);
+
+Route::middleware(['auth'])->group(function () {
+    Route::middleware("can:admin")->prefix('admin')->name('admin.')->group(function () {
+        Route::get('/home', function () {
+            return view('admin.index');
+        });
+        Route::resource('/advertising', AdvertisingController::class);
+        Route::resource('/car', CarController::class);
+        Route::resource('/property', PropertyController::class);
+    });
+
+    Route::middleware("can:customer")->prefix('customer')->name('customer.')->group(function () {
+        Route::get('/home', function () {
+            return view('index');
+        });
+    });
+});

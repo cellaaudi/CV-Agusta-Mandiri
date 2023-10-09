@@ -10,7 +10,7 @@
     <meta name="author" content="">
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('admin/images/favicon.png') }}">
-    <title>Freedash Template - The Ultimate Multipurpose admin template</title>
+    <title>CV Agusta Mandiri</title>
     <!-- Custom CSS -->
     <link href="{{ asset('admin/dist/css/style.min.css') }}" rel="stylesheet">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -22,7 +22,7 @@
 </head>
 
 <body>
-    <div class="main-wrapper">
+    <div class="main-wrapper bg-primary">
         <!-- ============================================================== -->
         <!-- Preloader - style you can find in spinners.css -->
         <!-- ============================================================== -->
@@ -35,49 +35,18 @@
         <!-- ============================================================== -->
         <!-- Preloader - style you can find in spinners.css -->
         <!-- ============================================================== -->
-        <!-- ============================================================== -->
-        <!-- Login box.scss -->
-        <!-- ============================================================== -->
+
         <div class="auth-wrapper d-flex no-block justify-content-center align-items-center position-relative">
             <div class="auth-box row">
-                <div class="bg-white">
+                <div class="bg-white rounded-4">
                     <div class="p-3">
-                        <div class="text-center">
-                            <img src="{{ asset('admin/images/big/icon.png') }}" alt="wrapkit">
-                        </div>
-                        <h2 class="mt-3 text-center">Selamat Datang Kembali</h2>
-                        <p class="text-center">Enter your email address and password to access admin panel.</p>
-                        <form class="mt-4">
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    <div class="form-group mb-3">
-                                        <label class="form-label text-dark" for="uname">Username</label>
-                                        <input class="form-control" id="uname" type="text"
-                                            placeholder="enter your username">
-                                    </div>
-                                </div>
-                                <div class="col-lg-12">
-                                    <div class="form-group mb-3">
-                                        <label class="form-label text-dark" for="pwd">Password</label>
-                                        <input class="form-control" id="pwd" type="password"
-                                            placeholder="enter your password">
-                                    </div>
-                                </div>
-                                <div class="col-lg-12 text-center">
-                                    <button type="submit" class="btn w-100 btn-dark">Sign In</button>
-                                </div>
-                                <div class="col-lg-12 text-center mt-5">
-                                    Don't have an account? <a href="#" class="text-danger">Sign Up</a>
-                                </div>
-                            </div>
-                        </form>
+
+                        @yield('content')
+
                     </div>
                 </div>
             </div>
         </div>
-        <!-- ============================================================== -->
-        <!-- Login box.scss -->
-        <!-- ============================================================== -->
     </div>
     <!-- ============================================================== -->
     <!-- All Required js -->

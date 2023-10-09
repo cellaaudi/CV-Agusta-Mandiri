@@ -1,64 +1,72 @@
-<section class="vh-100 bg-image"
-    style="background-image: url('https://mdbcdn.b-cdn.net/img/Photos/new-templates/search-box/img4.webp');">
-    <div class="mask d-flex align-items-center h-100 gradient-custom-3">
-        <div class="container h-100">
-            <div class="row d-flex justify-content-center align-items-center h-100">
-                <div class="col-12 col-md-9 col-lg-7 col-xl-6">
-                    <div class="card" style="border-radius: 15px;">
-                        <div class="card-body p-5">
-                            <h2 class="text-uppercase text-center mb-5">Create an account</h2>
+@extends('layouts.auth')
 
-                            <form method="POST" action="/register">
-                                @csrf
-                                <div class="form-outline mb-4">
-                                    <input type="text" name="name" class="form-control form-control-lg" />
-                                    <label class="form-label" for="form3Example1cg">Your Name</label>
-                                </div>
-                                <div class="form-outline mb-4">
-                                    <input type="email" name="email" class="form-control form-control-lg" />
-                                    <label class="form-label" for="form3Example3cg">Your Email</label>
-                                </div>
-
-                                <div class="form-outline mb-4">
-                                    <input type="text" name="telephone" class="form-control form-control-lg" />
-                                    <label class="form-label" for="form3Example4cg">Telephone</label>
-                                </div>
-
-                                <div class="form-outline mb-4">
-                                    <input type="password" name="password" class="form-control form-control-lg" />
-                                    <label class="form-label" for="form3Example4cg">Password</label>
-                                </div>
-
-                                <div class="form-outline mb-4">
-                                    <input type="password" name="password-confirm" class="form-control form-control-lg" />
-                                    <label class="form-label" for="form3Example4cdg">Repeat your password</label>
-                                </div>
-
-                                <div class="form-check d-flex justify-content-center mb-5">
-                                    <input class="form-check-input me-2" type="checkbox" value=""
-                                        id="form2Example3cg" />
-                                    <label class="form-check-label" for="form2Example3g">
-                                        I agree all statements in <a href="#!" class="text-body"><u>Terms of
-                                                service</u></a>
-                                    </label>
-                                </div>
-
-                                <div class="d-flex justify-content-center">
-                                    <button type="submit"
-                                        class="btn btn-success btn-block btn-lg gradient-custom-4 text-body">
-                                        {{ __('Register') }}
-                                    </button>
-                                </div>
-
-                                <p class="text-center text-muted mt-5 mb-0">Have already an account? <a href="/login"
-                                        class="fw-bold text-body"><u>Login here</u></a></p>
-
-                            </form>
-
-                        </div>
-                    </div>
-                </div>
+@section('content')
+<h2 class="mt-3 text-center">Selamat datang di CV Agusta Mandiri</h2>
+<p class="text-center">Daftar untuk dapat mengakses layanan dari kami dengan lebih lengkap</p>
+<form class="mt-4" method="POST" action="{{ route('register') }}">
+    @csrf
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="form-group mb-3">
+                <label class="form-label text-dark" for="name">Nama</label>
+                <input class="form-control @error('name') is-invalid @enderror" id="name" type="text" name="name" placeholder="Masukkan nama Anda" value="{{ old('name') }}" required autocomplete="name" autofocus>
+                @error('name')
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+                @enderror
             </div>
         </div>
+        <div class="col-lg-12">
+            <div class="form-group mb-3">
+                <label class="form-label text-dark" for="email">Email</label>
+                <input class="form-control @error('email') is-invalid @enderror" id="email" type="email" name="email" placeholder="contoh@gmail.com" value="{{ old('email') }}" required autocomplete="email">
+                @error('email')
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+                @enderror
+            </div>
+        </div>
+        <div class="col-lg-12">
+            <div class="form-group mb-3">
+                <label class="form-label text-dark" for="telephone">Telephone</label>
+                <input class="form-control @error('telephone') is-invalid @enderror" id="telephone" type="tel" name="telephone" placeholder="08xxxxxxxxxx" value="{{ old('telephone') }}" required>
+                @error('telephone')
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+                @enderror
+            </div>
+        </div>
+        <div class="col-lg-12">
+            <div class="form-group mb-3">
+                <label class="form-label text-dark" for="password">Kata Sandi</label>
+                <input class="form-control @error('password') is-invalid @enderror" id="password" type="password" name="password" placeholder="Masukkan kata sandi Anda" required autocomplete="new-password">
+                @error('password')
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+                @enderror
+            </div>
+        </div>
+        <div class="col-lg-12">
+            <div class="form-group mb-3">
+                <label class="form-label text-dark" for="password2">Konfirmasi kata sandi</label>
+                <input class="form-control @error('password2') is-invalid @enderror" id="password2" type="password" name="password_confirmation" placeholder="Masukkan ulang kata sandi Anda" required autocomplete="new-password">
+                @error('password2')
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+                @enderror
+            </div>
+        </div>
+        <div class="col-lg-12 text-center">
+            <button type="submit" class="btn w-100 btn-primary btn-rounded">Daftar</button>
+        </div>
+        <div class="col-lg-12 text-center mt-5">
+            Sudah memiliki akun? <a href="{{ route('login') }}" class="text-danger">Masuk</a>
+        </div>
     </div>
-</section>
+</form>
+@endsection

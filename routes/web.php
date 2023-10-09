@@ -1,9 +1,10 @@
 <?php
 
-use App\Http\Controllers\AdvertisingController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\AdvertisingController;
 use App\Http\Controllers\CarController;
+use App\Http\Controllers\PropertyController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -30,18 +31,28 @@ Route::get('/register', [RegisterController::class, 'index'])->name('register');
 Route::post('/register', [RegisterController::class, 'register']);
 
 Route::middleware(['auth'])->group(function () {
-    Route::middleware("can:admin")->prefix('admin')->name('admin.')->group(function () {
-        Route::get('/home', function () {
-            return view('admin.index');
-        });
-        Route::resource('/advertising', AdvertisingController::class);
-        Route::resource('/car', CarController::class);
-        Route::resource('/property', PropertyController::class);
-    });
+    // Route::middleware("can:admin")->prefix('admin')->name('admin.')->group(function () {
+    //     Route::get('/home', function () {
+    //         return view('admin.index');
+    //     });
+    //     Route::resource('/advertising', AdvertisingController::class);
+    //     Route::resource('/car', CarController::class);
+    //     Route::resource('/property', PropertyController::class);
+    // });
 
     Route::middleware("can:customer")->prefix('customer')->name('customer.')->group(function () {
         Route::get('/home', function () {
             return view('index');
         });
     });
+});
+
+// SEMENTARA
+Route::prefix('admin')->name('admin.')->group(function () {
+    Route::get('/home', function () {
+        return view('admin.index');
+    });
+    Route::resource('/advertising', AdvertisingController::class);
+    Route::resource('/car', CarController::class);
+    Route::resource('/property', PropertyController::class);
 });

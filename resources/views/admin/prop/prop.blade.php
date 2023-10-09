@@ -14,7 +14,7 @@
 <div class="page-breadcrumb">
     <div class="row">
         <div class="col-7 align-self-center">
-            <h4 class="page-title text-truncate text-dark font-weight-medium mb-1">Agusta Advertising</h4>
+            <h4 class="page-title text-truncate text-dark font-weight-medium mb-1">Agusta Properti</h4>
             <div class="d-flex align-items-center">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb m-0 p-0">
@@ -26,7 +26,7 @@
         </div>
         <div class="col-5 align-self-center">
             <div class="customize-input float-end">
-                <a href="{{ route('admin.advertising.create') }}" class="btn btn-primary btn-rounded"><i class="fas fa-plus"></i>     Tambah Produk</a>
+                <a href="{{ route('admin.property.create') }}" class="btn btn-primary btn-rounded"><i class="fas fa-plus"></i> Tambah Produk</a>
             </div>
         </div>
     </div>
@@ -43,23 +43,37 @@
                     <table id="multi_col_order" class="table border table-striped table-bordered text-nowrap" style="width:100%">
                         <thead>
                             <tr>
-                                <th>ID Produk</th>
-                                <th>Nama</th>
+                                <th>ID</th>
+                                <th>Judul</th>
+                                <th>Harga</th>
+                                <th>Luas Tanah</th>
+                                <th>Luas Bangunan</th>
+                                <th>Kamar</th>
+                                <th>Kamar Mandi</th>
+                                <th>Lantai</th>
+                                <th>Listrik</th>
+                                <th>Sertifikasi</th>
+                                <th>Deskripsi</th>
+                                <th>Status</th>
                                 <th>Kategori</th>
-                                <th>Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($advs as $adv)
+                            @foreach($props as $prop)
                             <tr>
-                                <td>{{ $adv -> id }}</td>
-                                <td>{{ $adv -> name }}</td>
-                                <td>{{ $adv -> category }}</td>
-                                <td>
-                                    <a href="{{ route('admin.advertising.show', $adv) }}" type="button" class="btn btn-success btn-rounded"><i class="far fa-folder-open"></i> Detail</a>
-                                    <a href="{{ route('admin.advertising.edit', $adv) }}" type="button" class="btn btn-warning btn-rounded"><i class="far fa-edit"></i> Edit</a>
-                                    <a type="button" class="btn btn-danger btn-rounded"><i class="far fa-trash-alt"></i> Hapus</a>
-                                </td>
+                                <td>{{ $prop -> id }}</td>
+                                <td>{{ $prop -> title }}</td>
+                                <td>{{ $prop -> price }}</td>
+                                <td>{{ $prop -> land_area }}m<sup>2</sup></td>
+                                <td>{{ $prop -> building_area }}m<sup>2</sup></td>
+                                <td>{{ $prop -> bedroom }}</td>
+                                <td>{{ $prop -> bathroom }}</td>
+                                <td>{{ $prop -> story }}</td>
+                                <td>{{ $prop -> electricity }} Watt</td>
+                                <td>{{ $prop -> certificate }}</td>
+                                <td>{{ $prop -> description }}</td>
+                                <td>{{ $prop -> status }}</td>
+                                <td>{{ $prop -> property_category -> category }}</td>
                             </tr>
                             @endforeach
                         </tbody>
@@ -72,26 +86,11 @@
 @endsection
 
 @section('jquery')
-<!-- All Jquery -->
-<!-- ============================================================== -->
-<!-- <script src="{{ asset('admin/libs/jquery/dist/jquery.min.js') }}">
-</script> -->
 <!-- Bootstrap tether Core JavaScript -->
 <script src="{{ asset('admin/libs/popper.js/dist/umd/popper.min.js') }}"></script>
 <script src="{{ asset('admin/libs/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script>
 <!-- apps -->
-<!-- apps -->
-<!-- <script src="{{ asset('admin/dist/js/app-style-switcher.js') }}"></script> -->
-<!-- <script src="{{ asset('admin/dist/js/feather.min.js') }}"></script> -->
-<!-- slimscrollbar scrollbar JavaScript -->
-<!-- <script src="{{ asset('admin/libs/perfect-scrollbar/dist/perfect-scrollbar.jquery.min.js') }}"></script> -->
 <script src="{{ asset('admin/extra-libs/sparkline/sparkline.js') }}"></script>
-<!--Wave Effects -->
-<!-- themejs -->
-<!--Menu sidebar -->
-<!-- <script src="{{ asset('admin/dist/js/sidebarmenu.js') }}"></script> -->
-<!--Custom JavaScript -->
-<!-- <script src="{{ asset('admin/dist/js/custom.min.js') }}"></script> -->
 <!--This page plugins -->
 <script src="{{ asset('admin/extra-libs/datatables.net/js/jquery.dataTables.min.js') }}"></script>
 <script src="{{ asset('admin/extra-libs/datatables.net-bs4/js/dataTables.responsive.min.js') }}"></script>
@@ -99,7 +98,7 @@
 <!-- <script src="{{ asset('DataTables/datatables.min.js') }}"></script> -->
 <script>
     $(document).ready(function() {
-        $('.table').DataTable();
+        $('table').DataTable();
     });
 </script>
 @endsection

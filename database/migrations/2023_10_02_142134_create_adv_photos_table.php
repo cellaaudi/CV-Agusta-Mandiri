@@ -15,7 +15,7 @@ class CreateAdvPhotosTable extends Migration
     {
         Schema::create('adv_photos', function (Blueprint $table) {
             $table->id();
-            $table->string('url');
+            $table->string('url')->unique();
             $table->unsignedBigInteger("adv_product_id");
             $table->timestamps();
 

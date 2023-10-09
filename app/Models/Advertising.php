@@ -10,16 +10,16 @@ class Advertising extends Model
 {
     use HasFactory;
 
-    protected $table = 'adv_products';
+    protected $table = "adv_products";
     protected $guarded = ['id'];
 
     public function appointment()
     {
-        return $this->belongsToMany("App\Models\Appointment", "adv_carts", "adv_product_id", "appointment_id");
+        return $this->belongsToMany(Appointment::class, "adv_carts", "adv_product_id", "appointment_id");
     }
 
     public function advertising_photo()
     {
-        return $this->hasMany("App\Models\AdvertisingPhoto", "adv_photo_id");
+        return $this->hasMany(AdvertisingPhoto::class, "adv_photo_id");
     }
 }

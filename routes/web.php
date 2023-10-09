@@ -20,52 +20,33 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
-// Route::get('/', function () {
-//     return view('index');
-// });
-
-Route::get('/login2', function () {
-    return view('login');
+Route::get('/', function() {
+    return redirect()->route('home');
 });
-Route::get('/register2', function () {
-    return view('register');
-});
-// Route::get('/login', [LoginController::class, 'index'])->middleware('guest');
-// Route::post('/login', [LoginController::class, 'authenticate']);
-// Route::get('/register', [RegisterController::class, 'index'])->middleware('guest');
-// Route::post('/register', [RegisterController::class, 'create']);
 
-// Route::resource('/register', RegisterController::class);
+Route::get('/home', [HomeController::class, 'index'])->name('home');
 
-// ADMIN (prefix + name bisa digabung sama middleware group nantinya)
-Route::prefix('admin')->name('admin.')->group(function () {
-    Route::get('/dash', function () {
-        return view('admin.index');
-    });
-    Route::resource('/advertising', AdvertisingController::class);
-    Route::resource('/car', CarController::class);
-    Route::resource('/property', PropertyController::class);
-});
+Route::get('/login', [LoginController::class, 'index'])->name('login');
+Route::post('/login', [LoginController::class, 'login']);
+Route::get('/register', [RegisterController::class, 'index'])->name('register');
+Route::post('/register', [RegisterController::class, 'register']);
 
 Route::middleware(['auth'])->group(function () {
-    Route::get('/', [HomeController::class, 'index']);
-    Route::get('/home', [HomeController::class, 'index'])->name('home');
-    
-    Route::middleware("can:admin")->group(function(){
-        // nanti route admin masuk sini
-        Route::get('/homeadmin', function () {
+    Route::middleware("can:admin")->prefix('admin')->name('admin.')->group(function () {
+        Route::get('/home', function () {
             return view('admin.index');
-        })->name("admin.home");
+        });
+        Route::resource('/advertising', AdvertisingController::class);
+        Route::resource('/car', CarController::class);
+        Route::resource('/property', PropertyController::class);
     });
 
-    Route::middleware("can:customer")->group(function () {
-        // route customer
+    Route::middleware("can:customer")->prefix('customer')->name('customer.')->group(function () {
+        Route::get('/home', function () {
+            return view('index');
+        });
     });
 });
-
-Auth::routes();
-
-// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 // Auth::routes();
 

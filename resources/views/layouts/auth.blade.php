@@ -40,9 +40,7 @@
             <div class="auth-box row">
                 <div class="bg-white rounded-4">
                     <div class="p-3">
-
                         @yield('content')
-                        
                     </div>
                 </div>
             </div>

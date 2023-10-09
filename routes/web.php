@@ -20,15 +20,15 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
-// Route::get('/', function () {
-//     return view('index');
-// });
-
-Route::get('/login2', function () {
-    return view('login');
+Route::get('/', function () {
+    return view('index');
 });
-Route::get('/register2', function () {
-    return view('register');
+
+Route::get('/dash', function () {
+    return view('admin.index');
+});
+Route::get('/login2', function () {
+    return view('layouts.auth');
 });
 // Route::get('/login', [LoginController::class, 'index'])->middleware('guest');
 // Route::post('/login', [LoginController::class, 'authenticate']);
@@ -39,9 +39,6 @@ Route::get('/register2', function () {
 
 // ADMIN (prefix + name bisa digabung sama middleware group nantinya)
 Route::prefix('admin')->name('admin.')->group(function () {
-    Route::get('/dash', function () {
-        return view('admin.index');
-    });
     Route::resource('/advertising', AdvertisingController::class);
     Route::resource('/car', CarController::class);
     Route::resource('/property', PropertyController::class);
@@ -57,7 +54,6 @@ Route::middleware(['auth'])->group(function () {
             return view('admin.index');
         })->name("admin.home");
     });
-
     Route::middleware("can:customer")->group(function () {
         // route customer
     });
@@ -65,7 +61,7 @@ Route::middleware(['auth'])->group(function () {
 
 Auth::routes();
 
-// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 // Auth::routes();
 

@@ -5,7 +5,6 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\CarController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\PropertyController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -37,14 +36,11 @@ Route::get('/login2', function () {
 
 // Route::resource('/register', RegisterController::class);
 
-// ADMIN (prefix + name bisa digabung sama middleware group nantinya)
-Route::prefix('admin')->name('admin.')->group(function () {
-    Route::resource('/advertising', AdvertisingController::class);
-    Route::resource('/car', CarController::class);
-    Route::resource('/property', PropertyController::class);
-});
+// ADMIN
+Route::resource('/advertising', AdvertisingController::class);
+Route::resource('/car', CarController::class);
 
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth'])->group(function(){
     Route::get('/', [HomeController::class, 'index']);
     Route::get('/home', [HomeController::class, 'index'])->name('home');
     
@@ -54,7 +50,7 @@ Route::middleware(['auth'])->group(function () {
             return view('admin.index');
         })->name("admin.home");
     });
-    Route::middleware("can:customer")->group(function () {
+    Route::middleware("can:customer")->group(function(){
         // route customer
     });
 });
@@ -62,7 +58,3 @@ Route::middleware(['auth'])->group(function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-// Auth::routes();
-
-// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

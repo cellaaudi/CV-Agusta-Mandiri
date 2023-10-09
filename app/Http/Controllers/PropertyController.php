@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Property;
 
 class PropertyController extends Controller
 {
@@ -14,9 +13,7 @@ class PropertyController extends Controller
      */
     public function index()
     {
-        $props = Property::all();
-
-        return view('admin.prop.prop', compact('props'));
+        //
     }
 
     /**

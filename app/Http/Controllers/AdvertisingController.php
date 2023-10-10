@@ -38,36 +38,28 @@ class AdvertisingController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
+        $request->validate([
             'name' => 'required',
             'category' => 'required',
-            'photos' => 'required'
+            'photos' => 'required|array',
+            'photos.*' => 'image|mimes:jpeg,jpg,png,svg,gif'
         ]);
 
-        $name = $request->get('name');
-        $category = $request->category;
-
         if ($request->hasFile('photos')) {
-            $allowed = ['jpeg', 'jpg', 'png', 'svg', 'gif'];
             $files = $request->file('photos');
 
             $product = Advertising::create([
-                'name' => $name,
-                'category' => $category
+                'name' => $request->name,
+                'category' => $request->category
             ]);
 
             foreach ($files as $file) {
-                $filename = $file->getClientOriginalName();
-                $extension = $file->getClientOriginalExtension();
-                $valid = in_array($extension, $allowed);
+                $filename = $file->store('photos');
 
-                if ($valid) {
-                    $filename = $file->store('photos');
-                    AdvertisingPhoto::create([
-                        'adv_product_id' => $product->id,
-                        'url' => $filename
-                    ]);
-                }
+                AdvertisingPhoto::create([
+                    'adv_product_id' => $product->id,
+                    'url' => $filename
+                ]);
             }
         }
 

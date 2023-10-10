@@ -231,10 +231,15 @@
                         <li class="list-divider"></li>
                         <li class="nav-small-cap"><span class="hide-menu">Layanan</span></li>
 
-                        <li class="sidebar-item"> <a class="sidebar-link" href="{{ route('admin.advertising.index') }}" aria-expanded="false"><i data-feather="trending-up" class="feather-icon"></i><span class="hide-menu">Agusta Advertising
-                                </span></a>
+                        <li class="sidebar-item"> <a class="sidebar-link" href="{{ route('admin.advertising.index') }}" aria-expanded="false"><i data-feather="trending-up" class="feather-icon"></i><span class="hide-menu">Agusta Advertising</span></a></li>
+
+                        <li class="sidebar-item"> <a class="sidebar-link has-arrow" href="javascript:void(0)" aria-expanded="false"><i data-feather="file-text" class="feather-icon"></i><span class="hide-menu">Agusta Motor</span></a>
+                            <ul aria-expanded="false" class="collapse  first-level base-level-line">
+                                <li class="sidebar-item"><a href="{{ route('admin.car.index') }}" class="sidebar-link"><span class="hide-menu"> Jual Mobil</span></a></li>
+                                <li class="sidebar-item"><a href="form-input-grid.html" class="sidebar-link"><span class="hide-menu"> Beli Mobil</span></a></li>
+                            </ul>
                         </li>
-                        <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="{{ route('admin.car.index') }}" aria-expanded="false"><i data-feather="message-square" class="feather-icon"></i><span class="hide-menu">Agusta Motor</span></a></li>
+
                         <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="{{ route('admin.property.index') }}" aria-expanded="false"><i data-feather="home" class="feather-icon"></i><span class="hide-menu">Agusta Properti</span></a></li>
 
                         <li class="list-divider"></li>
@@ -389,7 +394,7 @@
             @yield('breadcrumb')
 
             <div class="container-fluid">
-            @yield('content')
+                @yield('content')
             </div>
 
             <!-- ============================================================== -->

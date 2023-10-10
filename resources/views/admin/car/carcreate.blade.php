@@ -27,14 +27,14 @@
     <div class="col-12">
         <div class="card">
             <div class="card-body">
-                <form class="mt-3 form-horizontal" method="post" enctype="multipart/form-data" action="{{ route('admin.advertising.store') }}">
+                <form class="mt-3 form-horizontal" method="post" enctype="multipart/form-data" action="{{ route('admin.car.store') }}">
                     @csrf
                     <div class="form-body">
                         <div class="form-group mb-3 row">
                             <label for="inputHorizontal" class="col-sm-2 col-form-label">Judul</label>
                             <div class="col-sm-10">
-                                <input type="text" name="judul" class="form-control @error('judul') is-invalid @enderror" id="inputHorizontal" placeholder="Contoh: Audi A8 Sportback" required autofocus>
-                                @error('judul')
+                                <input type="text" name="title" class="form-control @error('title') is-invalid @enderror" id="inputHorizontal" placeholder="Contoh: Audi A8 Sportback" required autofocus>
+                                @error('title')
                                 <div class="invalid-feedback">
                                     {{ $message }}
                                 </div>
@@ -46,6 +46,36 @@
                             <div class="col-sm-10">
                                 <input type="number" name="year" class="form-control @error('year') is-invalid @enderror" id="inputHorizontal" placeholder="YYYY" min="1900" max="2023" minlength="4" maxlength="4" step="1" value="2023" required>
                                 @error('year')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="form-group mb-3 row">
+                            <label for="inputHorizontal" class="col-sm-2 col-form-label">Merk</label>
+                            <div class="col-sm-10">
+                                <select class="form-select mr-sm-2 @error('brand') is-invalid @enderror" id="inlineFormCustomSelect" name="brand" required>
+                                    @foreach($brands as $brand)
+                                    <option value="{{ $brand -> id }}">{{ $brand -> brand }}</option>
+                                    @endforeach
+                                </select>
+                                @error('brand')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="form-group mb-3 row">
+                            <label for="inputHorizontal" class="col-sm-2 col-form-label">Kategori</label>
+                            <div class="col-sm-10">
+                                <select class="form-select mr-sm-2 @error('category') is-invalid @enderror" id="inlineFormCustomSelect" name="category" required>
+                                    @foreach($categories as $category)
+                                    <option value="{{ $category -> id }}">{{ $category -> category }}</option>
+                                    @endforeach
+                                </select>
+                                @error('category')
                                 <div class="invalid-feedback">
                                     {{ $message }}
                                 </div>
@@ -121,20 +151,6 @@
                             <div class="col-sm-10">
                                 <textarea type="textarea" name="desc" class="form-control @error('desc') is-invalid @enderror" id="inputHorizontal" placeholder="Mobil dalam keadaan baik" rows="3" required></textarea>
                                 @error('desc')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
-                                @enderror
-                            </div>
-                        </div>
-                        <div class="form-group mb-3 row">
-                            <label for="inputHorizontal" class="col-sm-2 col-form-label">Status</label>
-                            <div class="col-sm-10">
-                                <select class="form-select mr-sm-2 @error('status') is-invalid @enderror" id="inlineFormCustomSelect" name="status" required>
-                                    <option value="Sell">Jual</option>
-                                    <option value="Buy">Beli</option>
-                                </select>
-                                @error('status')
                                 <div class="invalid-feedback">
                                     {{ $message }}
                                 </div>

@@ -61,13 +61,13 @@
                             <div class="col-sm-10">
                                 <div class="input-group flex-nowrap">
                                     <div class="custom-file w-100">
-                                        <input class="form-control @error('photo') is-invalid @enderror" type="file" name="photos[]" required>
+                                        <input class="form-control @error('photos') is-invalid @enderror" type="file" name="photos[]" required>
                                     </div>
                                     <button class="btn btn-outline-secondary btnAddPhoto" type="button">
                                         <i class="fas fa-plus"></i>
                                     </button>
                                 </div>
-                                @error('photo')
+                                @error('photos')
                                 <div class="invalid-feedback">
                                     {{ $message }}
                                 </div>

@@ -19,12 +19,12 @@ class Car extends Model
 
     public function car_brand()
     {
-        return $this->belongsTo("App\Models\CarBrand", "car_brand_id")->withTrashed();
+        return $this->belongsTo("App\Models\CarBrand", "car_brand_id");
     }
 
     public function car_category()
     {
-        return $this->belongsTo("App\Models\CarCategory", "car_category_id")->withTrashed();
+        return $this->belongsTo("App\Models\CarCategory", "car_category_id");
     }
 
     public function car_photo()

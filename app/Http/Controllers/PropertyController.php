@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Property;
+use App\Models\PropertyCategory;
 
 class PropertyController extends Controller
 {
@@ -26,7 +27,7 @@ class PropertyController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.prop.propcreate');
     }
 
     /**

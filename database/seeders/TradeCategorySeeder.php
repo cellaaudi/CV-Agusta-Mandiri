@@ -14,11 +14,11 @@ class TradeCategorySeeder extends Seeder
      */
     public function run()
     {
-        DB::table('trade_category')->insert([
+        DB::table('trade_categories')->insert([
             'category' => 'Mobil',
         ]);
 
-        DB::table('trade_category')->insert([
+        DB::table('trade_categories')->insert([
             'category' => 'Motor',
         ]);
     }

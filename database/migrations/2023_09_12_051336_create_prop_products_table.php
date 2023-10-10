@@ -15,6 +15,7 @@ class CreatePropProductsTable extends Migration
     {
         Schema::create('prop_products', function (Blueprint $table) {
             $table->id();
+            $table->enum('category', ['House', 'Villa', 'Land']);
             $table->string('title');
             $table->double('price');
             $table->integer('land_area');
@@ -26,10 +27,10 @@ class CreatePropProductsTable extends Migration
             $table->enum('certification', ['SHM', 'PBB', 'IMB', 'Adat']);
             $table->longtext("description");
             $table->enum('status', ['Available', 'Sold'])->default('Available');
-            $table->unsignedBigInteger('prop_category_id');
+            // $table->unsignedBigInteger('prop_category_id');
             $table->timestamps();
 
-            $table->foreign("prop_category_id")->references("id")->on("prop_categories");
+            // $table->foreign("prop_category_id")->references("id")->on("prop_categories");
         });
     }
 

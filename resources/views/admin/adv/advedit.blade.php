@@ -63,7 +63,7 @@
                                 <div class="custom-file w-100">
                                     <img class="img-fluid float-start" src="{{ asset('storage/' . $photo -> url) }}">
                                 </div>
-                                <button class="btn btn-outline-danger btnDelPhoto" type="button">
+                                <button class="btn btn-outline-danger btnDelExistPhoto" type="button" data-id="{{ $photo -> id }}">
                                     <i class="fas fa-minus"></i>
                                 </button>
                             </div>

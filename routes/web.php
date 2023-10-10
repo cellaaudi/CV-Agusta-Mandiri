@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\AdvertisingController;
+use App\Http\Controllers\CarBuyController;
 use App\Http\Controllers\CarController;
 use App\Http\Controllers\PropertyController;
 use Illuminate\Support\Facades\Route;
@@ -35,9 +36,10 @@ Route::middleware(['auth'])->group(function () {
     Route::middleware("can:admin")->prefix('admin')->name('admin.')->group(function () {
         Route::get('/home', function () {
             return view('admin.index');
-        });
+        })->name('home');
         Route::resource('/advertising', AdvertisingController::class);
         Route::resource('/car', CarController::class);
+        Route::resource('/buy-car', CarBuyController::class);
         Route::resource('/property', PropertyController::class);
     });
 

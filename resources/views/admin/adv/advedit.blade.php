@@ -1,5 +1,20 @@
 @extends('layouts.admin')
 
+@section('css')
+<script>
+    // DELETE EXISTING PHOTOS
+    var delPhotos = []
+
+    function deletePhoto(button) {
+        var img = $(button).data('id');
+
+        delPhotos.push(img);
+
+        document.getElementById('del_photos').value = JSON.stringify(delPhotos);
+    }
+</script>
+@endsection
+
 @section('breadcrumb')
 <div class="page-breadcrumb">
     <div class="row">
@@ -63,7 +78,7 @@
                                 <div class="custom-file w-100">
                                     <img class="img-fluid float-start" src="{{ asset('storage/' . $photo -> url) }}">
                                 </div>
-                                <button class="btn btn-outline-danger btnDelExistPhoto" type="button" data-id="{{ $photo -> id }}">
+                                <button class="btn btn-outline-danger btnDelExistPhoto" type="button" data-id="{{ $photo -> id }}" onclick="deletePhoto(this)">
                                     <i class="fas fa-minus"></i>
                                 </button>
                             </div>
@@ -85,6 +100,7 @@
                             </div>
                             @enderror
                         </div>
+                        <input type="hidden" name="del_photos[]" id="del_photos" value="">
                     </div>
                     <div class="form-actions">
                         <div class="text-end">
@@ -102,13 +118,21 @@
 @section('jquery')
 <script>
     $(document).ready(function() {
+        // ADD PHOTO SLOTS
         $('.btnAddPhoto').click(function() {
             $('#photos').append('<div class="col-sm-2 col-form-label"></div><div class="col-sm-10 mt-2"><div class="input-group flex-nowrap"><div class="custom-file w-100"><input class="form-control" type="file" name="photos[]"></div><button class="btn btn-outline-danger btnDelPhoto" type="button"><i class="fas fa-minus"></i></button></div></div>');
         })
 
+        // DELETE PHOTO SLOTS
         $(document).on('click', '.btnDelPhoto', function() {
             $(this).parent().parent().remove();
             $(this).parent().parent().prev().remove();
+        });
+
+        // DELETE EXISTED PHOTOS FROM UI
+        $(document).on('click', '.btnDelExistPhoto', function() {
+            $(this).parent().remove();
+            $(this).parent().prev().remove();
         });
     });
 </script>

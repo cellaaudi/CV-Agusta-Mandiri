@@ -103,7 +103,29 @@ class AdvertisingController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'category' => 'required',
+            'photos' => 'array',
+            'photos.*' => 'image|mimes:jpeg,jpg,png,svg,gif'
+        ]);
+
+        $delPhotos = $request->del_photos;
+        
+        if (!empty($delPhotos)) {
+            foreach($delPhotos as $del) {
+                echo $del . "<br>";
+                // $photo = AdvertisingPhoto::find($del);
+                // $photo->delete();
+            }
+        }
+
+        // $adv = Advertising::find($id);
+        // $adv->name = $request->name;
+        // $adv->category = $request->category;
+        // $adv->save();
+
+        // return redirect()->route('admin.advertising.index');
     }
 
     /**

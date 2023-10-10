@@ -35,7 +35,7 @@ class RegisterController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function register(Request $request)
     {
         $validateData = $request->validate([
             'name' => ['required', 'string', 'max:255'],
@@ -45,6 +45,8 @@ class RegisterController extends Controller
         ]);
 
         $validateData['password'] = Hash::make($validateData['password']);
+
+        // dd($validateData);
 
         User::create($validateData);
 

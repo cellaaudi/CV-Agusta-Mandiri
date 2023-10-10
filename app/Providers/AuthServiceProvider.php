@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Illuminate\Auth\Access\Response;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
 
@@ -25,6 +26,28 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        //
+        Gate::define('admin',function($user){
+            if ($user->role=='Admin') {
+                return Response::allow();
+            } else {
+                return Response::deny('Hanya Admin');
+            }
+        });
+
+        Gate::define('customer',function($user){
+            if ($user->role=='Customer') {
+                return Response::allow();
+            } else {
+                return Response::deny('Hanya Customer');
+            }
+        });
+
+        // Gate::define('staff',function($user){
+        //     if ($user->role=='Owner' || $user->role=='Staff') {
+        //         return Response::allow();
+        //     } else {
+        //         return Response::deny('Hanya Staff');
+        //     }
+        // });
     }
 }

@@ -29,16 +29,17 @@ Route::get('/login', [LoginController::class, 'index'])->name('login');
 Route::post('/login', [LoginController::class, 'login']);
 Route::get('/register', [RegisterController::class, 'index'])->name('register');
 Route::post('/register', [RegisterController::class, 'register']);
+Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 
 Route::middleware(['auth'])->group(function () {
-    // Route::middleware("can:admin")->prefix('admin')->name('admin.')->group(function () {
-    //     Route::get('/home', function () {
-    //         return view('admin.index');
-    //     });
-    //     Route::resource('/advertising', AdvertisingController::class);
-    //     Route::resource('/car', CarController::class);
-    //     Route::resource('/property', PropertyController::class);
-    // });
+    Route::middleware("can:admin")->prefix('admin')->name('admin.')->group(function () {
+        Route::get('/home', function () {
+            return view('admin.index');
+        });
+        Route::resource('/advertising', AdvertisingController::class);
+        Route::resource('/car', CarController::class);
+        Route::resource('/property', PropertyController::class);
+    });
 
     Route::middleware("can:customer")->prefix('customer')->name('customer.')->group(function () {
         Route::get('/home', function () {
@@ -48,11 +49,11 @@ Route::middleware(['auth'])->group(function () {
 });
 
 // SEMENTARA
-Route::prefix('admin')->name('admin.')->group(function () {
-    Route::get('/home', function () {
-        return view('admin.index');
-    });
-    Route::resource('/advertising', AdvertisingController::class);
-    Route::resource('/car', CarController::class);
-    Route::resource('/property', PropertyController::class);
-});
+// Route::prefix('admin')->name('admin.')->group(function () {
+//     Route::get('/home', function () {
+//         return view('admin.index');
+//     });
+//     Route::resource('/advertising', AdvertisingController::class);
+//     Route::resource('/car', CarController::class);
+//     Route::resource('/property', PropertyController::class);
+// });

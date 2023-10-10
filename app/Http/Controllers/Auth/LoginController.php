@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
@@ -33,9 +34,30 @@ class LoginController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function login(Request $request)
     {
-        //
+        $credentials = $request->validate([
+            'email' => ['required'],
+            'password' => ['required'],
+        ]);
+        // dd('hehe');
+
+        if(Auth::attempt($credentials)){
+            $request->session()->regenerate();
+            if(auth()->user()->role == 'Admin'){
+                return redirect()->intended('/admin/home');
+            }else if(auth()->user()->role == 'Customer'){
+                return redirect()->intended('/');
+            }
+        }
+
+        return back()->with('loginError', 'login failed!');
+    }
+    public function logout(Request $request){
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        return redirect('/');
     }
 
     /**

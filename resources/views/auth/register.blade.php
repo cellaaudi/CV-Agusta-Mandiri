@@ -31,7 +31,7 @@
         <div class="col-lg-12">
             <div class="form-group mb-3">
                 <label class="form-label text-dark" for="telephone">Telephone</label>
-                <input class="form-control @error('telephone') is-invalid @enderror" id="telephone" type="tel" name="telephone" placeholder="08xxxxxxxxxx" value="{{ old('telephone') }}" required>
+                <input class="form-control @error('telephone') is-invalid @enderror" id="telephone" type="number" name="telephone" placeholder="08xxxxxxxxxx" value="{{ old('telephone') }}" required>
                 @error('telephone')
                 <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>

@@ -63,17 +63,17 @@
                             <tr>
                                 <td>{{ $prop -> id }}</td>
                                 <td>{{ $prop -> title }}</td>
-                                <td>{{ $prop -> price }}</td>
-                                <td>{{ $prop -> land_area }}m<sup>2</sup></td>
-                                <td>{{ $prop -> building_area }}m<sup>2</sup></td>
-                                <td>{{ $prop -> bedroom }}</td>
-                                <td>{{ $prop -> bathroom }}</td>
-                                <td>{{ $prop -> story }}</td>
-                                <td>{{ $prop -> electricity }} Watt</td>
-                                <td>{{ $prop -> certificate }}</td>
+                                <td>Rp. {{ $prop -> price }}</td>
+                                <td>{{ $prop -> land_area }} m<sup>2</sup></td>
+                                <td>{!! $prop -> building_area ? "$prop->building_area m<sup>2</sup>": '-' !!}</td>
+                                <td>{{ $prop -> bedroom ?: '-'}}</td>
+                                <td>{{ $prop -> bathroom ?: '-'}}</td>
+                                <td>{{ $prop -> story ?: '-'}}</td>
+                                <td>{!! $prop -> electricity ? "$prop->electricity Watt": '-' !!}</td>
+                                <td>{{ $prop -> certification }}</td>
                                 <td>{{ $prop -> description }}</td>
                                 <td>{{ $prop -> status }}</td>
-                                <td>{{ $prop -> property_category -> category }}</td>
+                                <td>{{ $prop -> category }}</td>
                             </tr>
                             @endforeach
                         </tbody>

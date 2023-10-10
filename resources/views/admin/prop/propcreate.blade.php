@@ -27,7 +27,7 @@
     <div class="col-12">
         <div class="card">
             <div class="card-body">
-                <form class="mt-3 form-horizontal" method="post" enctype="multipart/form-data" action="{{ route('admin.advertising.store') }}">
+                <form class="mt-3 form-horizontal" method="POST" enctype="multipart/form-data" action="{{ route('admin.property.store') }}" >
                     @csrf
                     <div class="form-body">
                         <div class="form-group mb-3 row">
@@ -48,11 +48,11 @@
                         <div class="form-group mb-3 row">
                             <label for="inputHorizontal" class="col-sm-2 col-form-label">Judul</label>
                             <div class="col-sm-10">
-                                <input type="text" name="judul" class="form-control @error('judul') is-invalid @enderror" id="tbTitle" placeholder="Contoh: Rumah di Pusat Kota Denpasar" required autofocus>
-                                @error('judul')
+                                <input type="text" name="title" class="form-control @error('title') is-invalid @enderror" id="tbTitle" placeholder="Contoh: Rumah di Pusat Kota Denpasar" required autofocus>
+                                @error('title')
                                 <div class="invalid-feedback">
                                     {{ $message }}
-                                </div>
+                                </div>"
                                 @enderror
                             </div>
                         </div>
@@ -125,8 +125,8 @@
                         <div class="form-group mb-3 row">
                             <label for="inputHorizontal" class="col-sm-2 col-form-label">Listrik (Watt)</label>
                             <div class="col-sm-10">
-                                <input type="number" name="electricty" class="form-control @error('electricty') is-invalid @enderror" id="tbElectricity" placeholder="0" min="0" step="1" required>
-                                @error('electricty')
+                                <input type="number" name="electricity" class="form-control @error('electricity') is-invalid @enderror" id="tbElectricity" placeholder="0" min="0" step="1" required>
+                                @error('electricity')
                                 <div class="invalid-feedback">
                                     {{ $message }}
                                 </div>
@@ -165,13 +165,13 @@
                             <div class="col-sm-10">
                                 <div class="input-group flex-nowrap">
                                     <div class="custom-file w-100">
-                                        <input class="form-control @error('photo') is-invalid @enderror" type="file" name="photos[]" required>
+                                        <input class="form-control @error('photos') is-invalid @enderror" type="file" name="photos[]" required>
                                     </div>
                                     <button class="btn btn-outline-secondary btnAddPhoto" type="button">
                                         <i class="fas fa-plus"></i>
                                     </button>
                                 </div>
-                                @error('photo')
+                                @error('photos')
                                 <div class="invalid-feedback">
                                     {{ $message }}
                                 </div>

@@ -3,14 +3,13 @@
 @section('css')
 <script>
     // DELETE EXISTING PHOTOS
-    var delPhotos = []
+    var delPhotos = [];
 
     function deletePhoto(button) {
         var img = $(button).data('id');
-
         delPhotos.push(img);
 
-        document.getElementById('del_photos').value = JSON.stringify(delPhotos);
+        document.getElementById('del_photos').value = delPhotos;
     }
 </script>
 @endsection

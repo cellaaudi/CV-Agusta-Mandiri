@@ -110,22 +110,27 @@ class AdvertisingController extends Controller
             'photos.*' => 'image|mimes:jpeg,jpg,png,svg,gif'
         ]);
 
-        $delPhotos = $request->del_photos;
+        $delPhotos = $request->del_photos[0];
         
         if (!empty($delPhotos)) {
-            foreach($delPhotos as $del) {
-                echo $del . "<br>";
-                // $photo = AdvertisingPhoto::find($del);
-                // $photo->delete();
+            $delPhotoIds = explode(',', $delPhotos);
+
+            foreach($delPhotoIds as $del) {
+                $photo = AdvertisingPhoto::find($del);
+                $storage = public_path('storage/' . $photo -> url);
+                if (file_exists($storage)) {
+                    unlink($storage);
+                }
+                $photo->delete();
             }
         }
 
-        // $adv = Advertising::find($id);
-        // $adv->name = $request->name;
-        // $adv->category = $request->category;
-        // $adv->save();
+        $adv = Advertising::find($id);
+        $adv->name = $request->name;
+        $adv->category = $request->category;
+        $adv->save();
 
-        // return redirect()->route('admin.advertising.index');
+        return redirect()->route('admin.advertising.index');
     }
 
     /**

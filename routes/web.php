@@ -20,7 +20,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function() {
+Route::get('/', function () {
     return view('index');
 })->name('guest');
 
@@ -30,23 +30,26 @@ Route::get('/register', [RegisterController::class, 'index'])->name('register');
 Route::post('/register', [RegisterController::class, 'register']);
 Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 
-Route::middleware(['auth'])->group(function () {
-    Route::middleware("can:admin")->prefix('admin')->name('admin.')->group(function () {
-        Route::get('/home', function () {
-            return view('admin.index');
-        })->name('home');
-        Route::resource('/advertising', AdvertisingController::class);
-        Route::resource('/car', CarController::class);
-        Route::resource('/buy-car', CarBuyController::class);
-        Route::resource('/property', PropertyController::class);
-    });
+Route::middleware("can:admin")->prefix('admin')->name('admin.')->group(function () {
+    Route::get('/home', function () {
+        return view('admin.index');
+    })->name('home');
+    Route::resource('/advertising', AdvertisingController::class);
+    Route::resource('/car', CarController::class);
+    Route::resource('/buy-car', CarBuyController::class);
+    Route::resource('/property', PropertyController::class);
+});
 
-    Route::middleware("can:customer")->name('customer.')->group(function () {
-        Route::get('/home', function () {
-            return view('index');
-        })->name('home');
-        Route::get('/advertising', [CustomerController::class, 'advs'])->name('advertising');
-        Route::get('/car', [CustomerController::class, 'cars'])->name('car');
-        Route::get('/prop', [CustomerController::class, 'props'])->name('property');
+Route::name('customer.')->group(function () {
+    Route::get('/home', function () {
+        return view('index');
+    })->name('home');
+    Route::get('/advertising', [CustomerController::class, 'advs'])->name('advertising');
+    Route::get('/car', [CustomerController::class, 'cars'])->name('car');
+    Route::get('/property', [CustomerController::class, 'props'])->name('property');
+
+    Route::middleware("can:customer")->group(function () {
+        //keranjang
+        // kalo mau tambah ke keranjang langsung alert suruh login
     });
 });

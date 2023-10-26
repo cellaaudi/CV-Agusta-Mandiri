@@ -1,30 +1,18 @@
 @extends('layouts.home')
 
 @section("header")
-<li><a class="nav-link scrollto " href="#hero">Home</a></li>
-<li><a class="nav-link scrollto" href="#about">About</a></li>
-<li><a class="nav-link scrollto" href="#services">Services</a></li>
-<li><a class="nav-link scrollto " href="#portfolio">Portfolio</a></li>
-<li><a class="nav-link scrollto" href="#team">Team</a></li>
-<li class="dropdown"><a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down"></i></a>
+@auth
+<li class="dropdown"><a href="#"><span style="font-weight: normal;">Halo,&nbsp</span><span>{{ auth()->user()->name }}</span> <i class="bi bi-chevron-down"></i></a>
     <ul>
-        <li><a href="#">Drop Down 1</a></li>
-        <li class="dropdown"><a href="#"><span>Deep Drop Down</span> <i class="bi bi-chevron-right"></i></a>
-            <ul>
-                <li><a href="#">Deep Drop Down 1</a></li>
-                <li><a href="#">Deep Drop Down 2</a></li>
-                <li><a href="#">Deep Drop Down 3</a></li>
-                <li><a href="#">Deep Drop Down 4</a></li>
-                <li><a href="#">Deep Drop Down 5</a></li>
-            </ul>
-        </li>
-        <li><a href="#">Drop Down 2</a></li>
-        <li><a href="#">Drop Down 3</a></li>
-        <li><a href="#">Drop Down 4</a></li>
+        <li><a href="#">Profil saya <i class='bx bx-user fs-4'></i></a></li>
+        <li><a href="#">Keranjang <i class='bx bx-cart-alt fs-4'></i></a></li>
+        <li><a href="{{ route('logout') }}" style="color: red;">Keluar <i class='bx bx-log-out fs-4'></i></a></li>
     </ul>
 </li>
-<li><a class="nav-link scrollto" href="#contact">Contact</a></li>
-<li><a class="getstarted scrollto" href="#about">Get Started</a></li>
+@else
+<li><a class="getstarted scrollto" href="{{ route('login') }}">Login</a></li>
+@endauth
+{{-- <li><a class="getstarted scrollto" href="{{ route('logout') }}">Logout</a></li> --}}
 @endsection
 
 @section('content')

@@ -1,73 +1,25 @@
 @extends('layouts.home')
 
-<!-- ======= Header ======= -->
-<header id="header" class="fixed-top ">
-    <div class="container d-flex align-items-center justify-content-between">
-        <h1 class="logo"><a href="index.html">AGUSTA</a></h1>
-        <!-- Uncomment below if you prefer to use an image logo -->
-        <!-- <a href="index.html" class="logo"><img src="{{ asset('customer/img/logo.png') }}" alt="" class="img-fluid"></a> -->
-
-        <nav id="navbar" class="navbar">
-            <ul>
-                <li><a class="nav-link scrollto" href="#hero">Home</a></li>
-                <li><a class="nav-link scrollto" href="#about">Tentang</a></li>
-                <li><a class="nav-link scrollto" href="#services">Layanan</a></li>
-                <li><a class="nav-link scrollto " href="#portfolio">Portofolio</a></li>
-                <li><a class="nav-link scrollto" href="#team">Team</a></li>
-                <li class="dropdown"><a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down"></i></a>
-                    <ul>
-                        <li><a href="#">Drop Down 1</a></li>
-                        <li class="dropdown"><a href="#"><span>Deep Drop Down</span> <i class="bi bi-chevron-right"></i></a>
-                            <ul>
-                                <li><a href="#">Deep Drop Down 1</a></li>
-                                <li><a href="#">Deep Drop Down 2</a></li>
-                                <li><a href="#">Deep Drop Down 3</a></li>
-                                <li><a href="#">Deep Drop Down 4</a></li>
-                                <li><a href="#">Deep Drop Down 5</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="#">Drop Down 2</a></li>
-                        <li><a href="#">Drop Down 3</a></li>
-                        <li><a href="#">Drop Down 4</a></li>
-                    </ul>
-                </li>
-                <li><a class="nav-link scrollto" href="#contact">Kontak</a></li>
-                @auth
-                <!-- <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="javascript:void(0)" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <img src="{{ asset('admin/images/users/profile-pic.jpg') }}" alt="user" class="rounded-circle" width="40">
-                        <span class="ms-2 d-none d-lg-inline-block"><span>Hello,</span> <span class="text-dark">{{ auth()->user()->name }}</span> <i data-feather="chevron-down" class="svg-icon"></i></span>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-end dropdown-menu-right user-dd animated flipInY">
-                        <a class="dropdown-item" href="javascript:void(0)"><i data-feather="user" class="svg-icon me-2 ms-1"></i>
-                            My Profile</a>
-                        <a class="dropdown-item" href="javascript:void(0)"><i data-feather="credit-card" class="svg-icon me-2 ms-1"></i>
-                            My Balance</a>
-                        <a class="dropdown-item" href="javascript:void(0)"><i data-feather="mail" class="svg-icon me-2 ms-1"></i>
-                            Inbox</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="javascript:void(0)"><i data-feather="settings" class="svg-icon me-2 ms-1"></i>
-                            Account Setting</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="{{ route('logout') }}"><i data-feather="power" class="svg-icon me-2 ms-1"></i>
-                            Logout</a>
-                        <div class="dropdown-divider"></div>
-                        <div class="pl-4 p-3"><a href="javascript:void(0)" class="btn btn-sm btn-info">View
-                                Profile</a></div>
-                    </div>
-                </li> -->
-                <li><a href="#"><i class='bx bx-cart-alt fs-4'></i></a></li>
-                <li><a href="{{ route('logout') }}"><i class='bx bx-log-out fs-4'></i></a></li>
-                @else
-                <li><a class="getstarted scrollto" href="{{ route('login') }}">Login</a></li>
-                @endauth
-                {{-- <li><a class="getstarted scrollto" href="{{ route('logout') }}">Logout</a></li> --}}
-            </ul>
-            <i class="bi bi-list mobile-nav-toggle"></i>
-        </nav><!-- .navbar -->
-
-    </div>
-</header><!-- End Header -->
+@section("header")
+<li><a class="nav-link scrollto" href="#hero">Home</a></li>
+<li><a class="nav-link scrollto" href="#about">Tentang</a></li>
+<li><a class="nav-link scrollto" href="#services">Layanan</a></li>
+<li><a class="nav-link scrollto " href="#portfolio">Portofolio</a></li>
+<li><a class="nav-link scrollto" href="#team">Team</a></li>
+<li><a class="nav-link scrollto" href="#contact">Kontak</a></li>
+@auth
+<li class="dropdown"><a href="#"><span style="font-weight: normal;">Halo,&nbsp</span><span>{{ auth()->user()->name }}</span> <i class="bi bi-chevron-down"></i></a>
+    <ul>
+        <li><a href="#">Profil saya <i class='bx bx-user fs-4'></i></a></li>
+        <li><a href="#">Keranjang <i class='bx bx-cart-alt fs-4'></i></a></li>
+        <li><a href="{{ route('logout') }}" style="color: red;">Keluar <i class='bx bx-log-out fs-4'></i></a></li>
+    </ul>
+</li>
+@else
+<li><a class="getstarted scrollto" href="{{ route('login') }}">Login</a></li>
+@endauth
+{{-- <li><a class="getstarted scrollto" href="{{ route('logout') }}">Logout</a></li> --}}
+@endsection
 
 
 @section('content')
@@ -161,7 +113,7 @@
             </div>
 
             <div class="row gy-4">
-                <div class="col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
+                <a href="{{ route('customer.advertising') }}" class="a-card col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
                     <div class="icon-box iconbox-blue">
                         <div class="icon">
                             <svg width="100" height="100" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
@@ -170,12 +122,12 @@
                             </svg>
                             <i class="bx bx-store"></i>
                         </div>
-                        <h4><a href="{{ route('customer.advertising') }}">Periklanan</a></h4>
+                        <h4>Agusta Advertising</h4>
                         <p>Solusi periklanan yang efektif untuk meningkatkan bisnis Anda</p>
                     </div>
-                </div>
+                </a>
 
-                <div class="col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="200">
+                <a href="{{ route('customer.car') }}" class="a-card col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="200">
                     <div class="icon-box iconbox-orange ">
                         <div class="icon">
                             <svg width="100" height="100" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
@@ -184,12 +136,12 @@
                             </svg>
                             <i class="bx bx-car"></i>
                         </div>
-                        <h4><a href="{{ route('customer.car') }}">Mobil Bekas</a></h4>
+                        <h4>Agusta Motor</h4>
                         <p>Jual beli mobil bekas dengan kepercayaan dan profesionalitas</p>
                     </div>
-                </div>
+                </a>
 
-                <div class="col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="300">
+                <a href="{{ route('customer.property') }}" class="a-card col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="300">
                     <div class="icon-box iconbox-pink">
                         <div class="icon">
                             <svg width="100" height="100" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
@@ -198,10 +150,10 @@
                             </svg>
                             <i class="bx bx-building"></i>
                         </div>
-                        <h4><a href="{{ route('customer.property') }}">Properti</a></h4>
+                        <h4>Agusta Properti</h4>
                         <p>Temukan properti impian Anda di Bali dengan bantuan kami</p>
                     </div>
-                </div>
+                </a>
             </div>
         </div>
     </section><!-- End Services Section -->
@@ -212,9 +164,7 @@
 
             <div class="section-title">
                 <h2>Mengapa Harus Kami</h2>
-                <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint
-                    consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia
-                    fugiat sit in iste officiis commodi quidem hic quas.</p>
+                <p>Inilah beberapa keunggulan memilih kami untuk membantu Anda</p>
             </div>
 
             <div class="row">
@@ -791,55 +741,4 @@
     </section><!-- End Contact Section -->
 
 </main><!-- End #main -->
-@endsection
-
-@section('footer')
-<div class="footer-top">
-    <div class="container">
-        <div class="row">
-
-            <div class="col-lg-3 col-md-6 footer-contact">
-                <h3>Techie</h3>
-                <p>
-                    Jl. Tambak sari No. 27 <br>
-                    Kapal - Mengwi <br>
-                    Badung - Bali <br><br>
-                    <strong>Phone:</strong> 081318733001<br>
-                    <strong>Email:</strong> agustabali@gmail.com<br>
-                </p>
-            </div>
-
-            <div class="col-lg-2 col-md-6 footer-links">
-                <h4>Useful Links</h4>
-                <ul>
-                    <li><i class="bx bx-chevron-right"></i> <a href="#">Home</a></li>
-                    <li><i class="bx bx-chevron-right"></i> <a href="#">About us</a></li>
-                    <li><i class="bx bx-chevron-right"></i> <a href="#">Services</a></li>
-                    <li><i class="bx bx-chevron-right"></i> <a href="#">Terms of service</a></li>
-                    <li><i class="bx bx-chevron-right"></i> <a href="#">Privacy policy</a></li>
-                </ul>
-            </div>
-
-            <div class="col-lg-3 col-md-6 footer-links">
-                <h4>Our Services</h4>
-                <ul>
-                    <li><i class="bx bx-chevron-right"></i> <a href="#">Web Design</a></li>
-                    <li><i class="bx bx-chevron-right"></i> <a href="#">Web Development</a></li>
-                    <li><i class="bx bx-chevron-right"></i> <a href="#">Product Management</a></li>
-                    <li><i class="bx bx-chevron-right"></i> <a href="#">Marketing</a></li>
-                    <li><i class="bx bx-chevron-right"></i> <a href="#">Graphic Design</a></li>
-                </ul>
-            </div>
-
-            <div class="col-lg-4 col-md-6 footer-newsletter">
-                <h4>Join Our Newsletter</h4>
-                <p>Tamen quem nulla quae legam multos aute sint culpa legam noster magna</p>
-                <form action="" method="post">
-                    <input type="email" name="email"><input type="submit" value="Subscribe">
-                </form>
-            </div>
-
-        </div>
-    </div>
-</div>
 @endsection

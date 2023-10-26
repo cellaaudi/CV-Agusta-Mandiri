@@ -21,11 +21,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function() {
-    // return redirect()->route('home');
     return view('index');
-});
-
-// Route::get('/home', [HomeController::class, 'index'])->name('home');
+})->name('guest');
 
 Route::get('/login', [LoginController::class, 'index'])->name('login');
 Route::post('/login', [LoginController::class, 'login']);
@@ -44,7 +41,7 @@ Route::middleware(['auth'])->group(function () {
         Route::resource('/property', PropertyController::class);
     });
 
-    Route::middleware("can:customer")->prefix('customer')->name('customer.')->group(function () {
+    Route::middleware("can:customer")->name('customer.')->group(function () {
         Route::get('/home', function () {
             return view('index');
         })->name('home');
@@ -53,13 +50,3 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/prop', [CustomerController::class, 'props'])->name('property');
     });
 });
-
-// SEMENTARA
-// Route::prefix('admin')->name('admin.')->group(function () {
-//     Route::get('/home', function () {
-//         return view('admin.index');
-//     });
-//     Route::resource('/advertising', AdvertisingController::class);
-//     Route::resource('/car', CarController::class);
-//     Route::resource('/property', PropertyController::class);
-// });

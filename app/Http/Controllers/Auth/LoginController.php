@@ -40,14 +40,13 @@ class LoginController extends Controller
             'email' => ['required'],
             'password' => ['required'],
         ]);
-        // dd('hehe');
 
         if(Auth::attempt($credentials)){
             $request->session()->regenerate();
             if(auth()->user()->role == 'Admin'){
                 return redirect()->intended('/admin/home');
             }else if(auth()->user()->role == 'Customer'){
-                return redirect()->intended('/');
+                return redirect()->intended('/home');
             }
         }
 

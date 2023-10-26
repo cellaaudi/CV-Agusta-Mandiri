@@ -5,6 +5,7 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\AdvertisingController;
 use App\Http\Controllers\CarBuyController;
 use App\Http\Controllers\CarController;
+use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\PropertyController;
 use Illuminate\Support\Facades\Route;
 
@@ -46,7 +47,10 @@ Route::middleware(['auth'])->group(function () {
     Route::middleware("can:customer")->prefix('customer')->name('customer.')->group(function () {
         Route::get('/home', function () {
             return view('index');
-        });
+        })->name('home');
+        Route::get('/advertising', [CustomerController::class, 'advs'])->name('advertising');
+        Route::get('/car', [CustomerController::class, 'cars'])->name('car');
+        Route::get('/prop', [CustomerController::class, 'props'])->name('property');
     });
 });
 

@@ -1,20 +1,5 @@
 @extends('layouts.home')
 
-@section("header")
-@auth
-<li class="dropdown"><a href="#"><span style="font-weight: normal;">Halo,&nbsp</span><span>{{ auth()->user()->name }}</span> <i class="bi bi-chevron-down"></i></a>
-    <ul>
-        <li><a href="#">Profil saya <i class='bx bx-user fs-4'></i></a></li>
-        <li><a href="#">Keranjang <i class='bx bx-cart-alt fs-4'></i></a></li>
-        <li><a href="{{ route('logout') }}" style="color: red;">Keluar <i class='bx bx-log-out fs-4'></i></a></li>
-    </ul>
-</li>
-@else
-<li><a class="getstarted scrollto" href="{{ route('login') }}">Login</a></li>
-@endauth
-{{-- <li><a class="getstarted scrollto" href="{{ route('logout') }}">Logout</a></li> --}}
-@endsection
-
 @section('content')
 <section class="portfolio">
     <div class="container" data-aos="fade-up">
@@ -38,21 +23,21 @@
 
             @foreach($advs as $adv)
             <div class="col-lg-4 col-md-6 portfolio-item filter-{{ $adv -> category }}">
-                    <div class="portfolio-wrap">
-                        @foreach($photos as $photo)
-                        @if ($adv -> id == $photo -> adv_product_id)
-                        <img src="{{ asset('storage/' . $photo -> url) }}" class="img-fluid" alt="">
-                        @break
-                        @endif
-                        @endforeach
-                        <div class="portfolio-info">
-                            <h4>{{ $adv -> name }}</h4>
-                            <p>{{ $adv -> category }}</p>
-                        </div>
-                        <div class="portfolio-links">
-                            <a href="" title="More Details" class="btn btn-outline-light">Lihat Detail&nbsp;&nbsp;<i class="fa fa-angle-right" aria-hidden="true"></i></a>
-                        </div>
+                <div class="portfolio-wrap">
+                    @foreach($photos as $photo)
+                    @if ($adv -> id == $photo -> adv_product_id)
+                    <img src="{{ asset('storage/' . $photo -> url) }}" class="img-fluid" alt="">
+                    @break
+                    @endif
+                    @endforeach
+                    <div class="portfolio-info">
+                        <h4>{{ $adv -> name }}</h4>
+                        <p>{{ $adv -> category }}</p>
                     </div>
+                    <div class="portfolio-links">
+                        <a href="" title="More Details" class="btn btn-outline-light">Lihat Detail&nbsp;&nbsp;<i class="fa fa-angle-right" aria-hidden="true"></i></a>
+                    </div>
+                </div>
             </div>
             @endforeach
 

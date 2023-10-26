@@ -206,8 +206,8 @@ h6 {
   transition: all 0.3s ease-in-out 0s;
 }
 
-.navbar a:hover:before,
-.navbar li:hover>a:before,
+.navbar .nav-link:hover:before,
+.navbar li:hover>.nav-link:before,
 .navbar .active:before {
   visibility: visible;
   width: 100%;
@@ -217,6 +217,11 @@ h6 {
 .navbar .active,
 .navbar .active:focus,
 .navbar li:hover>a {
+  color: #fff;
+}
+
+.navbar .user {
+  font-weight: normal;
   color: #fff;
 }
 
@@ -355,7 +360,7 @@ h6 {
   bottom: 15px;
   left: 15px;
   padding: 10px 0;
-  background-color: #fff;
+  background-color: #b1a9fc;
   overflow-y: auto;
   transition: 0.3s;
 }

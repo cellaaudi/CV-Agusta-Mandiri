@@ -45,6 +45,7 @@ Route::name('customer.')->group(function () {
         return view('index');
     })->name('home');
     Route::get('/advertising', [CustomerController::class, 'advs'])->name('advertising');
+    Route::get('/advertising/detail', [CustomerController::class, 'detail'])->name('advertising.detail');
     Route::get('/car', [CustomerController::class, 'cars'])->name('car');
     Route::get('/property', [CustomerController::class, 'props'])->name('property');
 

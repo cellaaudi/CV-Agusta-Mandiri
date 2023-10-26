@@ -35,7 +35,7 @@
                         <p>{{ $adv -> category }}</p>
                     </div>
                     <div class="portfolio-links">
-                        <a href="" title="More Details" class="btn btn-outline-light">Lihat Detail&nbsp;&nbsp;<i class="fa fa-angle-right" aria-hidden="true"></i></a>
+                        <a href="{{ route('customer.advertising.detail', $adv) }}" title="More Details" class="btn btn-outline-light">Lihat Detail&nbsp;&nbsp;<i class="fa fa-angle-right" aria-hidden="true"></i></a>
                     </div>
                 </div>
             </div>

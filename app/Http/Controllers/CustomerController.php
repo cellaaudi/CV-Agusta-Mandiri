@@ -27,7 +27,8 @@ class CustomerController extends Controller
 
         return view('customer.adv.adv', compact('advs', 'photos'));
     }
-    public function detail($id)
+    
+    public function adv_detail($id)
     {
         $adv = Advertising::find($id);
         $photos = AdvertisingPhoto::where('adv_product_id', $id)->get();

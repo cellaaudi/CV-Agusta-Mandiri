@@ -1,4 +1,5 @@
-@extends('layout.home')
+@extends('layouts.home')
+
 @section('content')
     <section id="portfolio-details" class="portfolio-details">
         <div class="container">

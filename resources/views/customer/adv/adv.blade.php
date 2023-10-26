@@ -20,7 +20,6 @@
         </div>
 
         <div class="row portfolio-container">
-
             @foreach($advs as $adv)
             <div class="col-lg-4 col-md-6 portfolio-item filter-{{ $adv -> category }}">
                 <div class="portfolio-wrap">
@@ -35,7 +34,10 @@
                         <p>{{ $adv -> category }}</p>
                     </div>
                     <div class="portfolio-links">
-                        <a href="{{ route('customer.advertising.detail', $adv) }}" title="More Details" class="btn btn-outline-light">Lihat Detail&nbsp;&nbsp;<i class="fa fa-angle-right" aria-hidden="true"></i></a>
+                        <form action="{{ route('customer.advertising.detail', $adv) }}" method="post">
+                            @csrf
+                            <button type="submit" title="More Details" class="btn btn-outline-light">Lihat Detail&nbsp;&nbsp;<i class="fa fa-angle-right" aria-hidden="true"></i></button>
+                        </form> 
                     </div>
                 </div>
             </div>

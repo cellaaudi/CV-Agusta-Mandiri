@@ -1,4 +1,5 @@
 @extends('layouts.home')
+
 @section('content')
     <section id="pricing" class="pricing section-bg">
         <div class="container" data-aos="fade-up">

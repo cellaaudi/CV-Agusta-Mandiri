@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Advertising;
 use App\Models\Car;
 use App\Models\Property;
+use App\Models\AdvertisingPhoto;
 
 class CustomerController extends Controller
 {
@@ -18,18 +19,22 @@ class CustomerController extends Controller
     {
         //
     }
+
     public function advs()
     {
         $advs = Advertising::all();
+        $photos = AdvertisingPhoto::all();
 
-        return view('customer.adv.adv', compact('advs'));
+        return view('customer.adv.adv', compact('advs', 'photos'));
     }
+
     public function cars()
     {
         $cars = Car::all();
 
         return view('customer.car.car', compact('cars'));
     }
+
     public function props()
     {
         $props = Property::all();

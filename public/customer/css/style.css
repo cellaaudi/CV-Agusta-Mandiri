@@ -1018,15 +1018,15 @@ section {
 }
 
 .portfolio .portfolio-wrap .portfolio-links a {
-  color: rgba(255, 255, 255, 0.6);
+  color: rgba(255, 255, 255);
   margin: 0 2px;
-  font-size: 28px;
   display: inline-block;
   transition: 0.3s;
+  font-weight: bold;
 }
 
 .portfolio .portfolio-wrap .portfolio-links a:hover {
-  color: #fff;
+  color: #5846f9;
 }
 
 .portfolio .portfolio-wrap:hover::before {

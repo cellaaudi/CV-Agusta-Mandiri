@@ -43,7 +43,7 @@
                         kami terhadap inovasi yang berkelanjutan. Dalam semua yang kami lakukan, kami menjaga tingkat
                         keunggulan dan kualitas tanpa kompromi.
                     </p>
-                    <a href="#" class="read-more">Baca Selengkapnya <i class='bx bx-chevron-right'></i></a>
+                    <a href="{{ route('customer.about') }}" class="read-more">Baca Selengkapnya <i class='bx bx-chevron-right'></i></a>
                 </div>
             </div>
 
@@ -150,19 +150,18 @@
                     <div class="icon-box mt-5 mt-lg-0" data-aos="fade-up" data-aos-delay="100">
                         <i class="bx bx-receipt"></i>
                         <h4>Pengalaman Teruji</h4>
-                        <p>Berdiri sejak 2014, kami telah menghadapi berbagai tantangan dan sukses di berbagai bidang.
+                        <p>Berdiri sejak 2014, kami telah menghadapi berbagai tantangan dan sukses di berbagai bidang yang kami tawarkan.
                         </p>
                     </div>
                     <div class="icon-box mt-5" data-aos="fade-up" data-aos-delay="200">
                         <i class="bx bx-group"></i>
                         <h4>Tim Profesional Multitalenta</h4>
-                        <p>Kami memiliki tim yang beragam dengan latar belakang di periklanan, mobil bekas, dan
-                            properti, memberikan wawasan yang mendalam.</p>
+                        <p>Berasal dari latar belakang yang berbeda, tim kami memiliki wawasan yang lebih mendalam, baik dalam bidang periklanan, jual beli mobil, dan properti.</p>
                     </div>
                     <div class="icon-box mt-5" data-aos="fade-up" data-aos-delay="300">
-                        <i class="bx bx-dollar"></i>
+                        <i class="bx bx-dollar-circle"></i>
                         <h4>Harga Kompetitif</h4>
-                        <p>Kami menawarkan harga yang bersaing tanpa mengorbankan kualitas layanan.</p>
+                        <p>Kami menawarkan harga yang bersaing di pasar tanpa mengorbankan kualitas layanan yang kami berikan.</p>
                     </div>
                     <div class="icon-box mt-5" data-aos="fade-up" data-aos-delay="400">
                         <i class="bx bx-brain"></i>
@@ -172,14 +171,12 @@
                     <div class="icon-box mt-5" data-aos="fade-up" data-aos-delay="500">
                         <i class="bx bx-star"></i>
                         <h4>Kepuasan Pelanggan Utama</h4>
-                        <p>Kepuasan Anda adalah prioritas kami, dan kami berkomitmen untuk memberikan layanan luar
-                            biasa.</p>
+                        <p>Kepuasan Anda adalah prioritas utama kami, dan kami berkomitmen untuk memberikan layanan luar biasa.</p>
                     </div>
                     <div class="icon-box mt-5" data-aos="fade-up" data-aos-delay="600">
-                        <i class="bx bx-cube-alt"></i>
+                        <i class='bx bx-shield-quarter'></i>
                         <h4>Keterpercayaan dan Integritas</h4>
-                        <p>Kami dibangun di atas nilai-nilai kejujuran, transparansi, dan integritas yang kuat, dan kami
-                            diakui oleh masyarakat luas sebagai mitra yang dapat dipercaya.</p>
+                        <p>Kami dibangun di atas nilai-nilai kejujuran, transparansi, dan integritas yang kuat sehingga kami dapat menjadi mitra yang dapat dipercaya.</p>
                     </div>
                 </div>
                 <div class="image col-lg-6 order-1 order-lg-2 " data-aos="zoom-in" data-aos-delay="100">
@@ -673,7 +670,7 @@
                 <div class="col-lg-3 col-md-6">
                     <div class="info-box mb-4">
                         <i class="bx bx-map"></i>
-                        <h3>Office</h3>
+                        <h3>Kantor 1</h3>
                         <p>Jl. Tambak sari No. 27 Kapal - Mengwi</p>
                         <p>Badung - Bali</p>
                     </div>
@@ -681,7 +678,7 @@
                 <div class="col-lg-3 col-md-6">
                     <div class="info-box mb-4">
                         <i class="bx bx-map"></i>
-                        <h3>Workshop</h3>
+                        <h3>Kantor 2</h3>
                         <p>Jl. Siulan No. 98 Penatih Dangin Puri</p>
                         <p>Denpasar Timur - Bali</p>
                     </div>
@@ -690,7 +687,7 @@
                 <div class="col-lg-3 col-md-6">
                     <div class="info-box  mb-4">
                         <i class="bx bx-envelope"></i>
-                        <h3>Email Us</h3>
+                        <h3>Email</h3>
                         <p>agustabali@gmail.com</p><br>
                     </div>
                 </div>
@@ -698,9 +695,9 @@
                 <div class="col-lg-3 col-md-6">
                     <div class="info-box  mb-4">
                         <i class="bx bx-phone-call"></i>
-                        <h3>Call Us</h3>
-                        <p>081318733001</p>
-                        <p>081916511427</p>
+                        <h3>Telepon / WhatsApp</h3>
+                        <p><a href="https://wa.me/6281318733001" target="_blank" style="color: inherit;">081318733001</a></p>
+                        <p><a href="https://wa.me/6281916511427" target="_blank" style="color: inherit;">081916511427</a></p>
                     </div>
                 </div>
 

@@ -1,7 +1,7 @@
 @extends('layouts.home')
 
 @section('content')
-<section class="portfolio">
+<section class="portfolio inner-page">
     <div class="container" data-aos="fade-up">
         <div class="section-title">
             <h2>Agusta Advertising</h2>

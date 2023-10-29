@@ -40,7 +40,7 @@
 
 <body>
     <!-- ======= Header ======= -->
-    @if(Route::is('customer.home') or Route::is('guest'))
+    @if(Route::is('customer.home'))
     <header id="header" class="fixed-top ">
         @else
         <header id="header" class="fixed-top header-inner-pages">
@@ -52,7 +52,7 @@
 
                 <nav id="navbar" class="navbar">
                     <ul>
-                        @if(Route::is('customer.home') or Route::is('guest'))
+                        @if(Route::is('customer.home'))
                         <li><a class="nav-link scrollto" href="#hero">Home</a></li>
                         <li><a class="nav-link scrollto" href="#about">Tentang</a></li>
                         <li><a class="nav-link scrollto" href="#services">Layanan</a></li>

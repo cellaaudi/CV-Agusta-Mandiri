@@ -21,8 +21,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('index');
-})->name('guest');
+    return redirect('/home');
+});
 
 Route::get('/login', [LoginController::class, 'index'])->name('login');
 Route::post('/login', [LoginController::class, 'login']);
@@ -44,6 +44,9 @@ Route::name('customer.')->group(function () {
     Route::get('/home', function () {
         return view('index');
     })->name('home');
+    Route::get('/about', function () {
+        return view('customer.about');
+    })->name('about');
     Route::get('/advertising', [CustomerController::class, 'advs'])->name('advertising');
     Route::post('/advertising/detail/{adv}', [CustomerController::class, 'adv_detail'])->name('advertising.detail');
     Route::get('/car', [CustomerController::class, 'cars'])->name('car');

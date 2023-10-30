@@ -26,7 +26,7 @@ class CarCategoryController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.car.carcategorycreate');
     }
 
     /**
@@ -37,7 +37,15 @@ class CarCategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'category' => 'required',
+        ]);
+
+        CarCategory::create([
+            'category' => $request->category,
+        ]);
+
+        return redirect()->route('admin.car.category.index')->with('status', 'Produk berhasil ditambahkan');
     }
 
     /**
@@ -92,6 +100,8 @@ class CarCategoryController extends Controller
      */
     public function destroy($id)
     {
-        //
+        CarCategory::find($id)->delete();
+
+        return redirect()->route('admin.car.category.index');
     }
 }

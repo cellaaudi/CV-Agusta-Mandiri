@@ -56,7 +56,7 @@
                                 <td>{{ $brand -> brand }}</td>
                                 <td>
                                     <a href="{{ route('admin.car.brand.edit', $brand) }}" type="button" class="btn btn-warning btn-rounded"><i class="far fa-edit"></i> Edit</a>
-                                    <a type="button" class="btn btn-danger btn-rounded"><i class="far fa-trash-alt"></i> Hapus</a>
+                                    <button type="button" class="btn btn-danger btn-rounded" data-bs-toggle="modal" data-bs-target="#delModal" data-brand="{{ json_encode($brand) }}" onclick="deleteSelected(this)"><i class="far fa-trash-alt"></i> Hapus</button>
                                 </td>
                             </tr>
                             @endforeach
@@ -67,6 +67,29 @@
         </div>
     </div>
 </div>
+
+<!-- Danger Header Modal -->
+<div id="delModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="danger-header-modalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header modal-colored-header bg-danger">
+                <h4 class="modal-title" id="danger-header-modalLabel">Hapus Merk</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
+            </div>
+            <div class="modal-body">
+                <p></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-light" data-bs-dismiss="modal">Batal</button>
+                <form method="post">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="btn btn-danger btnDel">Hapus</button>
+                </form>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
 @endsection
 
 @section('jquery')
@@ -84,5 +107,15 @@
     $(document).ready(function() {
         $('table').DataTable();
     });
+</script>
+
+<script>
+    function deleteSelected(button) {
+        var data = $(button).data('brand');
+
+        $('#delModal .modal-body p').html('Apakah Anda yakin ingin menghapus <b>' + data.brand + '</b> dari daftar merk mobil?');
+
+        $('#delModal form').attr('action', '/admin/car/brand/' + data.id);
+    }
 </script>
 @endsection

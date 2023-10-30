@@ -26,7 +26,7 @@ class CarBrandController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.car.carbrandcreate');
     }
 
     /**
@@ -37,7 +37,15 @@ class CarBrandController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'brand' => 'required',
+        ]);
+
+        CarBrand::create([
+            'brand' => $request->brand,
+        ]);
+
+        return redirect()->route('admin.car.brand.index')->with('status', 'Produk berhasil ditambahkan');
     }
 
     /**
@@ -59,7 +67,9 @@ class CarBrandController extends Controller
      */
     public function edit($id)
     {
-        //
+        $brand = CarBrand::find($id);
+
+        return view('admin.car.carbrandedit', compact('brand'));
     }
 
     /**
@@ -71,7 +81,15 @@ class CarBrandController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'brand' => 'required',
+        ]);
+
+        $brand = CarBrand::find($id);
+        $brand->brand = $request->brand;
+        $brand->save();
+
+        return redirect()->route('admin.car.brand.index');
     }
 
     /**
@@ -82,6 +100,8 @@ class CarBrandController extends Controller
      */
     public function destroy($id)
     {
-        //
+        CarBrand::find($id)->delete();
+
+        return redirect()->route('admin.car.brand.index');
     }
 }

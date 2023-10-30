@@ -1,8 +1,5 @@
 @extends('layouts.admin')
 
-@section('css')
-@endsection
-
 @section('breadcrumb')
 <div class="page-breadcrumb">
     <div class="row">

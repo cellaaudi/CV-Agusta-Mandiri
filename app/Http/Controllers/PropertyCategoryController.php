@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\PropertyCategory;
 use Illuminate\Http\Request;
 
 class PropertyCategoryController extends Controller
@@ -13,7 +14,9 @@ class PropertyCategoryController extends Controller
      */
     public function index()
     {
-        //
+        $categories = PropertyCategory::orderBy('category', 'asc')->get();
+
+        return view('admin.prop.propcategory', compact('categories'));
     }
 
     /**

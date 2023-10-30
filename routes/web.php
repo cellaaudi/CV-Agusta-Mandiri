@@ -3,7 +3,9 @@
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\AdvertisingController;
+use App\Http\Controllers\CarBrandController;
 use App\Http\Controllers\CarBuyController;
+use App\Http\Controllers\CarCategoryController;
 use App\Http\Controllers\CarController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\PropertyController;
@@ -35,8 +37,12 @@ Route::middleware("can:admin")->prefix('admin')->name('admin.')->group(function 
         return view('admin.index');
     })->name('home');
     Route::resource('/advertising', AdvertisingController::class);
-    Route::resource('/car', CarController::class);
-    Route::resource('/buy-car', CarBuyController::class);
+    Route::prefix('car')->name('car.')->group(function () {
+        Route::resource('/sell', CarController::class);
+        Route::resource('/buy', CarBuyController::class);
+        Route::resource('/brand', CarBrandController::class);
+        Route::resource('/category', CarCategoryController::class);
+    });
     Route::resource('/property', PropertyController::class);
 });
 

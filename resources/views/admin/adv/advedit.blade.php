@@ -22,8 +22,9 @@
             <div class="d-flex align-items-center">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb m-0 p-0">
-                        <li class="breadcrumb-item"><a href="index.html" class="text-muted">Home</a></li>
-                        <li class="breadcrumb-item text-muted active" aria-current="page">Library</li>
+                        <li class="breadcrumb-item"><a href="{{ route('admin.home') }}" class="text-muted">Beranda</a></li>
+                        <li class="breadcrumb-item"><a href="{{ route('admin.advertising.index') }}" class="text-muted">Agusta Advertising</a></li>
+                        <li class="breadcrumb-item text-muted active" aria-current="page">Edit Produk</li>
                     </ol>
                 </nav>
             </div>
@@ -45,7 +46,7 @@
                         <div class="form-group mb-3 row">
                             <label for="inputHorizontal" class="col-sm-2 col-form-label">Nama</label>
                             <div class="col-sm-10">
-                                <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" id="inputHorizontal" placeholder="Contoh: Meja" required autofocus value="{{ $adv -> name }}">
+                                <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" id="inputHorizontal" placeholder="Contoh: Billboard" required autofocus value="{{ $adv -> name }}">
                                 @error('name')
                                 <div class="invalid-feedback">
                                     {{ $message }}

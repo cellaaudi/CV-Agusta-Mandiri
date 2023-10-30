@@ -11,8 +11,10 @@
             <div class="d-flex align-items-center">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb m-0 p-0">
-                        <li class="breadcrumb-item"><a href="index.html" class="text-muted">Home</a></li>
-                        <li class="breadcrumb-item text-muted active" aria-current="page">Library</li>
+                        <li class="breadcrumb-item"><a href="{{ route('admin.home') }}" class="text-muted">Beranda</a></li>
+                        <li class="breadcrumb-item"><a href="{{ route('admin.car.sell.index') }}" class="text-muted">Agusta Motor</a></li>
+                        <li class="breadcrumb-item"><a href="{{ route('admin.car.sell.index') }}" class="text-muted">Jual Mobil</a></li>
+                        <li class="breadcrumb-item text-muted active" aria-current="page">Tambah Produk</li>
                     </ol>
                 </nav>
             </div>
@@ -27,7 +29,7 @@
     <div class="col-12">
         <div class="card">
             <div class="card-body">
-                <form class="mt-3 form-horizontal" method="post" enctype="multipart/form-data" action="{{ route('admin.car.store') }}">
+                <form class="mt-3 form-horizontal" method="post" enctype="multipart/form-data" action="{{ route('admin.car.sell.store') }}">
                     @csrf
                     <div class="form-body">
                         <div class="form-group mb-3 row">

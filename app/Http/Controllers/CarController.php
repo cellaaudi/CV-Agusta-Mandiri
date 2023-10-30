@@ -19,7 +19,7 @@ class CarController extends Controller
     {
         $cars = Car::where('status', 'Sell')->get();
 
-        return view('admin.car.car', compact('cars'));
+        return view('admin.car.carsell', compact('cars'));
     }
 
     /**
@@ -32,7 +32,7 @@ class CarController extends Controller
         $brands = CarBrand::orderBy('brand', 'asc')->get();
         $categories = CarCategory::orderBy('category', 'asc')->get();
 
-        return view('admin.car.carcreate', compact('brands', 'categories'));
+        return view('admin.car.carsellcreate', compact('brands', 'categories'));
     }
 
     /**

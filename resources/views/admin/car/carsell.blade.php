@@ -14,19 +14,20 @@
 <div class="page-breadcrumb">
     <div class="row">
         <div class="col-7 align-self-center">
-            <h4 class="page-title text-truncate text-dark font-weight-medium mb-1">Agusta Advertising</h4>
+            <h4 class="page-title text-truncate text-dark font-weight-medium mb-1">Agusta Motor: Jual Mobil</h4>
             <div class="d-flex align-items-center">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb m-0 p-0">
                         <li class="breadcrumb-item"><a href="{{ route('admin.home') }}" class="text-muted">Beranda</a></li>
-                        <li class="breadcrumb-item text-muted active" aria-current="page">Agusta Advertising</li>
+                        <li class="breadcrumb-item text-muted active" aria-current="page">Agusta Motor</li>
+                        <li class="breadcrumb-item text-muted active" aria-current="page">Jual Mobil</li>
                     </ol>
                 </nav>
             </div>
         </div>
         <div class="col-5 align-self-center">
             <div class="customize-input float-end">
-                <a href="{{ route('admin.advertising.create') }}" class="btn btn-primary btn-rounded"><i class="fas fa-plus"></i>     Tambah Produk</a>
+                <a href="{{ route('admin.car.sell.create') }}" class="btn btn-primary btn-rounded"><i class="fas fa-plus"></i> Tambah Produk</a>
             </div>
         </div>
     </div>
@@ -44,20 +45,36 @@
                         <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>Nama</th>
+                                <th>Judul</th>
+                                <th>Tahun</th>
+                                <th>Merk</th>
                                 <th>Kategori</th>
+                                <th>Harga</th>
+                                <th>Kilometer</th>
+                                <th>Transmisi</th>
+                                <th>Kapasitas Mesin</th>
+                                <th>Bahan Bakar</th>
+                                <th>Status</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($advs as $adv)
+                            @foreach($cars as $car)
                             <tr>
-                                <td>{{ $adv -> id }}</td>
-                                <td>{{ $adv -> name }}</td>
-                                <td>{{ $adv -> category }}</td>
+                                <td>{{ $car -> id }}</td>
+                                <td>{{ $car -> title }}</td>
+                                <td>{{ $car -> year }}</td>
+                                <td>{{ $car -> car_brand -> brand }}</td>
+                                <td>{{ $car -> car_category -> category }}</td>
+                                <td>Rp. {{ $car -> price }}</td>
+                                <td>{{ $car -> kilometre }} km</td>
+                                <td>{{ $car -> transmission }}</td>
+                                <td>{{ $car -> capacity }} CC</td>
+                                <td>{{ $car -> fuel }}</td>
+                                <td>{{ $car -> sell_status }}</td>
                                 <td>
-                                    <a href="{{ route('admin.advertising.show', $adv) }}" type="button" class="btn btn-success btn-rounded"><i class="far fa-folder-open"></i> Detail</a>
-                                    <a href="{{ route('admin.advertising.edit', $adv) }}" type="button" class="btn btn-warning btn-rounded"><i class="far fa-edit"></i> Edit</a>
+                                    <a href="{{ route('admin.car.sell.show', $car) }}" type="button" class="btn btn-success btn-rounded"><i class="far fa-folder-open"></i> Detail</a>
+                                    <a href="{{ route('admin.car.sell.edit', $car) }}" type="button" class="btn btn-warning btn-rounded"><i class="far fa-edit"></i> Edit</a>
                                     <a type="button" class="btn btn-danger btn-rounded"><i class="far fa-trash-alt"></i> Hapus</a>
                                 </td>
                             </tr>
@@ -72,26 +89,11 @@
 @endsection
 
 @section('jquery')
-<!-- All Jquery -->
-<!-- ============================================================== -->
-<!-- <script src="{{ asset('admin/libs/jquery/dist/jquery.min.js') }}">
-</script> -->
 <!-- Bootstrap tether Core JavaScript -->
 <script src="{{ asset('admin/libs/popper.js/dist/umd/popper.min.js') }}"></script>
 <script src="{{ asset('admin/libs/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script>
 <!-- apps -->
-<!-- apps -->
-<!-- <script src="{{ asset('admin/dist/js/app-style-switcher.js') }}"></script> -->
-<!-- <script src="{{ asset('admin/dist/js/feather.min.js') }}"></script> -->
-<!-- slimscrollbar scrollbar JavaScript -->
-<!-- <script src="{{ asset('admin/libs/perfect-scrollbar/dist/perfect-scrollbar.jquery.min.js') }}"></script> -->
 <script src="{{ asset('admin/extra-libs/sparkline/sparkline.js') }}"></script>
-<!--Wave Effects -->
-<!-- themejs -->
-<!--Menu sidebar -->
-<!-- <script src="{{ asset('admin/dist/js/sidebarmenu.js') }}"></script> -->
-<!--Custom JavaScript -->
-<!-- <script src="{{ asset('admin/dist/js/custom.min.js') }}"></script> -->
 <!--This page plugins -->
 <script src="{{ asset('admin/extra-libs/datatables.net/js/jquery.dataTables.min.js') }}"></script>
 <script src="{{ asset('admin/extra-libs/datatables.net-bs4/js/dataTables.responsive.min.js') }}"></script>
@@ -99,7 +101,7 @@
 <!-- <script src="{{ asset('DataTables/datatables.min.js') }}"></script> -->
 <script>
     $(document).ready(function() {
-        $('.table').DataTable();
+        $('table').DataTable();
     });
 </script>
 @endsection

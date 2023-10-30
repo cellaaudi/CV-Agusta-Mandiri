@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CarBrand;
 use Illuminate\Http\Request;
 
 class CarBrandController extends Controller
@@ -13,7 +14,9 @@ class CarBrandController extends Controller
      */
     public function index()
     {
-        //
+        $brands = CarBrand::orderBy('brand', 'asc')->get();
+
+        return view('admin.car.carbrand', compact('brands'));
     }
 
     /**

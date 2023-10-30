@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CarCategory;
 use Illuminate\Http\Request;
 
 class CarCategoryController extends Controller
@@ -13,7 +14,9 @@ class CarCategoryController extends Controller
      */
     public function index()
     {
-        //
+        $categories = CarCategory::orderBy('category', 'asc')->get();
+
+        return view('admin.car.carcategory', compact('categories'));
     }
 
     /**
@@ -56,7 +59,9 @@ class CarCategoryController extends Controller
      */
     public function edit($id)
     {
-        //
+        $category = CarCategory::find($id);
+
+        return view('admin.car.carcategoryedit', compact('category'));
     }
 
     /**
@@ -68,7 +73,15 @@ class CarCategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'category' => 'required',
+        ]);
+
+        $category = CarCategory::find($id);
+        $category->category = $request->category;
+        $category->save();
+
+        return redirect()->route('admin.car.category.index');
     }
 
     /**

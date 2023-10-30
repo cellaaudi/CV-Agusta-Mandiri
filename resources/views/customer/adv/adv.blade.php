@@ -1,51 +1,67 @@
 @extends('layouts.home')
 
 @section('content')
-<section class="portfolio inner-page">
-    <div class="container" data-aos="fade-up">
-        <div class="section-title">
-            <h2>Agusta Advertising</h2>
-            <p>Berikut berbagai jenis periklanan yang dapat Anda pesan dari kami</p>
-        </div>
+<main id="main">
+    <!-- ======= Breadcrumbs ======= -->
+    <section class="breadcrumbs">
+        <div class="container">
 
-        <div class="row">
-            <div class="col-lg-12 d-flex justify-content-center">
-                <ul id="portfolio-flters">
-                    <li data-filter="*" class="filter-active">Semua</li>
-                    <li data-filter=".filter-Indoor">Indoor</li>
-                    <li data-filter=".filter-Outdoor">Outdoor</li>
-                    <li data-filter=".filter-IO">Indoor & Outdoor</li>
-                </ul>
+            <div class="d-flex justify-content-between align-items-center">
+                <h2></h2>
+                <ol>
+                    <li><a href="{{ route('customer.home') }}">Halaman Utama</a></li>
+                    <li>Agusta Advertising</li>
+                </ol>
             </div>
-        </div>
 
-        <div class="row portfolio-container">
-            @foreach($advs as $adv)
-            <div class="col-lg-4 col-md-6 portfolio-item filter-{{ $adv -> category }}">
-                <div class="portfolio-wrap">
-                    @foreach($photos as $photo)
-                    @if ($adv -> id == $photo -> adv_product_id)
-                    <img src="{{ asset('storage/' . $photo -> url) }}" class="img-fluid" alt="">
-                    @break
-                    @endif
-                    @endforeach
-                    <div class="portfolio-info">
-                        <h4>{{ $adv -> name }}</h4>
-                        <p>{{ $adv -> category }}</p>
-                    </div>
-                    <div class="portfolio-links">
-                        <form action="{{ route('customer.advertising.detail', $adv) }}" method="post">
-                            @csrf
-                            <button type="submit" title="More Details" class="btn btn-outline-light">Lihat Detail&nbsp;&nbsp;<i class="fa fa-angle-right" aria-hidden="true"></i></button>
-                        </form> 
-                    </div>
+        </div>
+    </section><!-- End Breadcrumbs -->
+
+    <section class="portfolio inner-page">
+        <div class="container" data-aos="fade-up">
+            <div class="section-title">
+                <h2>Agusta Advertising</h2>
+                <p>Berikut berbagai jenis periklanan yang dapat Anda pesan dari kami</p>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-12 d-flex justify-content-center">
+                    <ul id="portfolio-flters">
+                        <li data-filter="*" class="filter-active">Semua</li>
+                        <li data-filter=".filter-Indoor">Indoor</li>
+                        <li data-filter=".filter-Outdoor">Outdoor</li>
+                        <li data-filter=".filter-IO">Indoor & Outdoor</li>
+                    </ul>
                 </div>
             </div>
-            @endforeach
 
-        </div>
+            <div class="row portfolio-container">
+                @foreach($advs as $adv)
+                <div class="col-lg-4 col-md-6 portfolio-item filter-{{ $adv -> category }}">
+                    <div class="portfolio-wrap">
+                        @foreach($photos as $photo)
+                        @if ($adv -> id == $photo -> adv_product_id)
+                        <img src="{{ asset('storage/' . $photo -> url) }}" class="img-fluid" alt="">
+                        @break
+                        @endif
+                        @endforeach
+                        <div class="portfolio-info">
+                            <h4>{{ $adv -> name }}</h4>
+                            <p>{{ $adv -> category }}</p>
+                        </div>
+                        <div class="portfolio-links">
+                            <form action="{{ route('customer.advertising.detail', $adv) }}" method="post">
+                                @csrf
+                                <button type="submit" title="More Details" class="btn btn-outline-light">Lihat Detail&nbsp;&nbsp;<i class="fa fa-angle-right" aria-hidden="true"></i></button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                @endforeach
 
-        <!-- <div class="row">
+            </div>
+
+            <!-- <div class="row">
 
             @foreach ($advs as $adv)
             <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="100">
@@ -68,6 +84,7 @@
 
         </div> -->
 
-    </div>
-</section>
+        </div>
+    </section>
+</main>
 @endsection

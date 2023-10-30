@@ -170,7 +170,7 @@
                     </div>
                     <div class="icon-box mt-5" data-aos="fade-up" data-aos-delay="500">
                         <i class="bx bx-star"></i>
-                        <h4>Kepuasan Pelanggan Utama</h4>
+                        <h4>Kepuasan Pelanggan yang Utama</h4>
                         <p>Kepuasan Anda adalah prioritas utama kami, dan kami berkomitmen untuk memberikan layanan luar biasa.</p>
                     </div>
                     <div class="icon-box mt-5" data-aos="fade-up" data-aos-delay="600">

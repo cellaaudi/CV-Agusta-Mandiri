@@ -7,7 +7,7 @@
         <div class="container">
 
             <div class="d-flex justify-content-between align-items-center">
-                <h2>Tentang Kami</h2>
+                <h2></h2>
                 <ol>
                     <li><a href="{{ route('customer.home') }}">Halaman Utama</a></li>
                     <li>Tentang Kami</li>
@@ -18,6 +18,9 @@
     </section><!-- End Breadcrumbs -->
 
     <section id="about" class="inner-page about">
+        <div class="section-title">
+            <h2>Tentang Kami</h2>
+        </div>
         <div class="container content">
             <p>
                 <b>CV Agusta Mandiri</b> adalah perusahaan yang berdedikasi dalam berbagai bidang, termasuk
@@ -32,10 +35,14 @@
                 keunggulan dan kualitas tanpa kompromi.
             </p>
             <br>
-            <h5 style="font-weight: 600;">Visi</h5>
+            <div class="section-title">
+                <h2>Visi</h2>
+            </div>
             <p>Menjadi pemimpin terdepan dalam industri periklanan, jual beli mobil bekas, dan jual properti di Bali, dengan reputasi yang tak tertandingi dalam hal profesionalisme, kreativitas, dan keandalan.</p>
             <br>
-            <h5 style="font-weight: 600;">Misi</h5>
+            <div class="section-title">
+                <h2>Misi</h2>
+            </div>
             <ul>
                 <li><i class="bi bi-check-circle"></i> Berkomitmen dalam memberikan layanan terbaik demi kepuasan pelanggan yang tak tergoyahkan. Setiap layanan yang ditawarkan dirancang untuk memenuhi dan melampaui ekspektasi klien.</li>
                 <li><i class="bi bi-check-circle"></i> Selektif dalam pemilihan sumber daya manusia yang profesional, memberikan mereka kesempatan untuk berkembang, dan menciptakan lingkungan kerja yang mendukung pertumbuhan pribadi dan profesionalitas.</li>

@@ -27,7 +27,7 @@
     <div class="col-12">
         <div class="card">
             <div class="card-body">
-                <form class="mt-3 form-horizontal" method="POST" enctype="multipart/form-data" action="{{ route('admin.property.sell.store') }}" >
+                <form class="mt-3 form-horizontal" method="POST" enctype="multipart/form-data" action="{{ route('admin.prop.sell.store') }}" >
                     @csrf
                     <div class="form-body">
                         <div class="form-group mb-3 row">

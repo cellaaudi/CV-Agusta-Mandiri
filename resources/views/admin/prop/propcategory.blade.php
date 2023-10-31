@@ -27,7 +27,7 @@
         </div>
         <div class="col-5 align-self-center">
             <div class="customize-input float-end">
-                <a href="{{ route('admin.property.sell.create') }}" class="btn btn-primary btn-rounded"><i class="fas fa-plus"></i> Tambah Kategori</a>
+                <a href="{{ route('admin.prop.category.create') }}" class="btn btn-primary btn-rounded"><i class="fas fa-plus"></i> Tambah Kategori</a>
             </div>
         </div>
     </div>
@@ -55,8 +55,8 @@
                                 <td>{{ $category -> id }}</td>
                                 <td>{{ $category -> category }}</td>
                                 <td>
-                                    <a href="{{ route('admin.property.category.edit', $brand) }}" type="button" class="btn btn-warning btn-rounded"><i class="far fa-edit"></i> Edit</a>
-                                    <button type="button" class="btn btn-danger btn-rounded" data-bs-toggle="modal" data-bs-target="#delModal" data-brand="{{ json_encode($brand) }}" onclick="deleteSelected(this)"><i class="far fa-trash-alt"></i> Hapus</button>
+                                    <a href="{{ route('admin.prop.category.edit', $category) }}" type="button" class="btn btn-warning btn-rounded"><i class="far fa-edit"></i> Edit</a>
+                                    <button type="button" class="btn btn-danger btn-rounded" data-bs-toggle="modal" data-bs-target="#delModal" data-category="{{ json_encode($category) }}" onclick="deleteSelected(this)"><i class="far fa-trash-alt"></i> Hapus</button>
                                 </td>
                             </tr>
                             @endforeach
@@ -115,7 +115,7 @@
 
         $('#delModal .modal-body p').html('Apakah Anda yakin ingin menghapus <b>' + data.category + '</b> dari daftar kategori properti?');
 
-        $('#delModal form').attr('action', '/admin/car/category/' + data.id);
+        $('#delModal form').attr('action', '/admin/property/category/' + data.id);
     }
 </script>
 @endsection

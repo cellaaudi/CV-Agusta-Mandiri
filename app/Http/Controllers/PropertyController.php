@@ -88,7 +88,7 @@ class PropertyController extends Controller
             }
         }
 
-        return redirect()->route('admin.property.index')->with('status', 'Produk berhasil ditambahkan');
+        return redirect()->route('admin.prop.index')->with('status', 'Produk berhasil ditambahkan');
     }
 
     /**

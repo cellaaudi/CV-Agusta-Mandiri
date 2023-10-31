@@ -45,7 +45,7 @@ Route::middleware("can:admin")->prefix('admin')->name('admin.')->group(function 
         Route::resource('/brand', CarBrandController::class);
         Route::resource('/category', CarCategoryController::class);
     });
-    Route::prefix('property')->name('property.')->group(function () {
+    Route::prefix('property')->name('prop.')->group(function () {
         Route::resource('/sell', PropertyController::class);
         Route::resource('/category', PropertyCategoryController::class);
     });

@@ -242,8 +242,8 @@
                         </li>
                         <li class="sidebar-item"> <a class="sidebar-link has-arrow" href="javascript:void(0)" aria-expanded="false"><i data-feather="home" class="feather-icon"></i><span class="hide-menu">Agusta Properti</span></a>
                             <ul aria-expanded="false" class="collapse  first-level base-level-line">
-                                <li class="sidebar-item"><a href="{{ route('admin.property.sell.index') }}" class="sidebar-link"><span class="hide-menu"> Jual Properti</span></a></li>
-                                <li class="sidebar-item"><a href="{{ route('admin.property.category.index') }}" class="sidebar-link"><span class="hide-menu"> Kategori Properti</span></a></li>
+                                <li class="sidebar-item"><a href="{{ route('admin.prop.sell.index') }}" class="sidebar-link"><span class="hide-menu"> Jual Properti</span></a></li>
+                                <li class="sidebar-item"><a href="{{ route('admin.prop.category.index') }}" class="sidebar-link"><span class="hide-menu"> Kategori Properti</span></a></li>
                             </ul>
                         </li>
 

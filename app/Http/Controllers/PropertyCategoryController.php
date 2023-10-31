@@ -26,7 +26,7 @@ class PropertyCategoryController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.prop.propcategorycreate');
     }
 
     /**
@@ -37,7 +37,15 @@ class PropertyCategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'category' => 'required',
+        ]);
+
+        PropertyCategory::create([
+            'category' => $request->category,
+        ]);
+
+        return redirect()->route('admin.prop.category.index')->with('status', 'Produk berhasil ditambahkan');
     }
 
     /**
@@ -59,7 +67,9 @@ class PropertyCategoryController extends Controller
      */
     public function edit($id)
     {
-        //
+        $category = PropertyCategory::find($id);
+
+        return view('admin.prop.propcategoryedit', compact('category'));
     }
 
     /**
@@ -71,7 +81,15 @@ class PropertyCategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'category' => 'required',
+        ]);
+
+        $category = PropertyCategory::find($id);
+        $category->category = $request->category;
+        $category->save();
+
+        return redirect()->route('admin.prop.category.index');
     }
 
     /**
@@ -82,6 +100,8 @@ class PropertyCategoryController extends Controller
      */
     public function destroy($id)
     {
-        //
+        PropertyCategory::find($id)->delete();
+
+        return redirect()->route('admin.prop.category.index');
     }
 }

@@ -27,29 +27,39 @@ Route::get('/', function () {
     return redirect('/home');
 });
 
-Route::get('/login', [LoginController::class, 'index'])->name('login');
+Route::get('/login', [LoginController::class, 'index'])->name('login')->middleware('guest');
 Route::post('/login', [LoginController::class, 'login']);
 Route::get('/register', [RegisterController::class, 'index'])->name('register');
 Route::post('/register', [RegisterController::class, 'register']);
 Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 
-Route::middleware("can:admin")->prefix('admin')->name('admin.')->group(function () {
-    Route::get('/home', function () {
-        return view('admin.index');
-    })->name('home');
+Route::middleware(['auth'])->group(function () {
 
-    Route::resource('/advertising', AdvertisingController::class);
-    Route::prefix('car')->name('car.')->group(function () {
-        Route::resource('/sell', CarController::class);
-        Route::resource('/buy', CarBuyController::class);
-        Route::resource('/brand', CarBrandController::class);
-        Route::resource('/category', CarCategoryController::class);
+    Route::middleware("can:admin")->prefix('admin')->name('admin.')->group(function () {
+        Route::get('/home', function () {
+            return view('admin.index');
+        })->name('home');
+
+        Route::resource('/advertising', AdvertisingController::class);
+        Route::prefix('car')->name('car.')->group(function () {
+            Route::resource('/sell', CarController::class);
+            Route::resource('/buy', CarBuyController::class);
+            Route::resource('/brand', CarBrandController::class);
+            Route::resource('/category', CarCategoryController::class);
+        });
+        Route::prefix('property')->name('property.')->group(function () {
+            Route::resource('/sell', PropertyController::class);
+            Route::resource('/category', PropertyCategoryController::class);
+        });
     });
-    Route::prefix('property')->name('prop.')->group(function () {
-        Route::resource('/sell', PropertyController::class);
-        Route::resource('/category', PropertyCategoryController::class);
+    Route::name('customer.')->group(function () {
+        Route::middleware("can:customer")->group(function () {
+            //keranjang
+            // kalo mau tambah ke keranjang langsung alert suruh login
+        });
     });
 });
+
 
 Route::name('customer.')->group(function () {
     Route::get('/home', function () {
@@ -62,9 +72,4 @@ Route::name('customer.')->group(function () {
     Route::post('/advertising/detail/{adv}', [CustomerController::class, 'adv_detail'])->name('advertising.detail');
     Route::get('/car', [CustomerController::class, 'cars'])->name('car');
     Route::get('/property', [CustomerController::class, 'props'])->name('property');
-
-    Route::middleware("can:customer")->group(function () {
-        //keranjang
-        // kalo mau tambah ke keranjang langsung alert suruh login
-    });
 });

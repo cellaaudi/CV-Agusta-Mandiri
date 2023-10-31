@@ -48,7 +48,7 @@ class LoginController extends Controller
             }else if(auth()->user()->role == 'Customer'){
                 return redirect()->intended('/home');
             }
-        }   
+        }
 
         return back()->with('loginError', 'Login failed!');
     }

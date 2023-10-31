@@ -41,13 +41,5 @@ class AuthServiceProvider extends ServiceProvider
                 return Response::deny('Hanya Customer');
             }
         });
-
-        // Gate::define('staff',function($user){
-        //     if ($user->role=='Owner' || $user->role=='Staff') {
-        //         return Response::allow();
-        //     } else {
-        //         return Response::deny('Hanya Staff');
-        //     }
-        // });
     }
 }

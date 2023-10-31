@@ -39,8 +39,9 @@ class PropertyController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request);
         $this->validate($request, [
+            'category' =>'required',
+            'type' => 'required',
             'title' => 'required',
             'price' => 'required|numeric',
             'land_area' => 'required|numeric',
@@ -49,18 +50,19 @@ class PropertyController extends Controller
             'bathroom' => 'numeric',
             'story' => 'numeric',
             'electricity' => 'numeric',
-            'certificate' => 'required',
+            'certificate' => 'required|min:1',
             'desc' => 'required',
             'photos' => 'required',
-            'category' =>'required'
         ]);
 
         if ($request->hasFile('photos')) {
             $allowed = ['jpeg', 'jpg', 'png', 'svg', 'gif'];
+            $cert = implode(", ", $request->certificate);
             $files = $request->file('photos');
             
             $product = Property::create([
                 'category' => $request->category,
+                'type' => $request->type,
                 'title' => $request->title,
                 'price' => $request->price,
                 'land_area' => $request->land_area,
@@ -69,7 +71,7 @@ class PropertyController extends Controller
                 'bathroom' => $request->bathroom,
                 'story' => $request->story,
                 'electricity' => $request->electricity,
-                'certification' => $request->certificate,
+                'certification' => $cert,
                 'description' => $request->desc,
             ]);
 
@@ -88,7 +90,7 @@ class PropertyController extends Controller
             }
         }
 
-        return redirect()->route('admin.prop.index')->with('status', 'Produk berhasil ditambahkan');
+        return redirect()->route('admin.property.index')->with('status', 'Produk berhasil ditambahkan');
     }
 
     /**
@@ -99,7 +101,10 @@ class PropertyController extends Controller
      */
     public function show($id)
     {
-        //
+        $prop = Property::find($id);
+        $photos = PropertyPhoto::where('prop_product_id', $id)->get();
+
+        return view('admin.prop.propshow', compact('prop', 'photos'));
     }
 
     /**
@@ -133,6 +138,14 @@ class PropertyController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $photos = PropertyPhoto::where('prop_product_id', $id)->get();
+
+        foreach($photos as $photo) {
+            PropertyPhoto::find($photo -> id)->delete();
+        }
+
+        Property::find($id)->delete();
+
+        return redirect()->route('admin.property.index');
     }
 }

@@ -27,7 +27,7 @@
         </div>
         <div class="col-5 align-self-center">
             <div class="customize-input float-end">
-                <a href="{{ route('admin.prop.category.create') }}" class="btn btn-primary btn-rounded"><i class="fas fa-plus"></i> Tambah Kategori</a>
+                <a href="{{ route('admin.property.category.create') }}" class="btn btn-primary btn-rounded"><i class="fas fa-plus"></i> Tambah Kategori</a>
             </div>
         </div>
     </div>
@@ -55,7 +55,7 @@
                                 <td>{{ $category -> id }}</td>
                                 <td>{{ $category -> category }}</td>
                                 <td>
-                                    <a href="{{ route('admin.prop.category.edit', $category) }}" type="button" class="btn btn-warning btn-rounded"><i class="far fa-edit"></i> Edit</a>
+                                    <a href="{{ route('admin.property.category.edit', $category) }}" type="button" class="btn btn-warning btn-rounded"><i class="far fa-edit"></i> Edit</a>
                                     <button type="button" class="btn btn-danger btn-rounded" data-bs-toggle="modal" data-bs-target="#delModal" data-category="{{ json_encode($category) }}" onclick="deleteSelected(this)"><i class="far fa-trash-alt"></i> Hapus</button>
                                 </td>
                             </tr>

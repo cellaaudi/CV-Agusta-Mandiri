@@ -240,12 +240,7 @@
                                 <li class="sidebar-item"><a href="{{ route('admin.car.category.index') }}" class="sidebar-link"><span class="hide-menu"> Kategori Mobil</span></a></li>
                             </ul>
                         </li>
-                        <li class="sidebar-item"> <a class="sidebar-link has-arrow" href="javascript:void(0)" aria-expanded="false"><i data-feather="home" class="feather-icon"></i><span class="hide-menu">Agusta Properti</span></a>
-                            <ul aria-expanded="false" class="collapse  first-level base-level-line">
-                                <li class="sidebar-item"><a href="{{ route('admin.prop.sell.index') }}" class="sidebar-link"><span class="hide-menu"> Jual Properti</span></a></li>
-                                <li class="sidebar-item"><a href="{{ route('admin.prop.category.index') }}" class="sidebar-link"><span class="hide-menu"> Kategori Properti</span></a></li>
-                            </ul>
-                        </li>
+                        <li class="sidebar-item"> <a class="sidebar-link" href="{{ route('admin.property.index') }}" aria-expanded="false"><i data-feather="home" class="feather-icon"></i><span class="hide-menu">Agusta Properti</span></a></li>
 
                         <li class="list-divider"></li>
                         <li class="nav-small-cap"><span class="hide-menu">Components</span></li>

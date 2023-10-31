@@ -47,11 +47,9 @@ Route::middleware(['auth'])->group(function () {
             Route::resource('/brand', CarBrandController::class);
             Route::resource('/category', CarCategoryController::class);
         });
-        Route::prefix('property')->name('property.')->group(function () {
-            Route::resource('/sell', PropertyController::class);
-            Route::resource('/category', PropertyCategoryController::class);
-        });
+        Route::resource('/property', PropertyController::class);
     });
+    
     Route::name('customer.')->group(function () {
         Route::middleware("can:customer")->group(function () {
             //keranjang

@@ -11,8 +11,10 @@
             <div class="d-flex align-items-center">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb m-0 p-0">
-                        <li class="breadcrumb-item"><a href="index.html" class="text-muted">Home</a></li>
-                        <li class="breadcrumb-item text-muted active" aria-current="page">Library</li>
+                        <li class="breadcrumb-item"><a href="{{ route('admin.home') }}" class="text-muted">Beranda</a></li>
+                        <li class="breadcrumb-item"><a href="{{ route('admin.property.index') }}" class="text-muted">Agusta Properti</a></li>
+                        <li class="breadcrumb-item"><a href="{{ route('admin.property.index') }}" class="text-muted">Jual Properti</a></li>
+                        <li class="breadcrumb-item text-muted active" aria-current="page">Tambah Produk</li>
                     </ol>
                 </nav>
             </div>
@@ -27,7 +29,7 @@
     <div class="col-12">
         <div class="card">
             <div class="card-body">
-                <form class="mt-3 form-horizontal" method="POST" enctype="multipart/form-data" action="{{ route('admin.prop.sell.store') }}" >
+                <form class="mt-3 form-horizontal" method="POST" enctype="multipart/form-data" action="{{ route('admin.property.store') }}">
                     @csrf
                     <div class="form-body">
                         <div class="form-group mb-3 row">
@@ -39,6 +41,21 @@
                                     <option value="Land">Tanah</option>
                                 </select>
                                 @error('category')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="form-group mb-3 row">
+                            <label for="inputHorizontal" class="col-sm-2 col-form-label">Tipe</label>
+                            <div class="col-sm-10">
+                                <select class="form-select mr-sm-2 @error('type') is-invalid @enderror" id="cbType" name="type" required>
+                                    <option value="Sell">Jual</option>
+                                    <option value="Rent">Sewa</option>
+                                    <option value="Both">Jual dan Sewa</option>
+                                </select>
+                                @error('type')
                                 <div class="invalid-feedback">
                                     {{ $message }}
                                 </div>
@@ -136,12 +153,18 @@
                         <div class="form-group mb-3 row">
                             <label for="inputHorizontal" class="col-sm-2 col-form-label">Sertifikat</label>
                             <div class="col-sm-10">
-                                <select class="form-select mr-sm-2 @error('certificate') is-invalid @enderror" id="cbCertificate" name="certificate" required>
-                                    <option value="SHM">Sertifikat Hak Milik</option>
-                                    <option value="PBB">Pajak Bumi Bangunan</option>
-                                    <option value="IMB">Izin Mendirikan Bangunan</option>
-                                    <option value="Adat">Surat Adat</option>
-                                </select>
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" id="shm" name="certificate[]" value="SHM">
+                                    <label class="custom-control-label" for="shm">Surat Hak Milik (SHM)</label>
+                                </div>
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" id="imb" name="certificate[]" value="IMB">
+                                    <label class="custom-control-label" for="imb">Izin Mendirikan Bangunan (IMB)</label>
+                                </div>
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" id="hgb" name="certificate[]" value="HGB">
+                                    <label class="custom-control-label" for="hgb">Hak Guna Bangunan (HGB)</label>
+                                </div>
                                 @error('certificate')
                                 <div class="invalid-feedback">
                                     {{ $message }}

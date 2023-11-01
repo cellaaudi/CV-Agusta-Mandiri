@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -13,7 +15,9 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        $user = User::all();
+
+        return view('customer.profile', compact('user'));
     }
 
     /**
@@ -56,7 +60,8 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        $user = User::find($id);
+        return view('customer.profile', compact('user'));
     }
 
     /**
@@ -68,7 +73,20 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validateData = $request->validate([
+            'name' => 'required',
+            'email' => 'required',
+            'telephone' => 'required'
+        ]);
+
+        $user = User::find($id);
+        $user->name = $validateData['name'];
+        $user->email = $validateData['email'];
+        $user->telephone = $validateData['telephone'];
+        $user->save();
+
+        // return redirect()->route('customer.profile.edit', $user->id);
+        return redirect()->route('customer.profile.edit', $user->id);
     }
 
     /**

@@ -10,6 +10,7 @@ use App\Http\Controllers\CarController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\PropertyCategoryController;
 use App\Http\Controllers\PropertyController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -54,6 +55,8 @@ Route::middleware(['auth'])->group(function () {
         Route::middleware("can:customer")->group(function () {
             //keranjang
             // kalo mau tambah ke keranjang langsung alert suruh login
+
+            Route::resource('/profile', UserController::class);
         });
     });
 });

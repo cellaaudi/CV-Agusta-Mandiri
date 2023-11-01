@@ -69,7 +69,7 @@
                                     style="font-weight: normal;">Halo,&nbsp</span><span>{{ auth()->user()->name }}</span>
                                 <i class="bi bi-chevron-down"></i></a>
                             <ul>
-                                <li><a href="#">Profil saya <i class='bx bx-user fs-4'></i></a></li>
+                                <li><a href="{{ route('customer.profile.edit', auth()->user()->id) }}">Profil saya <i class='bx bx-user fs-4'></i></a></li>
                                 <li><a href="#">Keranjang <i class='bx bx-cart-alt fs-4'></i></a></li>
                                 <li><a href="{{ route('logout') }}" style="color: red;">Keluar <i
                                             class='bx bx-log-out fs-4'></i></a></li>

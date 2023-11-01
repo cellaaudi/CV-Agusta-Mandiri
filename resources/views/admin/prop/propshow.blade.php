@@ -18,7 +18,7 @@
                     <ol class="breadcrumb m-0 p-0">
                     <li class="breadcrumb-item"><a href="{{ route('admin.home') }}" class="text-muted">Beranda</a></li>
                     <li class="breadcrumb-item"><a href="{{ route('admin.property.index') }}" class="text-muted">Agusta Properti</a></li>
-                    <li class="breadcrumb-item text-muted active" aria-current="page">Detail Produk {{ $prop -> title }}</li>
+                    <li class="breadcrumb-item text-muted active" aria-current="page">Detail Produk</li>
                     </ol>
                 </nav>
             </div>

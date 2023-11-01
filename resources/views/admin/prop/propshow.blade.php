@@ -5,19 +5,20 @@
 <link href="{{ asset('admin/dist/css/style.min.css') }}" rel="stylesheet">
 <!-- This Page CSS -->
 <link rel="stylesheet" type="text/css" href="{{ asset('admin/extra-libs/prism/prism.css') }}">
+
 @endsection
 
 @section('breadcrumb')
 <div class="page-breadcrumb">
     <div class="row">
         <div class="col-7 align-self-center">
-            <h4 class="page-title text-truncate text-dark font-weight-medium mb-1">Properti: {{ $prop -> name }}</h4>
+            <h4 class="page-title text-truncate text-dark font-weight-medium mb-1">Properti: {{ $prop -> title }}</h4>
             <div class="d-flex align-items-center">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb m-0 p-0">
                     <li class="breadcrumb-item"><a href="{{ route('admin.home') }}" class="text-muted">Beranda</a></li>
                     <li class="breadcrumb-item"><a href="{{ route('admin.property.index') }}" class="text-muted">Agusta Properti</a></li>
-                    <li class="breadcrumb-item text-muted active" aria-current="page">Detail Produk {{ $prop -> name }}</li>
+                    <li class="breadcrumb-item text-muted active" aria-current="page">Detail Produk {{ $prop -> title }}</li>
                     </ol>
                 </nav>
             </div>
@@ -48,7 +49,7 @@
                             <div class="carousel-inner">
                                 @foreach($photos as $key => $photo)
                                 <div class="carousel-item {{ $key === 0 ? 'active' : '' }}">
-                                    <img class="d-block w-100" src="{{ asset('storage/' . $photo->url) }}">
+                                    <img class="d-block w-100 img-fluid" src="{{ asset('storage/' . $photo->url) }}">
                                 </div>
                                 @endforeach
                             </div>
@@ -64,18 +65,86 @@
                     </div>
                 </div>
                 <div class="mt-4 form-horizontal">
+                    <div class="form-group mb-3 row">
+                        <label for="inputHorizontal" class="col-sm-2 col-form-label">Kategori</label>
+                        <div class="col-sm-10">
+                            <label class="form-control">{{ $prop -> category == 'House' ? 'Rumah' : ( $prop -> category == 'Land' ? 'Tanah' : 'Villa') }}</label>
+                        </div>
+                    </div>
+                    <div class="form-group mb-3 row">
+                        <label for="inputHorizontal" class="col-sm-2 col-form-label">Tipe</label>
+                        <div class="col-sm-10">
+                            <label class="form-control">{{ $prop -> type == 'Sell' ? 'Jual' : ( $prop -> type == 'Rent' ? 'Sewa' : 'Jual dan Sewa') }}</label>
+                        </div>
+                    </div>
                     <div class="form-body">
                         <div class="form-group mb-3 row">
-                            <label for="inputHorizontal" class="col-sm-2 col-form-label">Nama</label>
+                            <label for="inputHorizontal" class="col-sm-2 col-form-label">Judul</label>
                             <div class="col-sm-10">
-                                <label class="form-control">{{ $prop -> name }}</label>
+                                <label class="form-control">{{ $prop -> title }}</label>
                             </div>
                         </div>
                     </div>
                     <div class="form-group mb-3 row">
-                        <label for="inputHorizontal" class="col-sm-2 col-form-label">Kategori</label>
+                        <label for="inputHorizontal" class="col-sm-2 col-form-label">Harga</label>
                         <div class="col-sm-10">
-                            <label class="form-control">{{ $prop -> category }}</label>
+                            <label class="form-control">Rp. {{ $prop -> price }}</label>
+                        </div>
+                    </div>
+                    <div class="form-group mb-3 row">
+                        <label for="inputHorizontal" class="col-sm-2 col-form-label">Luas Tanah</label>
+                        <div class="col-sm-10">
+                            <label class="form-control">{{ $prop -> land_area }} m<sup>2</sup></label>
+                        </div>
+                    </div>
+                    @if( $prop -> category != 'Land' )
+                    <div class="form-group mb-3 row">
+                        <label for="inputHorizontal" class="col-sm-2 col-form-label">Luas Bangunan</label>
+                        <div class="col-sm-10">
+                            <label class="form-control">{{ $prop -> building_area }} m<sup>2</sup></label>
+                        </div>
+                    </div>
+                    <div class="form-group mb-3 row">
+                        <label for="inputHorizontal" class="col-sm-2 col-form-label">Jumlah Kamar</label>
+                        <div class="col-sm-10">
+                            <label class="form-control">{{ $prop -> bedroom }}</label>
+                        </div>
+                    </div>
+                    <div class="form-group mb-3 row">
+                        <label for="inputHorizontal" class="col-sm-2 col-form-label">Jumlah Kamar Mandi</label>
+                        <div class="col-sm-10">
+                            <label class="form-control">{{ $prop -> bathroom }}</label>
+                        </div>
+                    </div>
+                    <div class="form-group mb-3 row">
+                        <label for="inputHorizontal" class="col-sm-2 col-form-label">Jumlah Lantai</label>
+                        <div class="col-sm-10">
+                            <label class="form-control">{{ $prop -> story }}</label>
+                        </div>
+                    </div>
+                    <div class="form-group mb-3 row">
+                        <label for="inputHorizontal" class="col-sm-2 col-form-label">Listrik</label>
+                        <div class="col-sm-10">
+                            <label class="form-control">{{ $prop -> electricity }} Watt</label>
+                        </div>
+                    </div>
+                    @endif
+                    <div class="form-group mb-3 row">
+                        <label for="inputHorizontal" class="col-sm-2 col-form-label">Sertifikasi</label>
+                        <div class="col-sm-10">
+                            <label class="form-control">{{ $prop -> certification }}</label>
+                        </div>
+                    </div>
+                    <div class="form-group mb-3 row">
+                        <label for="inputHorizontal" class="col-sm-2 col-form-label">Deskripsi</label>
+                        <div class="col-sm-10">
+                            <label class="form-control"><pre style="font-family: 'Rubik'; font-size: 1rem;">{{ $prop -> description }}</pre></label>
+                        </div>
+                    </div>
+                    <div class="form-group mb-3 row">
+                        <label for="inputHorizontal" class="col-sm-2 col-form-label">Status</label>
+                        <div class="col-sm-10">
+                            <label class="form-control {{ $prop -> status == 'Available' ? 'bg-success' : 'bg-danger' }}" style="color: #fff;">{{ $prop -> status == 'Available' ? 'Tersedia' : 'Terjual' }}</label>
                         </div>
                     </div>
                 </div>

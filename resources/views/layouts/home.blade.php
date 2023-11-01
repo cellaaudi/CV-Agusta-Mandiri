@@ -57,7 +57,7 @@
                         <li><a class="nav-link scrollto" href="#about">Tentang</a></li>
                         <li><a class="nav-link scrollto" href="#services">Layanan</a></li>
                         <li><a class="nav-link scrollto " href="#portfolio">Portofolio</a></li>
-                        <li><a class="nav-link scrollto" href="#team">Team</a></li>
+                        <li><a class="nav-link scrollto" href="#pricing">Mitra</a></li>
                         <li><a class="nav-link scrollto" href="#contact">Kontak</a></li>
                         @endif
 

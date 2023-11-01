@@ -14,13 +14,12 @@
 <div class="page-breadcrumb">
     <div class="row">
         <div class="col-7 align-self-center">
-            <h4 class="page-title text-truncate text-dark font-weight-medium mb-1">Agusta Properti: Jual Properti</h4>
+            <h4 class="page-title text-truncate text-dark font-weight-medium mb-1">Agusta Properti</h4>
             <div class="d-flex align-items-center">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb m-0 p-0">
                         <li class="breadcrumb-item"><a href="{{ route('admin.home') }}" class="text-muted">Beranda</a></li>
                         <li class="breadcrumb-item text-muted active" aria-current="page">Agusta Properti</li>
-                        <li class="breadcrumb-item text-muted active" aria-current="page">Jual Properti</li>
                     </ol>
                 </nav>
             </div>
@@ -61,7 +60,7 @@
                                 <td>Rp. {{ $prop -> price }}</td>
                                 <td>{{ $prop -> category == 'House' ? 'Rumah' : ( $prop -> category == 'Land' ? 'Tanah' : 'Villa') }}</td>
                                 <td>{{ $prop -> type == 'Sell' ? 'Jual' : ( $prop -> type == 'Rent' ? 'Sewa' : 'Jual dan Sewa') }}</td>
-                                <td>{{ $prop -> status == 'Available' ? 'Tersedia' : 'Tidak Tersedia'}}</td>
+                                <td class="{{ $prop -> status == 'Available' ? 'bg-success' : 'bg-danger' }}" style="color: #fff;">{{ $prop -> status == 'Available' ? 'Tersedia' : 'Terjual'}}</td>
                                 <td>
                                     <a href="{{ route('admin.property.show', $prop) }}" type="button" class="btn btn-success btn-rounded"><i class="far fa-folder-open"></i> Detail</a>
                                     <a href="{{ route('admin.property.edit', $prop) }}" type="button" class="btn btn-warning btn-rounded"><i class="far fa-edit"></i> Edit</a>

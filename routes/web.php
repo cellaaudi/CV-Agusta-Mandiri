@@ -49,7 +49,7 @@ Route::middleware(['auth'])->group(function () {
         });
         Route::resource('/property', PropertyController::class);
     });
-    
+
     Route::name('customer.')->group(function () {
         Route::middleware("can:customer")->group(function () {
             //keranjang
@@ -57,7 +57,6 @@ Route::middleware(['auth'])->group(function () {
         });
     });
 });
-
 
 Route::name('customer.')->group(function () {
     Route::get('/home', function () {

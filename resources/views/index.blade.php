@@ -437,18 +437,99 @@
         </div>
     </section><!-- End Portfolio Section -->
 
-    <!-- ======= Pricing Section ======= -->
+    <!-- ======= Cleint Section ======= -->
     <section id="pricing" class="pricing section-bg">
         <div class="container" data-aos="fade-up">
 
             <div class="section-title">
-                <h2>Pricing</h2>
-                <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint
-                    consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia
-                    fugiat sit in iste officiis commodi quidem hic quas.</p>
+                <h2>Mitra</h2>
+                <p>Pekerjaan kami telah dipercaya oleh perusahaan-perusahaan ternama</p>
             </div>
 
-            <div class="row">
+            <div id="carouselClient" class="carousel carousel-dark slide" data-bs-ride="carousel">
+                <div class="carousel-indicators">
+                    <button type="button" data-bs-target="#carouselClient" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                    <button type="button" data-bs-target="#carouselClient" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                    <button type="button" data-bs-target="#carouselClient" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                    <button type="button" data-bs-target="#carouselClient" data-bs-slide-to="3" aria-label="Slide 4"></button>
+                </div>
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <div class="row">
+                            <div class="col-sm mb-3 client d-flex align-items-center justify-content-center" data-aos="fade-up" data-aos-delay="100">
+                                <img src="{{ asset('storage/clients/oppo.png') }}" alt="">
+                            </div>
+                            <div class="col-sm mb-3 client d-flex align-items-center justify-content-center" data-aos="fade-up" data-aos-delay="100">
+                                <img src="{{ asset('storage/clients/asus.png') }}" alt="">
+                            </div>
+                            <div class="col-sm mb-3 client d-flex align-items-center justify-content-center" data-aos="fade-up" data-aos-delay="100">
+                                <img src="{{ asset('storage/clients/acer.png') }}" alt="">
+                            </div>
+                            <div class="col-sm mb-3 client d-flex align-items-center justify-content-center" data-aos="fade-up" data-aos-delay="100">
+                                <img src="{{ asset('storage/clients/lenovo.png') }}" alt="">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="row">
+                            <div class="col-sm mb-3 client d-flex align-items-center justify-content-center" data-aos="fade-up" data-aos-delay="100">
+                                <img src="{{ asset('storage/clients/grab.png') }}" alt="">
+                            </div>
+                            <div class="col-sm mb-3 client d-flex align-items-center justify-content-center" data-aos="fade-up" data-aos-delay="100">
+                                <img src="{{ asset('storage/clients/jnt_express.png') }}" alt="">
+                            </div>
+                            <div class="col-sm mb-3 client d-flex align-items-center justify-content-center" data-aos="fade-up" data-aos-delay="100">
+                                <img src="{{ asset('storage/clients/jnt_cargo.png') }}" alt="">
+                            </div>
+                            <div class="col-sm mb-3 client d-flex align-items-center justify-content-center" data-aos="fade-up" data-aos-delay="100">
+                                <img src="{{ asset('storage/clients/kirin.png') }}" alt="">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="row">
+                            <div class="col-sm mb-3 client d-flex align-items-center justify-content-center" data-aos="fade-up" data-aos-delay="100">
+                                <img src="{{ asset('storage/clients/comforta.png') }}" alt="">
+                            </div>
+                            <div class="col-sm mb-3 client d-flex align-items-center justify-content-center" data-aos="fade-up" data-aos-delay="100">
+                                <img src="{{ asset('storage/clients/bigland.png') }}" alt="">
+                            </div>
+                            <div class="col-sm mb-3 client d-flex align-items-center justify-content-center" data-aos="fade-up" data-aos-delay="100">
+                                <img src="{{ asset('storage/clients/dulux.png') }}" alt="">
+                            </div>
+                            <div class="col-sm mb-3 client d-flex align-items-center justify-content-center" data-aos="fade-up" data-aos-delay="100">
+                                <img src="{{ asset('storage/clients/coolant.png') }}" alt="">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="row">
+                            <div class="col-sm mb-3 client d-flex align-items-center justify-content-center" data-aos="fade-up" data-aos-delay="100">
+                                <img src="{{ asset('storage/clients/mie_gacoan.png') }}" alt="">
+                            </div>
+                            <div class="col-sm mb-3 client d-flex align-items-center justify-content-center" data-aos="fade-up" data-aos-delay="100">
+                                <img src="{{ asset('storage/clients/mowilex.png') }}" alt="">
+                            </div>
+                            <div class="col-sm mb-3 client d-flex align-items-center justify-content-center" data-aos="fade-up" data-aos-delay="100">
+                                <img src="{{ asset('storage/clients/roman_granit.png') }}" alt="">
+                            </div>
+                            <div class="col-sm mb-3 client d-flex align-items-center justify-content-center" data-aos="fade-up" data-aos-delay="100">
+                                <img src="{{ asset('storage/clients/granito.png') }}" alt="">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselClient" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselClient" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+
+            <!-- <div class="row">
 
                 <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="100">
                     <div class="box">
@@ -519,7 +600,7 @@
                     </div>
                 </div>
 
-            </div>
+            </div> -->
 
         </div>
     </section><!-- End Pricing Section -->

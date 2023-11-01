@@ -40,7 +40,7 @@ class PropertyController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'category' =>'required',
+            'category' => 'required',
             'type' => 'required',
             'title' => 'required',
             'price' => 'required|numeric',
@@ -59,7 +59,7 @@ class PropertyController extends Controller
             $allowed = ['jpeg', 'jpg', 'png', 'svg', 'gif'];
             $cert = implode(", ", $request->certificate);
             $files = $request->file('photos');
-            
+
             $product = Property::create([
                 'category' => $request->category,
                 'type' => $request->type,
@@ -115,7 +115,10 @@ class PropertyController extends Controller
      */
     public function edit($id)
     {
-        //
+        $prop = Property::find($id);
+        $photos = PropertyPhoto::where('prop_product_id', $id)->get();
+
+        return view('admin.prop.propedit', compact('prop', 'photos'));
     }
 
     /**
@@ -140,8 +143,13 @@ class PropertyController extends Controller
     {
         $photos = PropertyPhoto::where('prop_product_id', $id)->get();
 
-        foreach($photos as $photo) {
-            PropertyPhoto::find($photo -> id)->delete();
+        foreach ($photos as $photo) {
+            $img = PropertyPhoto::find($photo->id);
+            $storage = public_path('storage/' . $photo->url);
+            if (file_exists($storage)) {
+                unlink($storage);
+            }
+            $img->delete();
         }
 
         Property::find($id)->delete();

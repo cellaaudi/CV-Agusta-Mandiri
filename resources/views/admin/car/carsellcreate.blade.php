@@ -43,7 +43,7 @@
                         <div class="form-group mb-3 row">
                             <label for="inputHorizontal" class="col-sm-2 col-form-label">Tahun</label>
                             <div class="col-sm-10">
-                                <input type="number" name="year" class="form-control @error('year') is-invalid @enderror" id="inputHorizontal" placeholder="YYYY" min="1900" max="2023" minlength="4" maxlength="4" step="1" value="2023" required>
+                                <input type="number" name="year" class="form-control @error('year') is-invalid @enderror" id="inputHorizontal" placeholder="YYYY" minlength="4" maxlength="4" step="1" value="2023" required>
                                 @error('year')
                                 <div class="invalid-feedback">
                                     {{ $message }}
@@ -84,7 +84,7 @@
                         <div class="form-group mb-3 row">
                             <label for="inputHorizontal" class="col-sm-2 col-form-label">Harga (IDR)</label>
                             <div class="col-sm-10">
-                                <input type="number" name="price" class="form-control @error('price') is-invalid @enderror" id="inputHorizontal" placeholder="Rp 0,-" min="0" step="1" required>
+                                <input type="number" name="price" class="form-control @error('price') is-invalid @enderror" id="inputHorizontal" placeholder="Rp. 0,-" min="0" step="1" required>
                                 @error('price')
                                 <div class="invalid-feedback">
                                     {{ $message }}
@@ -148,7 +148,7 @@
                         <div class="form-group mb-3 row">
                             <label for="inputHorizontal" class="col-sm-2 col-form-label">Deskripsi</label>
                             <div class="col-sm-10">
-                                <textarea type="textarea" name="desc" class="form-control @error('desc') is-invalid @enderror" id="inputHorizontal" placeholder="Mobil dalam keadaan baik" rows="3" required></textarea>
+                                <textarea type="textarea" name="desc" class="form-control @error('desc') is-invalid @enderror" id="inputHorizontal" placeholder="Mobil dalam keadaan baik" rows="7" required></textarea>
                                 @error('desc')
                                 <div class="invalid-feedback">
                                     {{ $message }}

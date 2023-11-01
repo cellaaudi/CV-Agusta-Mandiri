@@ -50,10 +50,6 @@
                                 <th>Merk</th>
                                 <th>Kategori</th>
                                 <th>Harga</th>
-                                <th>Kilometer</th>
-                                <th>Transmisi</th>
-                                <th>Kapasitas Mesin</th>
-                                <th>Bahan Bakar</th>
                                 <th>Status</th>
                                 <th>Aksi</th>
                             </tr>
@@ -67,11 +63,7 @@
                                 <td>{{ $car -> car_brand -> brand }}</td>
                                 <td>{{ $car -> car_category -> category }}</td>
                                 <td>Rp. {{ $car -> price }}</td>
-                                <td>{{ $car -> kilometre }} km</td>
-                                <td>{{ $car -> transmission }}</td>
-                                <td>{{ $car -> capacity }} CC</td>
-                                <td>{{ $car -> fuel }}</td>
-                                <td>{{ $car -> sell_status }}</td>
+                                <td class="{{ $car -> sell_status == 'Available' ? 'bg-success' : 'bg-danger' }}" style="color: #fff;">{{ $car -> sell_status }}</td>
                                 <td>
                                     <a href="{{ route('admin.car.sell.show', $car) }}" type="button" class="btn btn-success btn-rounded"><i class="far fa-folder-open"></i> Detail</a>
                                     <a href="{{ route('admin.car.sell.edit', $car) }}" type="button" class="btn btn-warning btn-rounded"><i class="far fa-edit"></i> Edit</a>

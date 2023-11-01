@@ -45,7 +45,7 @@ class CarController extends Controller
     {
         $request->validate([
             'title' => 'required',
-            'year' => 'required|numeric',
+            'year' => 'required|numeric|max:2023',
             'brand' => 'required',
             'category' => 'required',
             'price' => 'required|numeric',
@@ -86,7 +86,7 @@ class CarController extends Controller
             }
         }
 
-        return redirect()->route('admin.car.index')->with('status', 'Produk berhasil ditambahkan');
+        return redirect()->route('admin.car.sell.index')->with('status', 'Produk berhasil ditambahkan');
     }
 
     /**
@@ -97,7 +97,10 @@ class CarController extends Controller
      */
     public function show($id)
     {
-        //
+        $car = Car::find($id);
+        $photos = CarPhoto::where('car_product_id', $id)->get();
+
+        return view('admin.car.carsellshow', compact('car', 'photos'));
     }
 
     /**
@@ -108,7 +111,10 @@ class CarController extends Controller
      */
     public function edit($id)
     {
-        //
+        $car = Car::find($id);
+        $photos = CarPhoto::where('car_product_id', $id)->get();
+
+        return view('admin.car.carselledit', compact('car', 'photos'));
     }
 
     /**

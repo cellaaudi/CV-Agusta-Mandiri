@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Advertising;
 use App\Models\AdvertisingPhoto;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class AdvertisingController extends Controller
 {
@@ -54,7 +55,7 @@ class AdvertisingController extends Controller
             ]);
 
             foreach ($files as $file) {
-                $filename = $file->store('photos');
+                $filename = $file->store('adv');
 
                 AdvertisingPhoto::create([
                     'adv_product_id' => $product->id,
@@ -106,22 +107,29 @@ class AdvertisingController extends Controller
         $request->validate([
             'name' => 'required',
             'category' => 'required',
-            'photos' => 'array',
             'photos.*' => 'image|mimes:jpeg,jpg,png,svg,gif'
         ]);
 
         $delPhotos = $request->del_photos[0];
-        
+
         if (!empty($delPhotos)) {
             $delPhotoIds = explode(',', $delPhotos);
 
-            foreach($delPhotoIds as $del) {
-                $photo = AdvertisingPhoto::find($del);
-                $storage = public_path('storage/' . $photo -> url);
-                if (file_exists($storage)) {
-                    unlink($storage);
+            $existPhotos = AdvertisingPhoto::where('adv_product_id', $id)->count();
+
+            if (count($delPhotoIds) < $existPhotos) {
+                foreach ($delPhotoIds as $del) {
+                    $photo = AdvertisingPhoto::find($del);
+                    $storage = public_path('storage/' . $photo->url);
+                    if (file_exists($storage)) {
+                        unlink($storage);
+                    }
+                    $photo->delete();
                 }
-                $photo->delete();
+            } else {
+                $request->validate([
+                    'photos' => 'required',
+                ]);
             }
         }
 
@@ -129,6 +137,19 @@ class AdvertisingController extends Controller
         $adv->name = $request->name;
         $adv->category = $request->category;
         $adv->save();
+
+        if ($request->hasFile('photos')) {
+            $files = $request->file('photos');
+
+            foreach ($files as $file) {
+                $filename = $file->store('adv');
+
+                AdvertisingPhoto::create([
+                    'adv_product_id' => $adv->id,
+                    'url' => $filename
+                ]);
+            }
+        }
 
         return redirect()->route('admin.advertising.index');
     }
@@ -141,6 +162,19 @@ class AdvertisingController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $photos = AdvertisingPhoto::where('adv_product_id', $id)->get();
+
+        foreach ($photos as $photo) {
+            $img = AdvertisingPhoto::find($photo->id);
+            $storage = public_path('storage/' . $photo->url);
+            if (file_exists($storage)) {
+                unlink($storage);
+            }
+            $img->delete();
+        }
+
+        Advertising::find($id)->delete();
+
+        return redirect()->route('admin.advertising.index');
     }
 }

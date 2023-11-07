@@ -34,7 +34,7 @@
                         <div class="form-group mb-3 row">
                             <label for="inputHorizontal" class="col-sm-2 col-form-label">Nama</label>
                             <div class="col-sm-10">
-                                <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" id="inputHorizontal" placeholder="Contoh: Billboard" required autofocus>
+                                <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" id="inputHorizontal" placeholder="Contoh: Billboard" autofocus value="{{ old('name') }}">
                                 @error('name')
                                 <div class="invalid-feedback">
                                     {{ $message }}
@@ -45,10 +45,10 @@
                         <div class="form-group mb-3 row">
                             <label for="inputHorizontal" class="col-sm-2 col-form-label">Kategori</label>
                             <div class="col-sm-10">
-                                <select class="form-select mr-sm-2 @error('category') is-invalid @enderror" id="inlineFormCustomSelect" name="category" required>
-                                    <option value="Indoor">Indoor</option>
-                                    <option value="Outdoor">Outdoor</option>
-                                    <option value="IO">Indoor dan Outdoor</option>
+                                <select class="form-select mr-sm-2 @error('category') is-invalid @enderror" id="inlineFormCustomSelect" name="category">
+                                    <option value="Indoor" {{ old('category') == "Indoor" ? 'selected' : '' }}>Indoor</option>
+                                    <option value="Outdoor" {{ old('category') == "Outdoor" ? 'selected' : '' }}>Outdoor</option>
+                                    <option value="IO" {{ old('category') == "IO" ? 'selected' : '' }}>Indoor dan Outdoor</option>
                                 </select>
                                 @error('category')
                                 <div class="invalid-feedback">
@@ -62,12 +62,15 @@
                             <div class="col-sm-10">
                                 <div class="input-group flex-nowrap">
                                     <div class="custom-file w-100">
-                                        <input class="form-control @error('photos') is-invalid @enderror" type="file" name="photos[]" required>
+                                        <input class="form-control inputPhoto @error('photos') is-invalid @enderror" type="file" name="photos[]" required>
                                     </div>
                                     <button class="btn btn-outline-secondary btnAddPhoto" type="button">
                                         <i class="fas fa-plus"></i>
                                     </button>
                                 </div>
+                                <!-- <div class="input-group flex-nowrap preview mt-1">
+                                    <div class="custom-file w-100"></div>
+                                </div> -->
                                 @error('photos')
                                 <div class="invalid-feedback">
                                     {{ $message }}
@@ -92,13 +95,29 @@
 @section('jquery')
 <script>
     $(document).ready(function() {
+        // // PREVIEW IMAGE INPUTTED
+        // $('.inputPhoto').on('change', function() {
+        //     const file = this.files[0];
+
+        //     if (file) {
+        //         var reader = new FileReader();
+
+        //         reader.onload = function(event) {
+        //             $(".preview").html("<img id='photoPreview' class='img-fluid mx-auto d-block' src='" + event.target.result + "'>");
+        //         };
+        //         reader.readAsDataURL(file);
+        //     }
+        // });
+
+        // ADD PHOTO SLOTS
         $('.btnAddPhoto').click(function() {
             $('#photos').append('<div class="col-sm-2 col-form-label"></div><div class="col-sm-10 mt-2"><div class="input-group flex-nowrap"><div class="custom-file w-100"><input class="form-control" type="file" name="photos[]"></div><button class="btn btn-outline-danger btnDelPhoto" type="button"><i class="fas fa-minus"></i></button></div></div>');
         })
 
+        // DELETE PHOTO SLOTS
         $(document).on('click', '.btnDelPhoto', function() {
-            $(this).parent().remove();
-            $(this).parent().prev().remove();
+            $(this).parent().parent().prev().remove();
+            $(this).parent().parent().remove();
         });
     });
 </script>

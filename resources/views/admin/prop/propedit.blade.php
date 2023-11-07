@@ -264,14 +264,14 @@
 
         // DELETE PHOTO SLOTS
         $(document).on('click', '.btnDelPhoto', function() {
-            $(this).parent().parent().remove();
             $(this).parent().parent().prev().remove();
+            $(this).parent().parent().remove();
         });
 
         // DELETE EXISTED PHOTOS FROM UI
         $(document).on('click', '.btnDelExistPhoto', function() {
-            $(this).parent().remove();
-            $(this).parent().prev().remove();
+            $(this).parent().parent().prev().remove();
+            $(this).parent().parent().remove();
         });
 
         // CATEGORY COMBO BOX ON 1ST PAGE LOAD

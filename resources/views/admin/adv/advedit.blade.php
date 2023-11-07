@@ -46,7 +46,7 @@
                         <div class="form-group mb-3 row">
                             <label for="inputHorizontal" class="col-sm-2 col-form-label">Nama</label>
                             <div class="col-sm-10">
-                                <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" id="inputHorizontal" placeholder="Contoh: Billboard" required autofocus value="{{ $adv -> name }}">
+                                <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" id="inputHorizontal" placeholder="Contoh: Billboard" autofocus value="{{ $adv -> name }}">
                                 @error('name')
                                 <div class="invalid-feedback">
                                     {{ $message }}
@@ -58,7 +58,7 @@
                     <div class="form-group mb-3 row">
                         <label for="inputHorizontal" class="col-sm-2 col-form-label">Kategori</label>
                         <div class="col-sm-10">
-                            <select class="form-select mr-sm-2 @error('category') is-invalid @enderror" id="inlineFormCustomSelect" name="category" required>
+                            <select class="form-select mr-sm-2 @error('category') is-invalid @enderror" id="inlineFormCustomSelect" name="category">
                                 <option value="Indoor" @if($adv->category == 'Indoor') selected @endif>Indoor</option>
                                 <option value="Outdoor" @if($adv->category == 'Outdoor') selected @endif>Outdoor</option>
                                 <option value="IO" @if($adv->category == 'IO') selected @endif>Indoor dan Outdoor</option>
@@ -71,37 +71,40 @@
                         </div>
                     </div>
                     <div id="photos" class="form-group mb-3 row">
+                        <div for="inputHorizontal" class="col-sm-2 col-form-label">Foto</div>
                         @foreach($photos as $key => $photo)
-                        <div for="inputHorizontal" class="col-sm-2 col-form-label">{{ $key === 0 ? 'Foto' : '' }}</div>
-                        <div class="col-sm-10 {{ $key === 0 ? '' : 'mt-2' }}">
-                            <div class="input-group flex-nowrap">
+                        @if($key != 0)
+                        <div for="inputHorizontal" class="col-sm-2 col-form-label"></div>
+                        @endif
+                        <div class="col-sm-10 mb-2">
+                            <div class="input-group flex-nowrap preview border border-danger rounded">
                                 <div class="custom-file w-100">
-                                    <img class="img-fluid float-start" src="{{ asset('storage/' . $photo -> url) }}">
+                                    <img id="photoPreview" class="img-fluid mx-auto d-block" src="{{ asset('storage/' . $photo -> url) }}">
                                 </div>
                                 <button class="btn btn-outline-danger btnDelExistPhoto" type="button" data-id="{{ $photo -> id }}" onclick="deletePhoto(this)">
-                                    <i class="fas fa-minus"></i>
+                                    <i class="fas fa-trash-alt"></i>
                                 </button>
                             </div>
                         </div>
                         @endforeach
                         <div class="col-sm-2 col-form-label"></div>
-                        <div class="col-sm-10 mt-2">
+                        <div class="col-sm-10 mb-2">
                             <div class="input-group flex-nowrap">
                                 <div class="custom-file w-100">
-                                    <input class="form-control @error('photo') is-invalid @enderror" type="file" name="photos[]">
+                                    <input id="firstInputPhoto" class="form-control @error('photo') is-invalid @enderror" type="file" name="photos[]">
                                 </div>
                                 <button class="btn btn-outline-secondary btnAddPhoto" type="button">
                                     <i class="fas fa-plus"></i>
                                 </button>
                             </div>
-                            @error('photo')
+                            @error('photos')
                             <div class="invalid-feedback">
                                 {{ $message }}
                             </div>
                             @enderror
                         </div>
-                        <input type="hidden" name="del_photos[]" id="del_photos" value="">
                     </div>
+                    <input type="hidden" name="del_photos[]" id="del_photos" value="">
                     <div class="form-actions">
                         <div class="text-end">
                             <a href="{{ route('admin.advertising.index') }}" type="reset" class="btn btn-outline-danger btn-rounded">Batal</a>
@@ -120,19 +123,19 @@
     $(document).ready(function() {
         // ADD PHOTO SLOTS
         $('.btnAddPhoto').click(function() {
-            $('#photos').append('<div class="col-sm-2 col-form-label"></div><div class="col-sm-10 mt-2"><div class="input-group flex-nowrap"><div class="custom-file w-100"><input class="form-control" type="file" name="photos[]"></div><button class="btn btn-outline-danger btnDelPhoto" type="button"><i class="fas fa-minus"></i></button></div></div>');
+            $('#photos').append('<div class="col-sm-2 col-form-label"></div><div class="col-sm-10 mb-2"><div class="input-group flex-nowrap"><div class="custom-file w-100"><input class="form-control" type="file" name="photos[]"></div><button class="btn btn-outline-danger btnDelPhoto" type="button"><i class="fas fa-minus"></i></button></div></div>');
         })
 
         // DELETE PHOTO SLOTS
         $(document).on('click', '.btnDelPhoto', function() {
-            $(this).parent().parent().remove();
             $(this).parent().parent().prev().remove();
+            $(this).parent().parent().remove();
         });
 
         // DELETE EXISTED PHOTOS FROM UI
         $(document).on('click', '.btnDelExistPhoto', function() {
-            $(this).parent().remove();
-            $(this).parent().prev().remove();
+            $(this).parent().parent().next().remove();
+            $(this).parent().parent().remove();
         });
     });
 </script>

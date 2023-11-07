@@ -8,9 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Province extends Model
 {
     use HasFactory;
+    protected $table = "provinces";
 
     public function regency()
     {
-        return $this->hasMany("App\Models\Regency", "regency_id")->withTrashed();
+        return $this->hasMany(Regency::class, "regency_id");
     }
 }

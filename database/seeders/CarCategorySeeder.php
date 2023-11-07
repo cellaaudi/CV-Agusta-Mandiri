@@ -3,7 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
+use App\Models\CarCategory;
 
 class CarCategorySeeder extends Seeder
 {
@@ -14,56 +14,44 @@ class CarCategorySeeder extends Seeder
      */
     public function run()
     {
-        DB::table('car_categories')->insert([
+        // 1
+        CarCategory::create([
             'category' => 'SUV',
         ]);
 
-        DB::table('car_categories')->insert([
+        // 2
+        CarCategory::create([
             'category' => 'MPV',
         ]);
 
-        DB::table('car_categories')->insert([
-            'category' => 'Crossover',
-        ]);
-
-        DB::table('car_categories')->insert([
-            'category' => 'Hatchback',
-        ]);
-
-        DB::table('car_categories')->insert([
+        // 3
+        CarCategory::create([
             'category' => 'Sedan',
         ]);
 
-        DB::table('car_categories')->insert([
-            'category' => 'Sport Sedan',
-        ]);
-
-        DB::table('car_categories')->insert([
+        // 4
+        CarCategory::create([
             'category' => 'Convertible',
         ]);
 
-        DB::table('car_categories')->insert([
-            'category' => 'Station Wagon',
-        ]);
-
-        DB::table('car_categories')->insert([
-            'category' => 'Off-Road',
-        ]);
-
-        DB::table('car_categories')->insert([
+        // 5
+        CarCategory::create([
             'category' => 'Pickup',
         ]);
 
-        DB::table('car_categories')->insert([
-            'category' => 'Elektrik',
+        // 6
+        CarCategory::create([
+            'category' => 'Double Cabin',
         ]);
 
-        DB::table('car_categories')->insert([
-            'category' => 'Hybrid',
+        // 7
+        CarCategory::create([
+            'category' => 'Hatchback',
         ]);
 
-        DB::table('car_categories')->insert([
-            'category' => 'LCGC (Low-Cost Green Car)',
+        // 8
+        CarCategory::create([
+            'category' => 'Station Wagon',
         ]);
     }
 }

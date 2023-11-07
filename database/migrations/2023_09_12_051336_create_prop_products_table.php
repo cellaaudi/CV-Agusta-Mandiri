@@ -25,13 +25,14 @@ class CreatePropProductsTable extends Migration
             $table->integer('bathroom')->nullable();
             $table->integer('story')->nullable();
             $table->integer('electricity')->nullable();
+            $table->foreignId('village_id');
+            $table->longtext('address');
+            $table->longtext('maps')->nullable();
             $table->string('certification');
             $table->longtext("description");
             $table->enum('status', ['Available', 'Sold'])->default('Available');
-            // $table->unsignedBigInteger('prop_category_id');
             $table->timestamps();
 
-            // $table->foreign("prop_category_id")->references("id")->on("prop_categories");
         });
     }
 

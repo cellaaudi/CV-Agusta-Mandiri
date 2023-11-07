@@ -9,13 +9,13 @@ class Village extends Model
 {
     use HasFactory;
 
-    public function address()
-    {
-        return $this->hasMany("App\Models\Address", "address_id")->withTrashed();
-    }
-
     public function district()
     {
-        return $this->belongsTo("App\Models\District", "district_id");
+        return $this->belongsTo(District::class, "district_id");
+    }
+
+    public function address()
+    {
+        return $this->hasMany(Address::class, "address_id");
     }
 }

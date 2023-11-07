@@ -8,14 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 class Regency extends Model
 {
     use HasFactory;
-
-    public function district()
-    {
-        return $this->hasMany("App\Models\District", "district_id")->withTrashed();
-    }
+    protected $table = "regencies";
 
     public function province()
     {
-        return $this->belongsTo("App\Models\Province", "province_id");
+        return $this->belongsTo(Province::class, "province_id");
+    }
+
+    public function district()
+    {
+        return $this->hasMany(District::class, "district_id");
     }
 }

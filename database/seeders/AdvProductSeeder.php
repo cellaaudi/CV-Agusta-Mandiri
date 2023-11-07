@@ -3,7 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
+use App\Models\Advertising;
 
 class AdvProductSeeder extends Seeder
 {
@@ -14,119 +14,118 @@ class AdvProductSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('adv_products')->insert([
+        // 1
+        Advertising::create([
             'name' => 'Billboard',
             'category' => 'Outdoor',
         ]);
 
-        DB::table('adv_products')->insert([
-            'name' => 'Signboard',
-            'category' => 'Outdoor',
-        ]);
-
-        DB::table('adv_products')->insert([
+        // 2
+        Advertising::create([
             'name' => 'Neon Box',
-            'category' => 'Outdoor',
-        ]);
-
-        DB::table('adv_products')->insert([
-            'name' => '3D Letter',
             'category' => 'IO',
         ]);
 
-        DB::table('adv_products')->insert([
-            'name' => 'Car Panel',
+        // 3
+        Advertising::create([
+            'name' => 'Letter Box',
+            'category' => 'IO',
+        ]);
+
+        // 4
+        Advertising::create([
+            'name' => 'Aluminium Composite',
+            'category' => 'Indoor',
+        ]);
+
+        // 5
+        Advertising::create([
+            'name' => 'Car Branding',
             'category' => 'Outdoor',
         ]);
 
-        DB::table('adv_products')->insert([
-            'name' => 'Alumunium Composite Panel',
-            'category' => 'Outdoor',
-        ]);
-
-        DB::table('adv_products')->insert([
-            'name' => 'Neon Sign',
-            'category' => 'Outdoor',
-        ]);
-
-        DB::table('adv_products')->insert([
-            'name' => 'LED Sign',
-            'category' => 'Outdoor',
-        ]);
-
-        DB::table('adv_products')->insert([
-            'name' => 'Kontruksi',
-            'category' => 'Outdoor',
-        ]);
-
-        DB::table('adv_products')->insert([
-            'name' => 'Digital Printing',
-            'category' => 'Outdoor',
-        ]);
-
-        DB::table('adv_products')->insert([
-            'name' => 'Truck Branding',
-            'category' => 'Outdoor',
-        ]);
-
-        DB::table('adv_products')->insert([
-            'name' => 'Container Branding',
-            'category' => 'Outdoor',
-        ]);
-
-        DB::table('adv_products')->insert([
+        // 6
+        Advertising::create([
             'name' => 'Kartu Nama',
             'category' => 'Outdoor',
         ]);
 
-        DB::table('adv_products')->insert([
-            'name' => 'X Banner/Roll-Up Banner',
+        // 7
+        Advertising::create([
+            'name' => 'X Banner / Roll Up Banner',
             'category' => 'IO',
         ]);
 
-        DB::table('adv_products')->insert([
+        // 8
+        Advertising::create([
             'name' => 'Flyer',
             'category' => 'Outdoor',
         ]);
 
-        DB::table('adv_products')->insert([
+        // 9
+        Advertising::create([
             'name' => 'Umbul-umbul',
             'category' => 'Outdoor',
         ]);
 
-        DB::table('adv_products')->insert([
-            'name' => 'Acrylic Display',
+        // 10
+        Advertising::create([
+            'name' => 'Stiker Kaca',
             'category' => 'Indoor',
         ]);
 
-        DB::table('adv_products')->insert([
-            'name' => 'Emboss Display',
+        // 11
+        Advertising::create([
+            'name' => 'Wall Branding',
             'category' => 'Indoor',
         ]);
 
-        DB::table('adv_products')->insert([
-            'name' => 'Cutting Sticker',
+        // 12
+        Advertising::create([
+            'name' => 'Partisi Kaca',
             'category' => 'Indoor',
         ]);
 
-        DB::table('adv_products')->insert([
-            'name' => 'Sand Blasting',
+        // 13
+        Advertising::create([
+            'name' => 'Partisi Gypsum',
             'category' => 'Indoor',
         ]);
 
-        DB::table('adv_products')->insert([
-            'name' => 'Wallpaper',
+        // 14
+        Advertising::create([
+            'name' => 'Booth Partisi',
             'category' => 'Indoor',
         ]);
 
-        DB::table('adv_products')->insert([
-            'name' => 'Partsi Kaca',
+        // 15
+        Advertising::create([
+            'name' => 'Rak Display',
             'category' => 'Indoor',
         ]);
 
-        DB::table('adv_products')->insert([
-            'name' => 'Partsy Gypsum',
+        // 16
+        Advertising::create([
+            'name' => 'Spanduk',
+            'category' => 'Outdoor',
+        ]);
+
+        // 17
+        Advertising::create([
+            'name' => 'Interior Meja',
             'category' => 'Indoor',
+        ]);
+
+        // 18
+        Advertising::create([
+            'name' => 'Akrilik Display',
+            'category' => 'Indoor',
+        ]);
+
+        // 19
+        Advertising::create([
+            'name' => 'Seragam',
+            'category' => 'IO',
         ]);
     }
 }

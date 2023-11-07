@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Models\CarBrand;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
 
 class CarBrandSeeder extends Seeder
 {
@@ -14,131 +14,163 @@ class CarBrandSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('car_brands')->insert([
+        // 1
+        CarBrand::create([
             'brand' => 'Hyundai',
         ]);
 
-        DB::table('car_brands')->insert([
+        // 2
+        CarBrand::create([
             'brand' => 'Toyota',
         ]);
 
-        DB::table('car_brands')->insert([
+        // 3
+        CarBrand::create([
             'brand' => 'Daihatsu',
         ]);
 
-        DB::table('car_brands')->insert([
+        // 4
+        CarBrand::create([
             'brand' => 'Honda',
         ]);
 
-        DB::table('car_brands')->insert([
+        // 5
+        CarBrand::create([
             'brand' => 'Mitsubishi',
         ]);
 
-        DB::table('car_brands')->insert([
+        // 6
+        CarBrand::create([
             'brand' => 'Suzuki',
         ]);
 
-        DB::table('car_brands')->insert([
+        // 7
+        CarBrand::create([
             'brand' => 'Wuling',
         ]);
 
-        DB::table('car_brands')->insert([
+        // 8
+        CarBrand::create([
             'brand' => 'Chery',
         ]);
 
-        DB::table('car_brands')->insert([
+        // 9
+        CarBrand::create([
             'brand' => 'KIA',
         ]);
 
-        DB::table('car_brands')->insert([
+        // 10
+        CarBrand::create([
             'brand' => 'Mazda',
         ]);
 
-        DB::table('car_brands')->insert([
+        // 11
+        CarBrand::create([
             'brand' => 'Subaru',
         ]);
 
-        DB::table('car_brands')->insert([
+        // 12
+        CarBrand::create([
             'brand' => 'Mercedes-Benz',
         ]);
 
-        DB::table('car_brands')->insert([
+        // 13
+        CarBrand::create([
             'brand' => 'Renault',
         ]);
 
-        DB::table('car_brands')->insert([
+        // 14
+        CarBrand::create([
             'brand' => 'Isuzu',
         ]);
 
-        DB::table('car_brands')->insert([
+        // 15
+        CarBrand::create([
             'brand' => 'Volvo',
         ]);
 
-        DB::table('car_brands')->insert([
+        // 16
+        CarBrand::create([
             'brand' => 'Lexus',
         ]);
 
-        DB::table('car_brands')->insert([
+        // 17
+        CarBrand::create([
             'brand' => 'Mini',
         ]);
 
-        DB::table('car_brands')->insert([
+        // 18
+        CarBrand::create([
             'brand' => 'BMW',
         ]);
 
-        DB::table('car_brands')->insert([
+        // 19
+        CarBrand::create([
             'brand' => 'Volkswagen',
         ]);
 
-        DB::table('car_brands')->insert([
+        // 20
+        CarBrand::create([
             'brand' => 'Peugeot',
         ]);
 
-        DB::table('car_brands')->insert([
+        // 21
+        CarBrand::create([
             'brand' => 'Jeep',
         ]);
 
-        DB::table('car_brands')->insert([
+        // 22
+        CarBrand::create([
             'brand' => 'Audi',
         ]);
 
-        DB::table('car_brands')->insert([
+        // 23
+        CarBrand::create([
             'brand' => 'Maserati',
         ]);
 
-        DB::table('car_brands')->insert([
+        // 24
+        CarBrand::create([
             'brand' => 'MG',
         ]);
 
-        DB::table('car_brands')->insert([
+        // 25
+        CarBrand::create([
             'brand' => 'Ford',
         ]);
 
-        DB::table('car_brands')->insert([
+        // 26
+        CarBrand::create([
             'brand' => 'Mahindra',
         ]);
 
-        DB::table('car_brands')->insert([
+        // 27
+        CarBrand::create([
             'brand' => 'TATA',
         ]);
 
-        DB::table('car_brands')->insert([
+        // 28
+        CarBrand::create([
             'brand' => 'DFSK',
         ]);
 
-        DB::table('car_brands')->insert([
+        // 29
+        CarBrand::create([
             'brand' => 'Jaguar',
         ]);
 
-        DB::table('car_brands')->insert([
+        // 30
+        CarBrand::create([
             'brand' => 'Nissan',
         ]);
 
-        DB::table('car_brands')->insert([
+        // 31
+        CarBrand::create([
             'brand' => 'Citroen',
         ]);
 
-        DB::table('car_brands')->insert([
+        // 32
+        CarBrand::create([
             'brand' => 'ORA',
         ]);
     }

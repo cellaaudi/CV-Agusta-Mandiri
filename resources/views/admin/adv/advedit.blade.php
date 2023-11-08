@@ -7,6 +7,7 @@
 
     function deletePhoto(button) {
         var img = $(button).data('id');
+        alert(img);
         delPhotos.push(img);
 
         document.getElementById('del_photos').value = delPhotos;

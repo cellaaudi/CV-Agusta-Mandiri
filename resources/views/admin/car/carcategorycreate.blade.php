@@ -32,7 +32,7 @@
                         <div class="form-group mb-3 row">
                             <label for="inputHorizontal" class="col-sm-2 col-form-label">Kategori</label>
                             <div class="col-sm-10">
-                                <input type="text" name="category" class="form-control @error('category') is-invalid @enderror" id="inputHorizontal" placeholder="Contoh: Sedan" autofocus>
+                                <input type="text" name="category" class="form-control @error('category') is-invalid @enderror" id="inputHorizontal" placeholder="Contoh: Sedan" autofocus value="{{ old('category') }}">
                                 @error('category')
                                 <div class="invalid-feedback">
                                     {{ $message }}

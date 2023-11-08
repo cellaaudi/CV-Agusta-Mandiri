@@ -19,7 +19,7 @@
 <div class="page-breadcrumb">
     <div class="row">
         <div class="col-7 align-self-center">
-            <h4 class="page-title text-truncate text-dark font-weight-medium mb-1">Edit Produk Advertising</h4>
+            <h4 class="page-title text-truncate text-dark font-weight-medium mb-1">Edit Produk Agusta Advertising</h4>
             <div class="d-flex align-items-center">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb m-0 p-0">
@@ -82,7 +82,7 @@
                                 <div class="custom-file w-100">
                                     <img id="photoPreview" class="img-fluid mx-auto d-block" src="{{ asset('storage/' . $photo -> url) }}">
                                 </div>
-                                <button class="btn btn-outline-danger btnDelExistPhoto" type="button" data-id="{{ $photo -> id }}" onclick="deletePhoto(this)">
+                                <button class="btn btn-danger btnDelExistPhoto" type="button" data-id="{{ $photo -> id }}" onclick="deletePhoto(this)">
                                     <i class="fas fa-trash-alt"></i>
                                 </button>
                             </div>
@@ -94,7 +94,7 @@
                                 <div class="custom-file w-100">
                                     <input id="firstInputPhoto" class="form-control @error('photo') is-invalid @enderror" type="file" name="photos[]">
                                 </div>
-                                <button class="btn btn-outline-secondary btnAddPhoto" type="button">
+                                <button class="btn btn-success btnAddPhoto" type="button">
                                     <i class="fas fa-plus"></i>
                                 </button>
                             </div>
@@ -124,7 +124,7 @@
     $(document).ready(function() {
         // ADD PHOTO SLOTS
         $('.btnAddPhoto').click(function() {
-            $('#photos').append('<div class="col-sm-2 col-form-label"></div><div class="col-sm-10 mb-2"><div class="input-group flex-nowrap"><div class="custom-file w-100"><input class="form-control" type="file" name="photos[]"></div><button class="btn btn-outline-danger btnDelPhoto" type="button"><i class="fas fa-minus"></i></button></div></div>');
+            $('#photos').append('<div class="col-sm-2 col-form-label"></div><div class="col-sm-10 mb-2"><div class="input-group flex-nowrap"><div class="custom-file w-100"><input class="form-control" type="file" name="photos[]"></div><button class="btn btn-danger btnDelPhoto" type="button"><i class="fas fa-trash-alt"></i></button></div></div>');
         })
 
         // DELETE PHOTO SLOTS

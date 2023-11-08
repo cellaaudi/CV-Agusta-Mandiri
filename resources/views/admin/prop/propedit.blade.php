@@ -99,6 +99,66 @@
                             </div>
                         </div>
                         <div class="form-group mb-3 row">
+                            <label for="inputHorizontal" class="col-sm-2 col-form-label">Provinsi</label>
+                            <div class="col-sm-10">
+                                <select id="cbProv" class="form-select mr-sm-2 @error('province') is-invalid @enderror" id="inlineFormCustomSelect" name="province">
+                                    @foreach($provs as $prov)
+                                    <option value="{{ $prov -> id }}" @if($prop -> village -> district -> regency -> province -> id == $prov -> id) selected @endif>{{ $prov -> name }}</option>
+                                    @endforeach
+                                </select>
+                                @error('province')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="form-group mb-3 row">
+                            <label for="inputHorizontal" class="col-sm-2 col-form-label">Kabupaten/Kota</label>
+                            <div class="col-sm-10">
+                                <select id="cbKab" class="form-select mr-sm-2 @error('regency') is-invalid @enderror" id="inlineFormCustomSelect" name="regency"></select>
+                                @error('regency')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                                @enderror
+                            </div>
+                        </div>
+                        <input type="hidden" data-kab="{{ $kab }}" id="inputKab">
+                        <div class="form-group mb-3 row">
+                            <label for="inputHorizontal" class="col-sm-2 col-form-label">Kecamatan</label>
+                            <div class="col-sm-10">
+                                <select id="cbKec" class="form-select mr-sm-2 @error('district') is-invalid @enderror" id="inlineFormCustomSelect" name="district"></select>
+                                @error('district')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="form-group mb-3 row">
+                            <label for="inputHorizontal" class="col-sm-2 col-form-label">Desa</label>
+                            <div class="col-sm-10">
+                                <select id="cbDesa" class="form-select mr-sm-2 @error('village') is-invalid @enderror" id="inlineFormCustomSelect" name="village"></select>
+                                @error('village')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="form-group mb-3 row">
+                            <label for="inputHorizontal" class="col-sm-2 col-form-label">Alamat</label>
+                            <div class="col-sm-10">
+                                <textarea type="text" name="address" class="form-control @error('address') is-invalid @enderror" placeholder="Tuliskan alamat lengkap di sini ..." rows="3">{{ old('address') }}</textarea>
+                                @error('address')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="form-group mb-3 row">
                             <label for="inputHorizontal" class="col-sm-2 col-form-label">Harga (IDR)</label>
                             <div class="col-sm-10">
                                 <input type="text" name="price" class="form-control @error('price') is-invalid @enderror" id="inputHorizontal" placeholder="Rp. 0,-" min="0" step="1" value="{{ $prop -> price }}">
@@ -210,15 +270,18 @@
                         </div>
                     </div>
                     <div id="photos" class="form-group mb-3 row">
+                        <div for="inputHorizontal" class="col-sm-2 col-form-label">Foto</div>
                         @foreach($photos as $key => $photo)
-                        <div for="inputHorizontal" class="col-sm-2 col-form-label">{{ $key === 0 ? 'Foto' : '' }}</div>
-                        <div class="col-sm-10 {{ $key === 0 ? '' : 'mt-2' }}">
-                            <div class="input-group flex-nowrap">
+                        @if($key != 0)
+                        <div for="inputHorizontal" class="col-sm-2 col-form-label"></div>
+                        @endif
+                        <div class="col-sm-10 mb-2">
+                            <div class="input-group flex-nowrap preview border border-danger rounded">
                                 <div class="custom-file w-100">
-                                    <img class="img-fluid float-start" src="{{ asset('storage/' . $photo -> url) }}">
+                                    <img id="photoPreview" class="img-fluid mx-auto d-block" src="{{ asset('storage/' . $photo -> url) }}">
                                 </div>
-                                <button class="btn btn-outline-danger btnDelExistPhoto" type="button" data-id="{{ $photo -> id }}" onclick="deletePhoto(this)">
-                                    <i class="fas fa-minus"></i>
+                                <button class="btn btn-danger btnDelExistPhoto" type="button" data-id="{{ $photo -> id }}" onclick="deletePhoto(this)">
+                                    <i class="fas fa-trash-alt"></i>
                                 </button>
                             </div>
                         </div>
@@ -229,7 +292,7 @@
                                 <div class="custom-file w-100">
                                     <input class="form-control @error('photo') is-invalid @enderror" type="file" name="photos[]">
                                 </div>
-                                <button class="btn btn-outline-secondary btnAddPhoto" type="button">
+                                <button class="btn btn-success btnAddPhoto" type="button">
                                     <i class="fas fa-plus"></i>
                                 </button>
                             </div>
@@ -257,9 +320,118 @@
 @section('jquery')
 <script>
     $(document).ready(function() {
+        // SELECT2 INITIALISATION
+        $('#cbProv').select2({});
+        $('#cbKab').select2({
+            placeholder: "-- Pilih Provinsi terlebih dahulu --"
+        });
+        $('#cbKec').select2({
+            placeholder: "-- Pilih Kabupaten/Kota terlebih dahulu --"
+        });
+        $('#cbDesa').select2({
+            placeholder: "-- Pilih Kecamatan terlebih dahulu --"
+        });
+
+        kab = $('#inputKab').data('kab');
+
+        function setInitial(element, initial) {
+            var option = new Option(initial.text, initial.id, true, true);
+            element.append(option).trigger('change');
+        }
+
+        // COMBO BOX INDONESIA
+        $('#cbProv').on('change', function() {
+            let prov = $(this).val();
+            $('#cbKab').attr('disabled', false);
+            $('#cbKec').attr('disabled', true);
+            $('#cbDesa').attr('disabled', true);
+
+            $('#cbKab').val(null).trigger("change");
+            $('#cbKec').val(null).trigger("change");
+            $('#cbDesa').val(null).trigger("change");
+
+            $('#cbKab').select2({
+                placeholder: '-- Pilih Kabupaten --',
+                ajax: {
+                    url: "{{ url('regency') }}/" + prov,
+                    processResults: function({
+                        data
+                    }) {
+                        return {
+                            results: $.map(data, function(item) {
+                                return {
+                                    id: item.id,
+                                    text: item.name,
+                                    data: {id: kab.id, text: kab.name}
+                                }
+                            })
+                        }
+                    }
+                }
+            })
+        });
+
+        $('#cbKab').on('change', function() {
+            let kab = $(this).val();
+            if (kab != null) {
+                $('#cbKec').attr('disabled', false);
+                $('#cbDesa').attr('disabled', true);
+            }
+
+            $('#cbKec').val(null).trigger("change");
+            $('#cbDesa').val(null).trigger("change");
+
+            $('#cbKec').select2({
+                placeholder: '-- Pilih Kecamatan --',
+                ajax: {
+                    url: "{{ url('district') }}/" + kab,
+                    processResults: function({
+                        data
+                    }) {
+                        return {
+                            results: $.map(data, function(item) {
+                                return {
+                                    id: item.id,
+                                    text: item.name,
+                                }
+                            })
+                        }
+                    }
+                }
+            })
+        });
+
+        $('#cbKec').on('change', function() {
+            let kec = $(this).val();
+            if (kec != null) {
+                $('#cbDesa').attr('disabled', false);
+            }
+
+            $('#cbDesa').val(null).trigger("change");
+
+            $('#cbDesa').select2({
+                placeholder: '-- Pilih Desa --',
+                ajax: {
+                    url: "{{ url('village') }}/" + kec,
+                    processResults: function({
+                        data
+                    }) {
+                        return {
+                            results: $.map(data, function(item) {
+                                return {
+                                    id: item.id,
+                                    text: item.name,
+                                }
+                            })
+                        }
+                    }
+                }
+            })
+        });
+
         // ADD PHOTO SLOTS
         $('.btnAddPhoto').click(function() {
-            $('#photos').append('<div class="col-sm-2 col-form-label"></div><div class="col-sm-10 mt-2"><div class="input-group flex-nowrap"><div class="custom-file w-100"><input class="form-control" type="file" name="photos[]"></div><button class="btn btn-outline-danger btnDelPhoto" type="button"><i class="fas fa-minus"></i></button></div></div>');
+            $('#photos').append('<div class="col-sm-2 col-form-label"></div><div class="col-sm-10 mt-2"><div class="input-group flex-nowrap"><div class="custom-file w-100"><input class="form-control" type="file" name="photos[]"></div><button class="btn btn-danger btnDelPhoto" type="button"><i class="fas fa-trash-alt"></i></button></div></div>');
         })
 
         // DELETE PHOTO SLOTS
@@ -270,7 +442,7 @@
 
         // DELETE EXISTED PHOTOS FROM UI
         $(document).on('click', '.btnDelExistPhoto', function() {
-            $(this).parent().parent().prev().remove();
+            $(this).parent().parent().next().remove();
             $(this).parent().parent().remove();
         });
 

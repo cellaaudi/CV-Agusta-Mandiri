@@ -8,6 +8,7 @@ use App\Http\Controllers\CarBuyController;
 use App\Http\Controllers\CarCategoryController;
 use App\Http\Controllers\CarController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\IndonesiaController;
 use App\Http\Controllers\PropertyCategoryController;
 use App\Http\Controllers\PropertyController;
 use App\Http\Controllers\UserController;
@@ -28,6 +29,7 @@ Route::get('/', function () {
     return redirect('/home');
 });
 
+// Route Authentication
 Route::get('/login', [LoginController::class, 'index'])->name('login')->middleware('guest');
 Route::post('/login', [LoginController::class, 'login']);
 Route::get('/register', [RegisterController::class, 'index'])->name('register');
@@ -35,7 +37,7 @@ Route::post('/register', [RegisterController::class, 'register']);
 Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 
 Route::middleware(['auth'])->group(function () {
-
+    // Route for Admin only
     Route::middleware("can:admin")->prefix('admin')->name('admin.')->group(function () {
         Route::get('/home', function () {
             return view('admin.index');
@@ -51,6 +53,7 @@ Route::middleware(['auth'])->group(function () {
         Route::resource('/property', PropertyController::class);
     });
 
+    // Route for Customer Only
     Route::name('customer.')->group(function () {
         Route::middleware("can:customer")->group(function () {
             //keranjang
@@ -61,6 +64,7 @@ Route::middleware(['auth'])->group(function () {
     });
 });
 
+// Route for Guest and All
 Route::name('customer.')->group(function () {
     Route::get('/home', function () {
         return view('index');
@@ -73,3 +77,8 @@ Route::name('customer.')->group(function () {
     Route::get('/car', [CustomerController::class, 'cars'])->name('car');
     Route::get('/property', [CustomerController::class, 'props'])->name('property');
 });
+
+// Route for Indonesia.sql
+Route::get('/regency/{id}', [IndonesiaController::class, 'regencies'])->name('regency');
+Route::get('/district/{id}', [IndonesiaController::class, 'districts'])->name('district');
+Route::get('/village/{id}', [IndonesiaController::class, 'villages'])->name('village');

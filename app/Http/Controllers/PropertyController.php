@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Property;
 use App\Models\PropertyCategory;
 use App\Models\PropertyPhoto;
+use App\Models\Province;
 
 class PropertyController extends Controller
 {
@@ -28,7 +29,9 @@ class PropertyController extends Controller
      */
     public function create()
     {
-        return view('admin.prop.propcreate');
+        $provs = Province::all();
+
+        return view('admin.prop.propcreate', compact('provs'));
     }
 
     /**
@@ -39,31 +42,37 @@ class PropertyController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
+        $request->validate([
             'category' => 'required',
             'type' => 'required',
             'title' => 'required',
+            'village' => 'required|numeric',
+            'address' => 'required',
             'price' => 'required|numeric',
             'land_area' => 'required|numeric',
-            'building_area' => 'numeric',
-            'bedroom' => 'numeric',
-            'bathroom' => 'numeric',
-            'story' => 'numeric',
-            'electricity' => 'numeric',
+            'building_area' => 'nullable|numeric',
+            'bedroom' => 'nullable|numeric',
+            'bathroom' => 'nullable|numeric',
+            'story' => 'nullable|numeric',
+            'electricity' => 'nullable|numeric',
             'certificate' => 'required|min:1',
             'desc' => 'required',
             'photos' => 'required',
+            'photos.*' => 'image|mimes:jpeg,jpg,png,svg,gif',
         ]);
 
+        $cert = implode(", ", $request->certificate);
+
         if ($request->hasFile('photos')) {
-            $allowed = ['jpeg', 'jpg', 'png', 'svg', 'gif'];
-            $cert = implode(", ", $request->certificate);
             $files = $request->file('photos');
 
             $product = Property::create([
                 'category' => $request->category,
                 'type' => $request->type,
                 'title' => $request->title,
+                'village_id' => $request->village,
+                'address' => $request->address,
+                'maps' => $request->maps,
                 'price' => $request->price,
                 'land_area' => $request->land_area,
                 'building_area' => $request->building_area,
@@ -76,17 +85,12 @@ class PropertyController extends Controller
             ]);
 
             foreach ($files as $file) {
-                $filename = $file->getClientOriginalName();
-                $extension = $file->getClientOriginalExtension();
-                $valid = in_array($extension, $allowed);
+                $filename = $file->store('prop');
 
-                if ($valid) {
-                    $filename = $file->store('photos');
-                    PropertyPhoto::create([
-                        'prop_product_id' => $product->id,
-                        'url' => $filename
-                    ]);
-                }
+                PropertyPhoto::create([
+                    'prop_product_id' => $product->id,
+                    'url' => $filename
+                ]);
             }
         }
 
@@ -117,8 +121,10 @@ class PropertyController extends Controller
     {
         $prop = Property::find($id);
         $photos = PropertyPhoto::where('prop_product_id', $id)->get();
+        $provs = Province::all();
+        $kab = $prop -> village -> district -> regency -> id;
 
-        return view('admin.prop.propedit', compact('prop', 'photos'));
+        return view('admin.prop.propedit', compact('prop', 'photos', 'provs', 'kab'));
     }
 
     /**
@@ -130,7 +136,83 @@ class PropertyController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        dd($request);
+        $request->validate([
+            'status' => 'required',
+            'category' => 'required',
+            'type' => 'required',
+            'title' => 'required',
+            'village' => 'required|numeric',
+            'address' => 'required',
+            'price' => 'required|numeric',
+            'land_area' => 'required|numeric',
+            'building_area' => 'nullable|numeric',
+            'bedroom' => 'nullable|numeric',
+            'bathroom' => 'nullable|numeric',
+            'story' => 'nullable|numeric',
+            'electricity' => 'nullable|numeric',
+            'certificate' => 'required|min:1',
+            'desc' => 'required',
+            'photos.*' => 'image|mimes:jpeg,jpg,png,svg,gif',
+        ]);
+
+        $cert = implode(", ", $request->certificate);
+        $delPhotos = $request->del_photos[0];
+
+        if (!empty($delPhotos)) {
+            $delPhotoIds = explode(',', $delPhotos);
+
+            $existPhotos = PropertyPhoto::where('prop_product_id', $id)->count();
+
+            if (count($delPhotoIds) < $existPhotos) {
+                foreach ($delPhotoIds as $del) {
+                    $photo = PropertyPhoto::find($del);
+                    $storage = public_path('storage/' . $photo->url);
+                    if (file_exists($storage)) {
+                        unlink($storage);
+                    }
+                    $photo->delete();
+                }
+            } else {
+                $request->validate([
+                    'photos' => 'required',
+                ]);
+            }
+        }
+
+        $prop = Property::find($id);
+        $prop->status = $request->status;
+        $prop->category = $request->category;
+        $prop->type = $request->type;
+        $prop->title = $request->title;
+        $prop->village_id = $request->village;
+        $prop->address = $request->address;
+        $prop->maps = $request->maps;
+        $prop->price = $request->price;
+        $prop->land_area = $request->land_area;
+        $prop->building_area = $request->building_area;
+        $prop->bedroom = $request->bedroom;
+        $prop->bathroom = $request->bathroom;
+        $prop->story = $request->story;
+        $prop->electricity = $request->electricity;
+        $prop->certification = $cert;
+        $prop->description = $request->desc;
+        $prop->save();
+
+        if ($request->hasFile('photos')) {
+            $files = $request->file('photos');
+
+            foreach ($files as $file) {
+                $filename = $file->store('prop');
+
+                PropertyPhoto::create([
+                    'prop_product_id' => $prop->id,
+                    'url' => $filename
+                ]);
+            }
+        }
+
+        return redirect()->route('admin.property.index');
     }
 
     /**

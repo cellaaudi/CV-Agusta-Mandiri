@@ -20,13 +20,13 @@ class Property extends Model
         return $this->belongsToMany(Appointment::class, "prop_carts", "prop_product_id", "appointment_id");
     }
 
-    // public function property_category()
-    // {
-    //     return $this->belongsTo(PropertyCategory::class, "prop_category_id")->withTrashed();
-    // }
-
     public function property_photo()
     {
         return $this->hasMany(PropertyPhoto::class, "prop_photo_id");
+    }
+
+    public function village()
+    {
+        return $this->belongsTo(Village::class, "village_id");
     }
 }

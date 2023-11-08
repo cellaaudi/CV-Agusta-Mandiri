@@ -67,6 +67,12 @@
                 <div class="mt-4 form-horizontal">
                     <div class="form-body">
                         <div class="form-group mb-3 row">
+                            <label for="inputHorizontal" class="col-sm-2 col-form-label">Status</label>
+                            <div class="col-sm-10">
+                                <label class="form-control {{ $car -> sell_status == 'Available' ? 'bg-success' : 'bg-danger' }}" style="color: #fff;">{{ $car -> sell_status == 'Available' ? 'Tersedia' : 'Terjual' }}</label>
+                            </div>
+                        </div>
+                        <div class="form-group mb-3 row">
                             <label for="inputHorizontal" class="col-sm-2 col-form-label">Judul</label>
                             <div class="col-sm-10">
                                 <label class="form-control">{{ $car -> title }}</label>
@@ -148,12 +154,6 @@
                                 <label class="form-control">
                                     <pre style="font-family: 'Rubik'; font-size: 1rem;">{{ $car -> description }}</pre>
                                 </label>
-                            </div>
-                        </div>
-                        <div class="form-group mb-3 row">
-                            <label for="inputHorizontal" class="col-sm-2 col-form-label">Status</label>
-                            <div class="col-sm-10">
-                                <label class="form-control {{ $car -> sell_status == 'Available' ? 'bg-success' : 'bg-danger' }}" style="color: #fff;">{{ $car -> sell_status == 'Available' ? 'Tersedia' : 'Terjual' }}</label>
                             </div>
                         </div>
                     </div>

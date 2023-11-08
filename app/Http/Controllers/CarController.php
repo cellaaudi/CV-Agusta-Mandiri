@@ -77,7 +77,7 @@ class CarController extends Controller
             ]);
 
             foreach($files as $file) {
-                $filename = $file->store('photos');
+                $filename = $file->store('car');
 
                 CarPhoto::create([
                     'car_product_id' => $product->id,

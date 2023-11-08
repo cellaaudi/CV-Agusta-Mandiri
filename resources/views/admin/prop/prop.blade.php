@@ -60,7 +60,7 @@
                                 <td>Rp. {{ $prop -> price }}</td>
                                 <td>{{ $prop -> category == 'House' ? 'Rumah' : ( $prop -> category == 'Land' ? 'Tanah' : 'Villa') }}</td>
                                 <td>{{ $prop -> type == 'Sell' ? 'Jual' : ( $prop -> type == 'Rent' ? 'Sewa' : 'Jual dan Sewa') }}</td>
-                                <td class="{{ $prop -> status == 'Available' ? 'bg-success' : 'bg-danger' }}" style="color: #fff;">{{ $prop -> status == 'Available' ? 'Tersedia' : 'Terjual'}}</td>
+                                <td class="{{ $prop -> status == 'Available' ? 'bg-success' : 'bg-danger' }}" style="color: #fff;">{{ $prop -> status == 'Available' ? 'Tersedia' : 'Terjual/Tersewa'}}</td>
                                 <td>
                                     <a href="{{ route('admin.property.show', $prop) }}" type="button" class="btn btn-success btn-rounded"><i class="far fa-folder-open"></i> Detail</a>
                                     <a href="{{ route('admin.property.edit', $prop) }}" type="button" class="btn btn-warning btn-rounded"><i class="far fa-edit"></i> Edit</a>
@@ -121,7 +121,7 @@
     function deleteSelected(button) {
         var data = $(button).data('prop');
 
-        $('#delModal .modal-body p').html('Apakah Anda yakin ingin menghapus <b>' + data.title + '</b> dari daftar produk properti?');
+        $('#delModal .modal-body p').html('Apakah Anda yakin ingin menghapus <b>' + data.title + '</b> dari daftar produk Agusta Properti?');
 
         $('#delModal form').attr('action', '/admin/property/' + data.id);
     }

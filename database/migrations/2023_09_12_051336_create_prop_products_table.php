@@ -18,6 +18,9 @@ class CreatePropProductsTable extends Migration
             $table->enum('category', ['House', 'Villa', 'Land']);
             $table->enum('type', ['Sell', 'Rent', 'Both']);
             $table->string('title');
+            $table->foreignId('village_id');
+            $table->longtext('address');
+            $table->longtext('maps')->nullable();
             $table->double('price');
             $table->integer('land_area');
             $table->integer('building_area')->nullable();
@@ -25,9 +28,6 @@ class CreatePropProductsTable extends Migration
             $table->integer('bathroom')->nullable();
             $table->integer('story')->nullable();
             $table->integer('electricity')->nullable();
-            $table->foreignId('village_id');
-            $table->longtext('address');
-            $table->longtext('maps')->nullable();
             $table->string('certification');
             $table->longtext("description");
             $table->enum('status', ['Available', 'Sold'])->default('Available');

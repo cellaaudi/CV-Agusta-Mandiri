@@ -10,7 +10,7 @@
                 <h2></h2>
                 <ol>
                     <li><a href="{{ route('customer.home') }}">Halaman Utama</a></li>
-                    <li><a href="{{ route('customer.advertising') }}">Agusta Advertising</a></li>
+                    <li><a href="{{ route('customer.car') }}">Agusta Motor</a></li>
                     <li>Detail Produk</li>
                 </ol>
             </div>
@@ -37,8 +37,8 @@
 
                 <div class="col-lg-4">
                     <div class="portfolio-info">
-                        <h3>{{ $adv -> name }}</h3>
-                        <h5>{{ $adv -> category }}</h5>
+                        <h3>{{ $car -> title }}</h3>
+                        <h5>{{ $car -> year }}</h5>
                     </div>
                     <div class="portfolio-description">
                         <h2>Deskripsi</h2>

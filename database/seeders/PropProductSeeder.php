@@ -28,7 +28,7 @@ class PropProductSeeder extends Seeder
             'address' => 'Perum Multi Bintang Asri ,Blok A no.4',
             'maps' => 'https://maps.app.goo.gl/w32PgqE47kF2fdbj9',
             'certification' => 'SHM',
-            'description' => 'Rumah siap huni
+            'description' => trim('Rumah siap huni
             Lokasi : Perum Multi Bintang Asri ,Blok A no.4, sanggulan Kediri Tabanan
             Jual : -Rp 385.000.000
             Luas tanah : 134 m²
@@ -42,7 +42,7 @@ class PropProductSeeder extends Seeder
             Gudang
             Akses : 150m ± dari Jalan Raya
             Keterangan :
-            Renovasi full',
+            Renovasi full'),
         ]);
 
         // 2
@@ -58,7 +58,7 @@ class PropProductSeeder extends Seeder
             'address' => 'Padang Mekar street II no. 24 (100 meters from the mahendradata highway)',
             'maps' => 'https://maps.app.goo.gl/BUAzcdyGmqPzhVRcA',
             'certification' => 'SHM',
-            'description' => 'Omah Jati Mahendradata
+            'description' => trim('Omah Jati Mahendradata
             Location : Padang Mekar street II no. 24, Padangsambian,Denpasar.
             (100 meters from the mahendradata highway)
             Price : Rp 2.2 billion (Rp 2.200.000.000)
@@ -71,7 +71,7 @@ class PropProductSeeder extends Seeder
             Fully furnished
             AC TV Water heather
             Kitchen
-            (SHM)',
+            (SHM)'),
         ]);
 
         // 3
@@ -85,7 +85,7 @@ class PropProductSeeder extends Seeder
             'address' => 'Jl. Bypass Ngurah Rai Nusa Dua (Dekat pintu masuk BTDC)',
             'maps' => 'https://maps.app.goo.gl/XQNFRtftYFY4Lqje9',
             'certification' => 'SHM',
-            'description' => 'Tanah Nusa Dua
+            'description' => trim('Tanah Nusa Dua
             Lokasi : Jl. Bypass Ngurah Rai Nusa Dua
             (Dekat pintu masuk BTDC)
             Harga : 
@@ -94,7 +94,7 @@ class PropProductSeeder extends Seeder
             *Minimal Sewa 5 Tahun
             Ukuran : 3 Are
             Lebar depan 14 Meter
-            Sudah berisikan dinding belakang.',
+            Sudah berisikan dinding belakang.'),
         ]);
     }
 }

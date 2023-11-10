@@ -77,6 +77,7 @@ Route::name('customer.')->group(function () {
     Route::get('/car', [CustomerController::class, 'cars'])->name('car');
     Route::get('/car/detail/{adv}', [CustomerController::class, 'car_detail'])->name('car.detail');
     Route::get('/property', [CustomerController::class, 'props'])->name('property');
+    Route::get('/property/detail/{adv}', [CustomerController::class, 'prop_detail'])->name('property.detail');
 });
 
 // Route for Indonesia.sql

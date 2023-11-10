@@ -8,6 +8,7 @@ use App\Models\Car;
 use App\Models\Property;
 use App\Models\AdvertisingPhoto;
 use App\Models\CarPhoto;
+use App\Models\PropertyPhoto;
 
 class CustomerController extends Controller
 {
@@ -56,8 +57,17 @@ class CustomerController extends Controller
     public function props()
     {
         $props = Property::all();
+        $photos = PropertyPhoto::all();
 
-        return view('customer.prop.prop', compact('props'));
+        return view('customer.prop.prop', compact('props', 'photos'));
+    }
+
+    public function prop_detail($id)
+    {
+        $prop = Property::find($id);
+        $photos = PropertyPhoto::where('prop_product_id', $id)->get();
+
+        return view('customer.prop.propdetail', compact('prop', 'photos'));
     }
 
     /**

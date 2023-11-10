@@ -1056,6 +1056,9 @@ section {
 
 .portfolio-details .portfolio-details-slider img {
   width: 100%;
+  max-height: 500px;
+  object-fit: contain;
+  aspect-ratio: 1/1;
 }
 
 .portfolio-details .portfolio-details-slider .swiper-pagination {

@@ -37,17 +37,65 @@
 
                 <div class="col-lg-4">
                     <div class="portfolio-info">
-                        <h3>{{ $car -> title }}</h3>
-                        <h5>{{ $car -> year }}</h5>
+                        <h3>Rp. {{ $car -> price }}</h3>
+                        <div class="row mb-2">
+                            <span class="col-sm-5 text-muted"><small>Judul</small></span>
+                            <span class="col-sm-7">{{ $car -> title }}</span>
+                        </div>
+                        <div class="row mb-2">
+                            <span class="col-sm-5 text-muted"><small>Tahun</small></span>
+                            <span class="col-sm-7 ">{{ $car -> year }}</span>
+                        </div>
+                        <div class="row mb-2">
+                            <span class="col-sm-5 text-muted"><small>Merk</small></span>
+                            <span class="col-sm-7">{{ $car -> car_brand -> brand }}</span>
+                        </div>
+                        <div class="row mb-2">
+                            <span class="col-sm-5 text-muted"><small>Kategori</small></span>
+                            <span class="col-sm-7 ">{{ $car -> car_category -> category }}</span>
+                        </div>
+                        <div class="row mb-2">
+                            <span class="col-sm-5 text-muted"><small>Kilometer</small></span>
+                            <span class="col-sm-7 ">{{ $car -> kilometre }} km</span>
+                        </div>
+                        <div class="row mb-2">
+                            <span class="col-sm-5 text-muted"><small>Transmisi</small></span>
+                            <span class="col-sm-7 ">{{ $car -> transmission }}</span>
+                        </div>
+                        <div class="row mb-2">
+                            <span class="col-sm-5 text-muted"><small>Kapasitas Mesin</small></span>
+                            <span class="col-sm-7 ">
+                                @if($car->capacity == 1)
+                                > 1000 cc
+                                @elseif($car->capacity == 2)
+                                1000 - 1500 cc
+                                @elseif($car->capacity == 3)
+                                1500 - 2000 cc
+                                @elseif($car->capacity == 4)
+                                2000 - 3000 cc
+                                @else
+                                > 3000 cc
+                                @endif
+                            </span>
+                        </div>
+                        <div class="row mb-2">
+                            <span class="col-sm-5 text-muted"><small>Bahan Bakar</small></span>
+                            <span class="col-sm-7 ">
+                                @if($car->fuel == 'Petrol')
+                                Bensin
+                                @elseif($car->fuel == 'Diesel')
+                                Diesel
+                                @elseif($car->fuel == 'Electricity')
+                                Listrik
+                                @else
+                                Hybrid
+                                @endif
+                            </span>
+                        </div>
                     </div>
                     <div class="portfolio-description">
                         <h2>Deskripsi</h2>
-                        <p>
-                            Autem ipsum nam porro corporis rerum. Quis eos dolorem eos itaque inventore commodi labore quia
-                            quia. Exercitationem repudiandae officiis neque suscipit non officia eaque itaque enim.
-                            Voluptatem officia accusantium nesciunt est omnis tempora consectetur dignissimos. Sequi nulla
-                            at esse enim cum deserunt eius.
-                        </p>
+                        <p>{{ $car -> description }}</p>
                     </div>
                 </div>
 

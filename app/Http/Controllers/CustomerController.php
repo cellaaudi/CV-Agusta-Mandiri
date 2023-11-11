@@ -24,7 +24,7 @@ class CustomerController extends Controller
 
     public function advs()
     {
-        $advs = Advertising::all();
+        $advs = Advertising::orderBy('name', 'asc')->get();
         $photos = AdvertisingPhoto::all();
 
         return view('customer.adv.adv', compact('advs', 'photos'));

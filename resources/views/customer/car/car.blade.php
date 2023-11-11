@@ -24,6 +24,41 @@
                 <p>Berikut berbagai merk dan tipe mobil bekas yang tersedia untuk Anda pilih</p>
             </div>
 
+            <div class="row mb-3">
+                <div class="col-lg-12 d-flex justify-content-center">
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-danger">Action</button>
+                        <button type="button" class="btn btn-danger dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+                            <span class="visually-hidden">Toggle Dropdown</span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Action</a></li>
+                            <li><a class="dropdown-item" href="#">Another action</a></li>
+                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="#">Separated link</a></li>
+                        </ul>
+                    </div>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-danger">Action</button>
+                        <button type="button" class="btn btn-danger dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+                            <span class="visually-hidden">Toggle Dropdown</span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Action</a></li>
+                            <li><a class="dropdown-item" href="#">Another action</a></li>
+                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="#">Separated link</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
             <div class="row row-cols-1 row-cols-md-3 g-4">
                 @php
                 $delay = 0;
@@ -40,7 +75,6 @@
                         @endforeach
                         <div class="card-body">
                             <h5 class="card-title">[{{ $car -> year }}] {{ $car -> title }}</h5>
-                            <p class="card-text">Merk : {{ $car -> car_brand -> brand }} <br> Kategori : {{ $car -> car_category -> category }}</p>
                             <p class="card-text text-primary h4"><strong>Rp. {{ $car -> price }}</strong></p>
                         </div>
                     </div>

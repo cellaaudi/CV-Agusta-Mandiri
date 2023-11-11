@@ -38,7 +38,10 @@
                 <div class="col-lg-4">
                     <div class="portfolio-info">
                         <h3>{{ $adv -> name }}</h3>
-                        <h5>{{ $adv -> category }}</h5>
+                        <div class="row mb-2">
+                            <span class="col-sm-5 text-muted"><small>Kategori</small></span>
+                            <span class="col-sm-7">{{  $adv -> category == "IO" ? "Indoor & Outdoor" : $adv -> category }}</span>
+                        </div>
                     </div>
                     <div class="portfolio-description">
                         <h2>Deskripsi</h2>
@@ -50,7 +53,7 @@
                         </p>
                     </div>
                 </div>
-
+                
             </div>
 
         </div>

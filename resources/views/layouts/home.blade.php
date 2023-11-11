@@ -174,6 +174,8 @@
     <div id="preloader"></div>
 
     <!-- Vendor JS Files -->
+    <script src="{{ asset('admin/libs/jquery/dist/jquery.min.js') }}"></script>
+    
     <script src="{{ asset('customer/vendor/purecounter/purecounter_vanilla.js') }}"></script>
     <script src="{{ asset('customer/vendor/aos/aos.js') }}"></script>
     <script src="{{ asset('customer/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
@@ -184,6 +186,8 @@
 
     <!-- Template Main JS File -->
     <script src="{{ asset('customer/js/main.js') }}"></script>
+
+    @yield('jquery')
 
 </body>
 

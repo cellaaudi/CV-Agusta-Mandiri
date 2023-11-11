@@ -130,7 +130,7 @@ class AdvPhotoSeeder extends Seeder
         ]);
 
         AdvertisingPhoto::create([
-            'url' => 'adv/kartu_nama_1.jpeg',
+            'url' => 'adv/kartu_nama_1.jpg',
             'adv_product_id' => 6
         ]);
 

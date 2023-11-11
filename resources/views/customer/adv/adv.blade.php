@@ -17,7 +17,46 @@
         </div>
     </section><!-- End Breadcrumbs -->
 
-    <section class="portfolio inner-page">
+    <section id="pricing" class="pricing portfolio section-bg inner-page">
+        <div class="container" data-aos="fade-up">
+            <div class="section-title">
+                <h2>Agusta Advertising</h2>
+                <p>Berikut berbagai jenis periklanan yang dapat Anda pesan dari kami</p>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-12 d-flex justify-content-center">
+                    <ul id="portfolio-flters">
+                        <li data-filter="*" class="filter-active">Semua</li>
+                        <li data-filter=".filter-Indoor">Indoor</li>
+                        <li data-filter=".filter-Outdoor">Outdoor</li>
+                        <li data-filter=".filter-IO">Indoor & Outdoor</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="row row-cols-1 row-cols-md-3 g-4 card-container">
+                @foreach($advs as $adv)
+                <a href="{{ route('customer.advertising.detail', $adv) }}" class="col card-item filter-{{ $adv -> category }}">
+                    <div class=" card h-100">
+                        @foreach($photos as $photo)
+                        @if ($adv -> id == $photo -> adv_product_id)
+                        <img src="{{ asset('storage/' . $photo -> url) }}" class="card-img-top" alt="{{ $adv -> name }}">
+                        @break
+                        @endif
+                        @endforeach
+                        <div class="card-body">
+                            <h5 class="card-title">{{ $adv -> name }}</h5>
+                        </div>
+                    </div>
+                </a>
+                @endforeach
+            </div>
+
+        </div>
+    </section>
+
+    <!-- <section class="portfolio inner-page">
         <div class="container" data-aos="fade-up">
             <div class="section-title">
                 <h2>Agusta Advertising</h2>
@@ -61,30 +100,60 @@
 
             </div>
 
-            <!-- <div class="row">
-
-            @foreach ($advs as $adv)
-            <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="100">
-                <div class="box">
-                    <h3>{{ $adv->name }}</h3>
-                    <h4><sup>$</sup>0<span> / month</span></h4>
-                    <ul>
-                        <li>Aida dere</li>
-                        <li>Nec feugiat nisl</li>
-                        <li>Nulla at volutpat dola</li>
-                        <li class="na">Pharetra massa</li>
-                        <li class="na">Massa ultricies mi</li>
-                    </ul>
-                    <div class="btn-wrap">
-                        <a href="#" class="btn-buy">Buy Now</a>
-                    </div>
-                </div>
-            </div>
-            @endforeach
-
-        </div> -->
-
         </div>
-    </section>
+    </section> -->
 </main>
+@endsection
+
+@section('jquery')
+<script>
+    $(document).ready(function() {
+        const select = (el, all = false) => {
+            el = el.trim()
+            if (all) {
+                return [...document.querySelectorAll(el)]
+            } else {
+                return document.querySelector(el)
+            }
+        }
+
+        const on = (type, el, listener, all = false) => {
+            let selectEl = select(el, all)
+            if (selectEl) {
+                if (all) {
+                    selectEl.forEach(e => e.addEventListener(type, listener))
+                } else {
+                    selectEl.addEventListener(type, listener)
+                }
+            }
+        }
+
+        window.addEventListener('load', () => {
+            let cardContainer = select('.card-container');
+            if (cardContainer) {
+                let cardIsotope = new Isotope(cardContainer, {
+                    itemSelector: '.card-item'
+                });
+
+                let cardFilters = select('#portfolio-flters li', true);
+
+                on('click', '#portfolio-flters li', function(e) {
+                    e.preventDefault();
+                    cardFilters.forEach(function(el) {
+                        el.classList.remove('filter-active');
+                    });
+                    this.classList.add('filter-active');
+
+                    cardIsotope.arrange({
+                        filter: this.getAttribute('data-filter')
+                    });
+                    cardIsotope.on('arrangeComplete', function() {
+                        AOS.refresh()
+                    });
+                }, true);
+            }
+
+        });
+    });
+</script>
 @endsection

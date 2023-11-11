@@ -36,11 +36,14 @@
                 </div>
 
                 <div class="col-lg-4">
+                    <div class="d-grid gap-2 mb-3">
+                        <button class="add-cart">+ Keranjang</button>
+                    </div>
                     <div class="portfolio-info">
                         <h3>{{ $adv -> name }}</h3>
                         <div class="row mb-2">
                             <span class="col-sm-5 text-muted"><small>Kategori</small></span>
-                            <span class="col-sm-7">{{  $adv -> category == "IO" ? "Indoor & Outdoor" : $adv -> category }}</span>
+                            <span class="col-sm-7">{{ $adv -> category == "IO" ? "Indoor & Outdoor" : $adv -> category }}</span>
                         </div>
                     </div>
                     <div class="portfolio-description">
@@ -53,7 +56,7 @@
                         </p>
                     </div>
                 </div>
-                
+
             </div>
 
         </div>

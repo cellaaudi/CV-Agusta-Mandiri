@@ -36,6 +36,9 @@
                 </div>
 
                 <div class="col-lg-4">
+                    <div class="d-grid gap-2 mb-3">
+                        <button class="add-cart">+ Keranjang</button>
+                    </div>
                     <div class="portfolio-info">
                         <h3>Rp. {{ $car -> price }}</h3>
                         <div class="row mb-2">

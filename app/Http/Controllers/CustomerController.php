@@ -7,6 +7,8 @@ use App\Models\Advertising;
 use App\Models\Car;
 use App\Models\Property;
 use App\Models\AdvertisingPhoto;
+use App\Models\CarBrand;
+use App\Models\CarCategory;
 use App\Models\CarPhoto;
 use App\Models\PropertyPhoto;
 
@@ -40,10 +42,12 @@ class CustomerController extends Controller
 
     public function cars()
     {
-        $cars = Car::all();
+        $cars = Car::where('status', 'Sell')->where('sell_status', 'Available')->get();
         $photos = CarPhoto::all();
+        $brands = CarBrand::orderBy('brand', 'asc')->get();
+        $categories = CarCategory::orderBy('category', 'asc')->get();
 
-        return view('customer.car.car', compact('cars', 'photos'));
+        return view('customer.car.car', compact('cars', 'photos', 'brands', 'categories'));
     }
 
     public function car_Detail($id)

@@ -167,6 +167,13 @@ h6 {
   position: relative;
 }
 
+.navbar .hello {
+  color: rgba(255, 255, 255, 0.7);
+  font-family: 'Poppins', sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+}
+
 .navbar>ul>li {
   padding: 10px 0 10px 24px;
 }
@@ -191,6 +198,19 @@ h6 {
   font-size: 12px;
   line-height: 0;
   margin-left: 5px;
+}
+
+.navbar .navicon {
+  font-size: 24px !important;
+}
+
+.navbar .clear,
+.navbar .clear .navicon {
+  color: rgba(255, 255, 255, 1);
+}
+
+.navbar #cart {
+  padding-left: 49px;
 }
 
 .navbar>ul>li>a:before {
@@ -248,6 +268,10 @@ h6 {
   visibility: hidden;
 }
 
+.navbar .dropdown i {
+  cursor: pointer;
+}
+
 .navbar .dropdown ul {
   display: block;
   position: absolute;
@@ -274,7 +298,7 @@ h6 {
 }
 
 .navbar .dropdown ul a i {
-  font-size: 12px;
+  font-size: 24px;
 }
 
 .navbar .dropdown ul a:hover,
@@ -620,7 +644,8 @@ section {
   margin-bottom: 0;
 }
 
-.about .content .read-more {
+.about .content .read-more,
+.add-cart {
   font-family: "Poppins", sans-serif;
   font-weight: 500;
   font-size: 16px;
@@ -634,11 +659,13 @@ section {
   position: relative;
 }
 
-.about .content .read-more:hover {
+.about .content .read-more:hover,
+.add-cart:hover {
   background: linear-gradient(180deg, #5846f9 0%, #7b27d8 100%);
 }
 
-.about .content .read-more i {
+.about .content .read-more i,
+.add-cart i {
   font-size: 22px;
   position: absolute;
   right: 20px;

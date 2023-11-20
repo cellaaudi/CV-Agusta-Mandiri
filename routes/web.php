@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdvertisingCartController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\AdvertisingController;
@@ -59,8 +60,11 @@ Route::middleware(['auth'])->group(function () {
         Route::middleware("can:customer")->group(function () {
             //keranjang
             // kalo mau tambah ke keranjang langsung alert suruh login
-            Route::get('/cart/advertising/{id}', [CartController::class, 'showAdvertising'])->name('adv.cart');
-            Route::post('/cart/advertising/add', [CartController::class, 'addAdvertising'])->name('adv.cart.add');
+            Route::prefix('cart')->name('cart.')->group(function () {
+                Route::resource('/advertising', AdvertisingCartController::class);
+            });
+            // Route::get('/cart/advertising/{id}', [CartController::class, 'showAdvertising'])->name('adv.cart');
+            // Route::post('/cart/advertising/add', [CartController::class, 'addAdvertising'])->name('adv.cart.add');
 
             Route::resource('/profile', UserController::class);
         });

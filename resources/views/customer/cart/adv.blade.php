@@ -1,74 +1,86 @@
 @extends('layouts.home')
 
 @section('content')
-    <main id="main">
-        <!-- ======= Breadcrumbs ======= -->
-        <section class="breadcrumbs">
-            <div class="container">
+<main id="main">
+    <!-- ======= Breadcrumbs ======= -->
+    <section class="breadcrumbs">
+        <div class="container">
 
-                <div class="d-flex justify-content-between align-items-center">
-                    <h2></h2>
-                    <ol>
-                        <li><a href="{{ route('customer.home') }}">Halaman Utama</a></li>
-                        <li><a href="{{ route('customer.advertising') }}">Agusta Advertising</a></li>
-                        <li>Keranjang</li>
-                    </ol>
-                </div>
-
+            <div class="d-flex justify-content-between align-items-center">
+                <h2></h2>
+                <ol>
+                    <li><a href="{{ route('customer.home') }}">Halaman Utama</a></li>
+                    <li><a href="{{ route('customer.advertising') }}">Agusta Advertising</a></li>
+                    <li>Keranjang</li>
+                </ol>
             </div>
-        </section><!-- End Breadcrumbs -->
 
-        <section id="pricing" class="pricing portfolio section-bg inner-page">
-            <div class="container" data-aos="fade-up">
-                <div class="section-title">
-                    <h2>Agusta Advertising</h2>
-                    <p>Berikut berbagai jenis periklanan yang dapat Anda pesan dari kami</p>
-                </div>
+        </div>
+    </section><!-- End Breadcrumbs -->
 
-                @foreach ($carts as $cart)
-                <div class="card mb-3" style="max-width: 540px;">
-                    <div class="row g-0">
-                        <div class="col-md-4">
-                            @foreach ($photos as $photo)
-                                    @if ($cart->adv_product_id == $photo->adv_product_id)
-                                        <img src="{{ asset('storage/' . $photo->url) }}" class="img-fluid rounded-start"
-                                            alt="{{ $cart->advertising->name }}">
-                                    @break
+    <section id="pricing" class="pricing portfolio section-bg inner-page">
+        <div class="container" data-aos="fade-up">
+            <div class="section-title">
+                <h2>Keranjang: Agusta Advertising</h2>
+            </div>
+
+            <div class="row flex-column-reverse flex-lg-row">
+                <div class="col-lg-8">
+                    @foreach ($user->advertising_cart as $cart)
+                    <div class="card mb-3 cardt" style="max-width: 800px;">
+                        <div class="row g-0">
+                            <div class="col-md-4 preview">
+                                @foreach ($photos as $photo)
+                                @if ($cart->id == $photo->adv_product_id)
+                                <img id="photoPreview" src="{{ asset('storage/' . $photo->url) }}" class="img-fluid mx-auto d-block rounded-start" alt="{{ $cart->name }}">
+                                @break
                                 @endif
-                            @endforeach
+                                @endforeach
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                    <h5 class="card-title fw-bold">{{ $cart -> name }}</h5>
+                                    <p class="card-text"><small class="text-muted">Kategori :</small> {{ $cart->category == 'IO' ? 'Indoor & Outdoor' : $cart->category }}</p>
+                                    <button class="btn float-end">
+                                        <i class='bx bx-trash text-muted ' style="font-size: 24px"></i>
+                                    </button>
+                                </div>
+                            </div>
                         </div>
-                        <div class="col-md-8">
-                            <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
-                                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
-                                    additional content. This content is a little bit longer.</p>
-                                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                    </div>
+                    @endforeach
+                </div>
+                <div class="col-lg-4 mb-5">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title mb-3 fw-bold">Buat Janji Temu</h5>
+                            <p class="card-text d-flex justify-content-between mb-1">
+                                <span class="text-muted"><small>Jenis Produk</small></span>
+                                <span>Advertising</span>
+                            </p>
+                            <p class="card-text d-flex justify-content-between mb-4">
+                                <span class="text-muted"><small>Jumlah Produk</small></span>
+                                <span id="txtTotal"></span>
+                            </p>
+                            <div class="d-grid gap-2">
+                                <button class="add-cart btn" type="button">Pilih Jadwal</button>
                             </div>
                         </div>
                     </div>
                 </div>
-                @endforeach
-
-                <div class="row row-cols-1 row-cols-md-3 g-4 card-container">
-                    {{-- @foreach ($cart as $c)
-                        <a class="col card-item filter-{{ $c->category }}">
-                            <div class=" card h-100">
-                                @foreach ($photos as $photo)
-                                    @if ($c->adv_product_id == $photo->adv_product_id)
-                                        <img src="{{ asset('storage/' . $photo->url) }}" class="card-img-top"
-                                            alt="{{ $c->name }}">
-                                    @break
-                                @endif
-                            @endforeach
-                            <div class="card-body">
-                                <h5 class="card-title">{{ $c->name }}</h5>
-                            </div>
-                        </div>
-                    </a>
-                @endforeach --}}
             </div>
 
         </div>
     </section>
 </main>
+@endsection
+
+@section('jquery')
+<script>
+    $(document).ready(function() {
+        var total = $('.cardt').length;
+
+        $('#txtTotal').html(total + " produk");
+    });
+</script>
 @endsection

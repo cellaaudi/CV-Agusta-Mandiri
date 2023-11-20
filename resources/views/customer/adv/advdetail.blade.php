@@ -22,10 +22,10 @@
             <div class="container">
                 <div class="row">
                     <div id="notifSuccess" class="alert alert-success alert-dismissible fade show" role="alert">
-                        <strong>Berhasil menambah produk -</strong> Produk berhasil ditambahkan ke keranjangmu
+                        <strong>Berhasil - </strong>Produk berhasil ditambahkan ke keranjangmu
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
-                    <div id="notifFailed" class="alert alert-danger alert-dismissible fade show" role="alert"><button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    <div id="notifFailed" class="alert alert-danger alert-dismissible fade show" role="alert">
                     </div>
                 </div>
                 <div class="row gy-4">
@@ -55,21 +55,8 @@
                                     class="col-sm-7">{{ $adv->category == 'IO' ? 'Indoor & Outdoor' : $adv->category }}</span>
                             </div>
                         </div>
-                        <div class="portfolio-description">
-                            <h2>Deskripsi</h2>
-                            <p>
-                                Autem ipsum nam porro corporis rerum. Quis eos dolorem eos itaque inventore commodi labore
-                                quia
-                                quia. Exercitationem repudiandae officiis neque suscipit non officia eaque itaque enim.
-                                Voluptatem officia accusantium nesciunt est omnis tempora consectetur dignissimos. Sequi
-                                nulla
-                                at esse enim cum deserunt eius.
-                            </p>
-                        </div>
                     </div>
-
                 </div>
-
             </div>
         </section>
     </main>
@@ -80,9 +67,10 @@
         function addToCart(button) {
             var adv = $(button).data("adv");
             var user = {{ auth()->user()->id }};
+
             $.ajax({
                 type: "POST",
-                url: "{{ route('customer.adv.cart.add') }}",
+                url: "{{ route('customer.cart.advertising.store') }}",
                 data: {
                     "_token": "<?php echo csrf_token(); ?>",
                     "user_id": user,
@@ -96,7 +84,7 @@
                 },
                 error: function(xhr, status, error) {
                     $('#notifSuccess').hide();
-                    $('#notifFailed').prepend("<strong>Produk gagal ditambahkan - </strong>" + xhr.responseJSON.message);
+                    $('#notifFailed').html("<strong>Gagal - </strong>" + xhr.responseJSON.message + '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>');
                     $('#notifFailed').show();
                 }
             })

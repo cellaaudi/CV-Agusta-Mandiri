@@ -8,6 +8,7 @@ use App\Models\AdvertisingCart;
 use App\Models\AdvertisingPhoto;
 use App\Models\Car;
 use App\Models\Property;
+use App\Models\User;
 use PDO;
 use PDOException;
 
@@ -91,10 +92,11 @@ class CartController extends Controller
 
     public function showAdvertising($id)
     {
-        $carts = AdvertisingCart::where('user_id', $id)->get();
+        $user = User::find($id);
+        // $carts = AdvertisingCart::where('user_id', $id)->get();
         $photos = AdvertisingPhoto::all();
 
-        return view('customer.cart.adv', compact('carts', 'photos'));
+        return view('customer.cart.adv', compact('user', 'photos'));
     }
 
     private function isDuplicateKeyError(\Exception $e)
@@ -125,33 +127,13 @@ class CartController extends Controller
                 return response()->json([
                     'status' => 'Failed',
                     'message' => 'Produk sudah ada di keranjangmu',
-                ], 500); // atau kode status lainnya yang sesuai dengan situasi
+                ], 500);
             }
 
-            // Jika bukan kesalahan kunci utama, tangkap pengecualian dan kembalikan respons kesalahan yang sesuai
             return response()->json([
                 'status' => 'Failed',
                 'message' => $e->getMessage(),
             ], 500);
         }
-
-
-        // $adv = Advertising::find($id);
-        // try {
-        // AdvertisingCart::create([
-        //     'user_id' => $request->user_id,
-        //     'adv_product_id' => $request->adv_product_id,
-        // ]);
-        // return response()->json(array(
-        //     'status' => 'Success',
-        // ), 201);
-        // } catch (PDOException $e) {
-        //     return response()->json(array(
-        //         'status' => 'Failed',
-        //         'serverStatus' => $e,
-        //     ), 500);
-        // }
-
-        // return redirect()->route('customer.car.brand.index')->with('status', 'Produk berhasil ditambahkan');
     }
 }

@@ -68,7 +68,7 @@
                     @if (auth()->user()->role === 'Customer')
                         <li id="cart" class="dropdown clear"><i class="navicon bx bx-cart-alt" aria-hidden="true"></i>
                             <ul>
-                                <li><a href="{{ route('customer.adv.cart', auth()->user()->id) }}">Advertising <i
+                                <li><a href="{{ route('customer.cart.advertising.show', auth()->user()->id) }}">Advertising <i
                                             class='bx bx-store'></i></a></li>
                                 <li><a href="#">Mobil <i class='bx bx-car'></i></a></li>
                                 <li><a href="#">Properti <i class='bx bx-building'></i></a></li>

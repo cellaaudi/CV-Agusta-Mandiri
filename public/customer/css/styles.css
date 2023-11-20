@@ -39,6 +39,7 @@
 }
 
 /* ADD TO CART BUTTON */
+/* CHOOSE SCHEDULE BUTTON */
 .add-cart {
     font-family: "Poppins", sans-serif;
     font-weight: 500;
@@ -56,6 +57,7 @@
 
 .add-cart:hover {
     background: linear-gradient(180deg, #5846f9 0%, #7b27d8 100%);
+    color: #fff;
 }
 
 .add-cart i {
@@ -64,3 +66,13 @@
     right: 20px;
     top: 12px;
 }
+
+/* CART PAGES: SHOW IMAGE */
+/* .preview {
+    max-height: 100px;
+}
+
+.preview #photoPreview {
+    max-height: 100%;
+    width: auto;
+} */

@@ -118,7 +118,7 @@
                             <div class="col-sm-10">
                                 <select class="form-select mr-sm-2 @error('regency') is-invalid @enderror" id="cbKab" name="regency" required id="cbKab">
                                     @foreach($kabs as $k)
-                                    <option value="{{ $k -> id }}" @if($prop->village->district->regency->id == $k->id) selected @endif>{{ Str::title($k -> name) }}</option>
+                                    <option value="{{ $k -> id }}" @if($prop->village->district->regency->id == $k->id) selected @endif>{{ $k -> name }}</option>
                                     @endforeach
                                 </select>
                                 @error('regency')
@@ -131,7 +131,11 @@
                         <div class="form-group mb-3 row">
                             <label for="inputHorizontal" class="col-sm-2 col-form-label">Kecamatan</label>
                             <div class="col-sm-10">
-                                <select id="cbKec" class="form-select mr-sm-2 @error('district') is-invalid @enderror" id="inlineFormCustomSelect" name="district"></select>
+                                <select id="cbKec" class="form-select mr-sm-2 @error('district') is-invalid @enderror" id="inlineFormCustomSelect" name="district">
+                                    @foreach($kecs as $k)
+                                    <option value="{{ $k -> id }}" @if($prop->village->district->id == $k->id) selected @endif>{{ $k -> name }}</option>
+                                    @endforeach
+                                </select>
                                 @error('district')
                                 <div class="invalid-feedback">
                                     {{ $message }}
@@ -142,7 +146,11 @@
                         <div class="form-group mb-3 row">
                             <label for="inputHorizontal" class="col-sm-2 col-form-label">Desa</label>
                             <div class="col-sm-10">
-                                <select id="cbDesa" class="form-select mr-sm-2 @error('village') is-invalid @enderror" id="inlineFormCustomSelect" name="village"></select>
+                                <select id="cbDesa" class="form-select mr-sm-2 @error('village') is-invalid @enderror" id="inlineFormCustomSelect" name="village">
+                                    @foreach($desas as $d)
+                                    <option value="{{ $d -> id }}" @if($prop->village->id == $d->id) selected @endif>{{ $d -> name }}</option>
+                                    @endforeach
+                                </select>
                                 @error('village')
                                 <div class="invalid-feedback">
                                     {{ $message }}
@@ -153,7 +161,7 @@
                         <div class="form-group mb-3 row">
                             <label for="inputHorizontal" class="col-sm-2 col-form-label">Alamat</label>
                             <div class="col-sm-10">
-                                <textarea type="text" name="address" class="form-control @error('address') is-invalid @enderror" placeholder="Tuliskan alamat lengkap di sini ..." rows="3">{{ old('address') }}</textarea>
+                                <textarea type="text" name="address" class="form-control @error('address') is-invalid @enderror" placeholder="Tuliskan alamat lengkap di sini ..." rows="3">{{ $prop -> address }}</textarea>
                                 @error('address')
                                 <div class="invalid-feedback">
                                     {{ $message }}
@@ -325,22 +333,9 @@
     $(document).ready(function() {
         // SELECT2 INITIALISATION
         $('#cbProv').select2({});
-        $('#cbKab').select2({
-            placeholder: "-- Pilih Provinsi terlebih dahulu --"
-        });
-        $('#cbKec').select2({
-            placeholder: "-- Pilih Kabupaten/Kota terlebih dahulu --"
-        });
-        $('#cbDesa').select2({
-            placeholder: "-- Pilih Kecamatan terlebih dahulu --"
-        });
-
-        kab = $('#inputKab').data('kab');
-
-        function setInitial(element, initial) {
-            var option = new Option(initial.text, initial.id, true, true);
-            element.append(option).trigger('change');
-        }
+        $('#cbKab').select2({});
+        $('#cbKec').select2({});
+        $('#cbDesa').select2({});
 
         // COMBO BOX INDONESIA
         $('#cbProv').on('change', function() {
@@ -354,7 +349,7 @@
             $('#cbDesa').val(null).trigger("change");
 
             $('#cbKab').select2({
-                placeholder: '-- Pilih Kabupaten --',
+                placeholder: '-- Pilih Kabupaten/Kota --',
                 ajax: {
                     url: "{{ url('regency') }}/" + prov,
                     processResults: function({
@@ -365,10 +360,6 @@
                                 return {
                                     id: item.id,
                                     text: item.name,
-                                    data: {
-                                        id: kab.id,
-                                        text: kab.name
-                                    }
                                 }
                             })
                         }

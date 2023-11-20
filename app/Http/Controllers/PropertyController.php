@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\District;
 use Illuminate\Http\Request;
 use App\Models\Property;
 use App\Models\PropertyCategory;
 use App\Models\PropertyPhoto;
 use App\Models\Province;
+use App\Models\Regency;
+use App\Models\Village;
 
 class PropertyController extends Controller
 {
@@ -122,9 +125,11 @@ class PropertyController extends Controller
         $prop = Property::find($id);
         $photos = PropertyPhoto::where('prop_product_id', $id)->get();
         $provs = Province::all();
-        $kab = $prop -> village -> district -> regency -> id;
+        $kabs = Regency::where('province_id', $prop -> village -> district -> regency -> province -> id)->get();
+        $kecs = District::where('regency_id', $prop -> village -> district -> regency -> id)->get();
+        $desas = Village::where('district_id', $prop -> village -> district -> id)->get();
 
-        return view('admin.prop.propedit', compact('prop', 'photos', 'provs', 'kab'));
+        return view('admin.prop.propedit', compact('prop', 'photos', 'provs', 'kabs', 'kecs', 'desas'));
     }
 
     /**

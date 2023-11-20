@@ -116,7 +116,11 @@
                         <div class="form-group mb-3 row">
                             <label for="inputHorizontal" class="col-sm-2 col-form-label">Kabupaten/Kota</label>
                             <div class="col-sm-10">
-                                <select id="cbKab" class="form-select mr-sm-2 @error('regency') is-invalid @enderror" id="inlineFormCustomSelect" name="regency"></select>
+                                <select class="form-select mr-sm-2 @error('regency') is-invalid @enderror" id="cbKab" name="regency" required id="cbKab">
+                                    @foreach($kabs as $k)
+                                    <option value="{{ $k -> id }}" @if($prop->village->district->regency->id == $k->id) selected @endif>{{ Str::title($k -> name) }}</option>
+                                    @endforeach
+                                </select>
                                 @error('regency')
                                 <div class="invalid-feedback">
                                     {{ $message }}
@@ -124,7 +128,6 @@
                                 @enderror
                             </div>
                         </div>
-                        <input type="hidden" data-kab="{{ $kab }}" id="inputKab">
                         <div class="form-group mb-3 row">
                             <label for="inputHorizontal" class="col-sm-2 col-form-label">Kecamatan</label>
                             <div class="col-sm-10">
@@ -362,7 +365,10 @@
                                 return {
                                     id: item.id,
                                     text: item.name,
-                                    data: {id: kab.id, text: kab.name}
+                                    data: {
+                                        id: kab.id,
+                                        text: kab.name
+                                    }
                                 }
                             })
                         }

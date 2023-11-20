@@ -7,6 +7,7 @@ use App\Http\Controllers\CarBrandController;
 use App\Http\Controllers\CarBuyController;
 use App\Http\Controllers\CarCategoryController;
 use App\Http\Controllers\CarController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\IndonesiaController;
 use App\Http\Controllers\PropertyCategoryController;
@@ -58,6 +59,8 @@ Route::middleware(['auth'])->group(function () {
         Route::middleware("can:customer")->group(function () {
             //keranjang
             // kalo mau tambah ke keranjang langsung alert suruh login
+            Route::get('/cart/advertising/{id}', [CartController::class, 'showAdvertising'])->name('adv.cart');
+            Route::post('/cart/advertising/add', [CartController::class, 'addAdvertising'])->name('adv.cart.add');
 
             Route::resource('/profile', UserController::class);
         });

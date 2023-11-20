@@ -17,6 +17,7 @@ class CreateAdvCartsTable extends Migration
             $table->foreignId("user_id")->constrained('users');
             $table->foreignId("adv_product_id")->constrained('adv_products');
             $table->timestamps();
+            $table->primary(['user_id', 'adv_product_id']);
         });
     }
 

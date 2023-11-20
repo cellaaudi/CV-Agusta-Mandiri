@@ -14,12 +14,9 @@ class CreateAdvCartsTable extends Migration
     public function up()
     {
         Schema::create('adv_carts', function (Blueprint $table) {
-            $table->unsignedBigInteger("appointment_id");
-            $table->unsignedBigInteger("adv_product_id");
+            $table->foreignId("user_id")->constrained('users');
+            $table->foreignId("adv_product_id")->constrained('adv_products');
             $table->timestamps();
-
-            $table->foreign("appointment_id")->references("id")->on("appointments");
-            $table->foreign("adv_product_id")->references("id")->on("adv_products");
         });
     }
 

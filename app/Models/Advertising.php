@@ -13,9 +13,14 @@ class Advertising extends Model
     protected $table = "adv_products";
     protected $guarded = ['id'];
 
-    public function appointment()
+    // public function appointment()
+    // {
+    //     return $this->belongsToMany(Appointment::class, "adv_carts", "adv_product_id", "appointment_id");
+    // }
+
+    public function advertising_cart()
     {
-        return $this->belongsToMany(Appointment::class, "adv_carts", "adv_product_id", "appointment_id");
+        return $this->belongsToMany(User::class, 'adv_carts', 'adv_product_id', 'user_id')->withTimestamps();
     }
 
     public function advertising_photo()

@@ -48,9 +48,24 @@ class User extends Authenticatable
         }
     }
 
-    public function appoinments()
+    // public function appoinments()
+    // {
+    //     return $this->hasMany("App\Models\Appointment", "user_id");
+    // }
+
+    public function advertising_cart()
     {
-        return $this->hasMany("App\Models\Appointment", "user_id");
+        return $this->belongsToMany(Advertising::class, 'adv_carts', 'user_id', 'adv_product_id');
+    }
+
+    public function car_cart()
+    {
+        return $this->belongsToMany(Advertising::class, 'car_carts', 'user_id', 'car_product_id');
+    }
+
+    public function property_cart()
+    {
+        return $this->belongsToMany(Advertising::class, 'prop_carts', 'user_id', 'prop_product_id');
     }
 
 }

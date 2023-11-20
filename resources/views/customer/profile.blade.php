@@ -1,7 +1,5 @@
 @extends('layouts.home')
 
-
-
 @section('content')
     <main id="main">
         <!-- ======= Breadcrumbs ======= -->
@@ -12,7 +10,7 @@
                     <h2></h2>
                     <ol>
                         <li><a href="{{ route('customer.home') }}">Halaman Utama</a></li>
-                        <li>Profil Saya</li>
+                        <li>Profil</li>
                     </ol>
                 </div>
 

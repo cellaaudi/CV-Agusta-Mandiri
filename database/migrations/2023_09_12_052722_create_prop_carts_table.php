@@ -14,13 +14,10 @@ class CreatePropCartsTable extends Migration
     public function up()
     {
         Schema::create('prop_carts', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('appointment_id');
-            $table->unsignedBigInteger('prop_product_id');
+            $table->foreignId("user_id")->constrained('users');
+            $table->foreignId("prop_product_id")->constrained('prop_products');
             $table->timestamps();
-
-            $table->foreign('appointment_id')->references('id')->on('appointments');
-            $table->foreign('prop_product_id')->references('id')->on('prop_products');
+            $table->primary(['user_id', 'prop_product_id']);
         });
     }
 

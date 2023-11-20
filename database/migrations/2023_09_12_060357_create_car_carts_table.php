@@ -14,13 +14,10 @@ class CreateCarCartsTable extends Migration
     public function up()
     {
         Schema::create('car_carts', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('appointment_id');
-            $table->unsignedBigInteger('car_product_id');
+            $table->foreignId("user_id")->constrained('users');
+            $table->foreignId("car_product_id")->constrained('car_products');
             $table->timestamps();
-
-            $table->foreign('appointment_id')->references('id')->on('appointments');
-            $table->foreign('car_product_id')->references('id')->on('car_products');
+            $table->primary(['user_id', 'car_product_id']);
         });
     }
 

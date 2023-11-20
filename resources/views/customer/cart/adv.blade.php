@@ -63,7 +63,7 @@
                                 <span id="txtTotal"></span>
                             </p>
                             <div class="d-grid gap-2">
-                                <button class="add-cart btn" type="button">Pilih Jadwal</button>
+                                <a href="{{ route('customer.appointment.advertising.index') }}" class="add-cart btn" type="button">Pilih Jadwal</a>
                             </div>
                         </div>
                     </div>

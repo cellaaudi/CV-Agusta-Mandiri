@@ -68,6 +68,11 @@ class User extends Authenticatable
         return $this->belongsToMany(Advertising::class, 'prop_carts', 'user_id', 'prop_product_id');
     }
 
+    public function advertising_appointment()
+    {
+        return $this->hasMany(AdvertisingAppointment::class, 'user_id');
+    }
+
     // public function advCarts()
     // {
     //     return $this->hasMany("App\Models\advCarts", "user_id");

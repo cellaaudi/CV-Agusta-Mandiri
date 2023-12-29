@@ -25,7 +25,7 @@
                 <div class="mb-3 row">
                     <label for="inputDate" class="col-sm-2 col-form-label">Tanggal</label>
                     <div class="col-sm-10">
-                        <input type="date" class="form-control" id="inputDate" min="<?php echo date("Y-m-d", strtotime("+1 day")); ?>" max="<?php echo date("Y-m-d", strtotime("+15 day")); ?>" value="<?php echo date("Y-m-d", strtotime("+1 day")); ?>">
+                        <input type="date" class="form-control" id="inputDate" min="<?php echo date("Y-m-d", strtotime("-1 day")); ?>" max="<?php echo date("Y-m-d", strtotime("+13 day")); ?>" value="<?php echo date("Y-m-d", strtotime("-1 day")); ?>" name="date">
                         <div class="form-text">
                             Anda hanya dapat membuat janji temu untuk 2 minggu kedepan.
                         </div>
@@ -35,26 +35,29 @@
                     <label for="inputTime" class="col-sm-2 col-form-label">Jam</label>
                     <div class="col-sm-10">
                         <div>
-                            <input type="checkbox" class="btn-check" id="btncheck1" autocomplete="off">
-                            <label class="btn btn-outline-primary" for="btncheck1">10:00 - 11:00</label>
+                            <input type="radio" class="btn-check" name="rdoTime" id="rdoTime1" autocomplete="off" checked onclick="selectedTime('10:00:00', '11:00:00')">
+                            <label class="btn btn-outline-primary" for="rdoTime1">10:00 - 11:00</label>
 
-                            <input type="checkbox" class="btn-check" id="btncheck2" autocomplete="off">
-                            <label class="btn btn-outline-primary" for="btncheck2">11:00 - 12:00</label>
+                            <input type="radio" class="btn-check" name="rdoTime" id="rdoTime2" autocomplete="off" onclick="selectedTime('11:00:00', '12:00:00')">
+                            <label class="btn btn-outline-primary" for="rdoTime2">11:00 - 12:00</label>
 
-                            <input type="checkbox" class="btn-check" id="btncheck3" autocomplete="off">
-                            <label class="btn btn-outline-primary" for="btncheck3">12:00 - 13:00</label>
+                            <input type="radio" class="btn-check" name="rdoTime" id="rdoTime3" autocomplete="off" onclick="selectedTime('12:00:00', '13:00:00')">
+                            <label class="btn btn-outline-primary" for="rdoTime3">12:00 - 13:00</label>
 
-                            <input type="checkbox" class="btn-check" id="btncheck4" autocomplete="off">
-                            <label class="btn btn-outline-primary" for="btncheck4">13:00 - 14:00</label>
+                            <input type="radio" class="btn-check" name="rdoTime" id="rdoTime4" autocomplete="off" onclick="selectedTime('13:00:00', '14:00:00')">
+                            <label class="btn btn-outline-primary" for="rdoTime4">13:00 - 14:00</label>
 
-                            <input type="checkbox" class="btn-check" id="btncheck5" autocomplete="off">
-                            <label class="btn btn-outline-primary" for="btncheck5">14:00 - 15:00</label>
+                            <input type="radio" class="btn-check" name="rdoTime" id="rdoTime5" autocomplete="off" onclick="selectedTime('14:00:00', '15:00:00')">
+                            <label class="btn btn-outline-primary" for="rdoTime5">14:00 - 15:00</label>
 
-                            <input type="checkbox" class="btn-check" id="btncheck6" autocomplete="off">
-                            <label class="btn btn-outline-primary" for="btncheck6">15:00 - 16:00</label>
+                            <input type="radio" class="btn-check" name="rdoTime" id="rdoTime6" autocomplete="off" onclick="selectedTime('15:00:00', '16:00:00')">
+                            <label class="btn btn-outline-primary" for="rdoTime6">15:00 - 16:00</label>
 
-                            <input type="checkbox" class="btn-check" id="btncheck7" autocomplete="off">
-                            <label class="btn btn-outline-primary" for="btncheck7">16:00 - 17:00</label>
+                            <input type="radio" class="btn-check" name="rdoTime" id="rdoTime7" autocomplete="off" onclick="selectedTime('16:00:00', '17:00:00')">
+                            <label class="btn btn-outline-primary" for="rdoTime7">16:00 - 17:00</label>
+
+                            <input type="hidden" name="start" id="start" value="">
+                            <input type="hidden" name="end" id="end" value="">
                         </div>
                         <div class="form-text">
                             Waktu yang ditampilkan dalam zona Waktu Indonesia Tengah (WITA) - UTC+08:00.
@@ -65,17 +68,21 @@
                     <label for="inputDate" class="col-sm-2 col-form-label">Pembayaran</label>
                     <div class="col-sm-10">
                         <div aria-label="Basic radio toggle button group">
-                            <input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" checked>
-                            <label class="btn btn-outline-primary" for="btnradio1">Tunai</label>
+                            <input type="radio" class="btn-check" name="payment" id="rdoCash" autocomplete="off" value="Cash" checked>
+                            <label class="btn btn-outline-primary" for="rdoCash">Tunai</label>
 
-                            <input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off">
-                            <label class="btn btn-outline-primary" for="btnradio2">Debit / Kredit</label>
+                            <input type="radio" class="btn-check" name="payment" id="rdoCredit" autocomplete="off" value="Credit">
+                            <label class="btn btn-outline-primary" for="rdoCredit">Debit / Kredit</label>
 
-                            <input type="radio" class="btn-check" name="btnradio" id="btnradio3" autocomplete="off">
-                            <label class="btn btn-outline-primary" for="btnradio3">Tukar Tambah</label>
+                            <input type="radio" class="btn-check" name="payment" id="rdoTrade" autocomplete="off" value="Trade">
+                            <label class="btn btn-outline-primary" for="rdoTrade">Tukar Tambah</label>
+                        </div>
+                        <div class="form-text">
+                            Tipe pembayaran dapat berubah sesuai kesepakatan setelah bertemu.
                         </div>
                     </div>
                 </div>
+                <input type="hidden" name="user" value="{{ auth()->user()->id }}">
                 <div class="mt-5 form-actions">
                     <div class="text-end">
                         <button class="add-cart">Buat Janji Temu</button>
@@ -85,4 +92,13 @@
         </div>
     </section>
 </main>
+@endsection
+
+@section('jquery')
+<script>
+    function selectedTime(start, end) {
+        document.getElementById('start').value = start;
+        document.getElementById('end').value = end;
+    }
+</script>
 @endsection

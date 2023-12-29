@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AdvertisingAppointment;
 use Illuminate\Http\Request;
 
 class AdvertisingAppointmentController extends Controller
@@ -13,7 +14,7 @@ class AdvertisingAppointmentController extends Controller
      */
     public function index()
     {
-        return view('customer.appointment.adv');
+        // return view('customer.appointment.adv');
     }
 
     /**
@@ -34,7 +35,23 @@ class AdvertisingAppointmentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'date' => 'required|date|after:today',
+            'start' => 'required|date_format:H:i:s|before:end',
+            'end' => 'required|date_format:H:i:s|after:start',
+            'payment' => 'required',
+            'user' => 'required|numeric',
+        ]);
+
+        AdvertisingAppointment::create([
+            'date' => $request->date,
+            'start' => $request->start,
+            'end' => $request->end,
+            'payment' => $request->payment,
+            'user_id' => $request->user,
+        ]);
+
+        return redirect()->route('customer.advertising');
     }
 
     /**

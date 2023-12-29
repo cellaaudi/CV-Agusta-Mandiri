@@ -67,6 +67,7 @@
                             </div> -->
                             <p class="h6 card-title mt-5 mb-3 fw-bold">Pilih Jadwal</p>
                             <form action="{{ route('customer.appointment.advertising.store') }}" method="post">
+                                @csrf
                                 <div class="mb-3 row">
                                     <label for="inputDate" class="col-sm-2 col-form-label">Tanggal</label>
                                     <div class="col-sm-10">
@@ -153,7 +154,7 @@
         document.getElementById('start').value = start;
         document.getElementById('end').value = end;
     }
-    
+
     $(document).ready(function() {
         var total = $('.cardt').length;
 

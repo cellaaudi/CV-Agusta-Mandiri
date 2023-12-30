@@ -24,7 +24,7 @@
                 <h2>Keranjang: Agusta Advertising</h2>
             </div>
 
-            <div class="row flex-column-reverse flex-lg-row">
+            <div class="row flex-lg-row">
                 <div class="col-lg-5">
                     @foreach ($user->advertising_cart as $cart)
                     <div class="card mb-3 cardt" style="max-width: 800px;">
@@ -62,9 +62,6 @@
                                 <span class="text-muted"><small>Jumlah Produk</small></span>
                                 <span id="txtTotal"></span>
                             </p>
-                            <!-- <div class="d-grid gap-2">
-                                <a href="{{ route('customer.appointment.advertising.index') }}" class="add-cart btn" type="button">Pilih Jadwal</a>
-                            </div> -->
                             <p class="h6 card-title mt-5 mb-3 fw-bold">Pilih Jadwal</p>
                             <form action="{{ route('customer.appointment.advertising.store') }}" method="post">
                                 @csrf
@@ -81,25 +78,25 @@
                                     <label for="inputTime" class="col-sm-2 col-form-label">Jam</label>
                                     <div class="col-sm-10">
                                         <div>
-                                            <input type="radio" class="btn-check" name="rdoTime" id="rdoTime1" autocomplete="off" checked onclick="selectedTime('10:00:00', '11:00:00')">
+                                            <input type="radio" class="btn-check" name="rdoTime" id="rdoTime1" autocomplete="off" onclick="selectedTime(this)" data-start="10:00:00" data-end="11:00:00">
                                             <label class="btn btn-outline-primary" for="rdoTime1">10:00 - 11:00</label>
 
-                                            <input type="radio" class="btn-check" name="rdoTime" id="rdoTime2" autocomplete="off" onclick="selectedTime('11:00:00', '12:00:00')">
+                                            <input type="radio" class="btn-check" name="rdoTime" id="rdoTime2" autocomplete="off" onclick="selectedTime(this)" data-start="11:00:00" data-end="12:00:00">
                                             <label class="btn btn-outline-primary" for="rdoTime2">11:00 - 12:00</label>
 
-                                            <input type="radio" class="btn-check" name="rdoTime" id="rdoTime3" autocomplete="off" onclick="selectedTime('12:00:00', '13:00:00')">
+                                            <input type="radio" class="btn-check" name="rdoTime" id="rdoTime3" autocomplete="off" onclick="selectedTime(this)" data-start="12:00:00" data-end="13:00:00">
                                             <label class="btn btn-outline-primary" for="rdoTime3">12:00 - 13:00</label>
 
-                                            <input type="radio" class="btn-check" name="rdoTime" id="rdoTime4" autocomplete="off" onclick="selectedTime('13:00:00', '14:00:00')">
+                                            <input type="radio" class="btn-check" name="rdoTime" id="rdoTime4" autocomplete="off" onclick="selectedTime(this)" data-start="13:00:00" data-end="14:00:00">
                                             <label class="btn btn-outline-primary" for="rdoTime4">13:00 - 14:00</label>
 
-                                            <input type="radio" class="btn-check" name="rdoTime" id="rdoTime5" autocomplete="off" onclick="selectedTime('14:00:00', '15:00:00')">
+                                            <input type="radio" class="btn-check" name="rdoTime" id="rdoTime5" autocomplete="off" onclick="selectedTime(this)" data-start="14:00:00" data-end="15:00:00">
                                             <label class="btn btn-outline-primary" for="rdoTime5">14:00 - 15:00</label>
 
-                                            <input type="radio" class="btn-check" name="rdoTime" id="rdoTime6" autocomplete="off" onclick="selectedTime('15:00:00', '16:00:00')">
+                                            <input type="radio" class="btn-check" name="rdoTime" id="rdoTime6" autocomplete="off" onclick="selectedTime(this)" data-start="15:00:00" data-end="16:00:00">
                                             <label class="btn btn-outline-primary" for="rdoTime6">15:00 - 16:00</label>
 
-                                            <input type="radio" class="btn-check" name="rdoTime" id="rdoTime7" autocomplete="off" onclick="selectedTime('16:00:00', '17:00:00')">
+                                            <input type="radio" class="btn-check" name="rdoTime" id="rdoTime7" autocomplete="off" onclick="selectedTime(this)" data-start="16:00:00" data-end="17:00:00">
                                             <label class="btn btn-outline-primary" for="rdoTime7">16:00 - 17:00</label>
 
                                             <input type="hidden" name="start" id="start" value="">
@@ -150,15 +147,64 @@
 
 @section('jquery')
 <script>
-    function selectedTime(start, end) {
-        document.getElementById('start').value = start;
-        document.getElementById('end').value = end;
+    // Cek validitas waktu
+    function validTime(selectedDate) {
+        // Ambil tanggal dan waktu sekarang
+        var today = new Date();
+        var year = today.getFullYear();
+        var month = today.getMonth() + 1;
+        var date = today.getDate();
+        var hour = today.getHours();
+        var min = today.getMinutes();
+        // Ubah tanggal dan waktu sekarang dalam menit
+        var nowMin = year * 525600 + month * 43800 + date * 1440 + hour * 60 + min;
+
+        // Ambil tanggal dan waktu terpilih
+        var selectedDateSplit = selectedDate.split('-');
+        var selectedYear = parseInt(selectedDateSplit[0]);
+        var selectedMonth = parseInt(selectedDateSplit[1]);
+        var selectedDay = parseInt(selectedDateSplit[2]);
+        // Ubah tanggal dan waktu terpilih dalam menit
+        var selectedDateMin = selectedYear * 525600 + selectedMonth * 43800 + selectedDay * 1440;
+
+        // Ambil radio button jam
+        var rdoTime = document.getElementsByName('rdoTime');
+
+        for (var i = 0; i < rdoTime.length; i++) {
+            var start = rdoTime[i].getAttribute('data-start');
+
+            var startMin = year * 525600 + month * 43800 + date * 1440 + parseInt(start.split(':')[0]) * 60 + parseInt(start.split(':')[1]);
+
+            if (selectedDateMin < nowMin && startMin < nowMin) {
+                rdoTime[i].disabled = true;
+                rdoTime[i].classList.add('disabled');
+            } else {
+                rdoTime[i].disabled = false;
+                rdoTime[i].classList.remove('disabled');
+            }
+        }
+    }
+
+    // Ubah value waktu mulai dan selesai
+    function selectedTime(button) {
+        document.getElementById('start').value = this.getAttribute('data-start');
+        document.getElementById('end').value = this.getAttribute('data-end');
     }
 
     $(document).ready(function() {
+        // Hitung total produk di keranjang
         var total = $('.cardt').length;
-
         $('#txtTotal').html(total + " produk");
+
+        document.getElementById('start').value = '10:00:00';
+        document.getElementById('end').value = '11:00:00';
+
+        var selectedDate = document.getElementById('inputDate').value;
+        validTime(selectedDate);
+
+        $('#inputDate').on('change', function() {
+            validTime();
+        });
     });
 </script>
 @endsection

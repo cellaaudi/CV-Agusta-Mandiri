@@ -67,8 +67,8 @@
                         <li id="cart" class="dropdown clear"><i class="navicon bx bx-cart-alt" aria-hidden="true"></i>
                             <ul>
                                 <li><a href="{{ route('customer.cart.advertising.show', auth()->user()->id) }}">Advertising <i class='bx bx-store'></i></a></li>
-                                <li><a href="#">Mobil <i class='bx bx-car'></i></a></li>
-                                <li><a href="#">Properti <i class='bx bx-building'></i></a></li>
+                                <li><a href="{{ route('customer.cart.car.show', auth()->user()->id) }}">Mobil <i class='bx bx-car'></i></a></li>
+                                <li><a href="{{ route('customer.cart.property.show', auth()->user()->id) }}">Properti <i class='bx bx-building'></i></a></li>
                             </ul>
                         </li>
                         <li class="dropdown hello clear"><span style="font-weight: normal;">Halo,&nbsp</span><span>{{ auth()->user()->name }}</span>

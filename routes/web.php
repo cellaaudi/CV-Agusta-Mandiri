@@ -7,11 +7,13 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\AdvertisingController;
 use App\Http\Controllers\CarBrandController;
 use App\Http\Controllers\CarBuyController;
+use App\Http\Controllers\CarCartController;
 use App\Http\Controllers\CarCategoryController;
 use App\Http\Controllers\CarController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\IndonesiaController;
+use App\Http\Controllers\PropertyCartController;
 use App\Http\Controllers\PropertyCategoryController;
 use App\Http\Controllers\PropertyController;
 use App\Http\Controllers\UserController;
@@ -64,11 +66,15 @@ Route::middleware(['auth'])->group(function () {
             Route::prefix('cart')->name('cart.')->group(function () {
                 // kurang pengecekan kalo user tembak langsung di parameter, ganti id bisa langsung lihat keranjang user lain
                 Route::resource('/advertising', AdvertisingCartController::class);
+                Route::resource('/car', CarCartController::class);
+                Route::resource('/property', PropertyCartController::class);
             });
 
             Route::prefix('appointment')->name('appointment.')->group(function () {
                 // kurang pengecekan kalo user tembak langsung di parameter, ganti id bisa langsung lihat keranjang user lain
                 Route::resource('/advertising', AdvertisingAppointmentController::class);
+                Route::resource('/car', CarCartController::class);
+                Route::resource('/property', PropertyCartController::class);
             });
             Route::resource('/profile', UserController::class);
         });

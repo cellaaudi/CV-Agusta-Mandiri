@@ -60,12 +60,12 @@ class User extends Authenticatable
 
     public function car_cart()
     {
-        return $this->belongsToMany(Advertising::class, 'car_carts', 'user_id', 'car_product_id');
+        return $this->belongsToMany(Car::class, 'car_carts', 'user_id', 'car_product_id');
     }
 
     public function property_cart()
     {
-        return $this->belongsToMany(Advertising::class, 'prop_carts', 'user_id', 'prop_product_id');
+        return $this->belongsToMany(Property::class, 'prop_carts', 'user_id', 'prop_product_id');
     }
 
     public function advertising_appointment()

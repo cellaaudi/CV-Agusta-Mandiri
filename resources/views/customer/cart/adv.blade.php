@@ -68,16 +68,21 @@
                                 <div class="mb-3 row">
                                     <label for="inputDate" class="col-sm-2 col-form-label">Tanggal</label>
                                     <div class="col-sm-10">
-                                        <input type="date" class="form-control" id="inputDate" min="<?php echo date("Y-m-d"); ?>" max="<?php echo date("Y-m-d", strtotime("+13 day")); ?>" value="<?php echo date("Y-m-d"); ?>" name="date">
+                                        <input type="date" class="form-control @error('date') is-invalid @enderror" id="inputDate" min="<?php echo date("Y-m-d"); ?>" max="<?php echo date("Y-m-d", strtotime("+13 day")); ?>" value="<?php echo date("Y-m-d"); ?>" name="date">
                                         <div class="form-text">
                                             Anda hanya dapat membuat janji temu untuk 2 minggu kedepan.
                                         </div>
+                                        @error('date')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                        @enderror
                                     </div>
                                 </div>
                                 <div class="mb-3 row">
                                     <label for="inputTime" class="col-sm-2 col-form-label">Jam</label>
                                     <div class="col-sm-10">
-                                        <div>
+                                        <div class="@error('start') is-invalid @enderror @error('end') is-invalid @enderror">
                                             <input type="radio" class="btn-check" name="rdoTime" id="rdoTime1" autocomplete="off" onclick="selectedTime(this)" data-start="10:00:00" data-end="11:00:00">
                                             <label class="btn btn-outline-primary" for="rdoTime1">10:00 - 11:00</label>
 
@@ -105,13 +110,23 @@
                                         <div class="form-text">
                                             Waktu yang ditampilkan dalam zona Waktu Indonesia Tengah (WITA) - UTC+08:00.
                                         </div>
+                                        @error('start')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                        @enderror
+                                        @error('end')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                        @enderror
                                     </div>
                                 </div>
                                 <div class="mb-3 row">
                                     <label for="inputDate" class="col-sm-2 col-form-label">Pembayaran</label>
-                                    <div class="col-sm-10">
-                                        <div aria-label="Basic radio toggle button group">
-                                            <input type="radio" class="btn-check" name="payment" id="rdoCash" autocomplete="off" value="Cash" checked>
+                                    <div class="col-sm-10 @error('payment') is-invalid @enderror">
+                                        <div aria-label="basic radio toggle button group">
+                                            <input type="radio" class="btn-check" name="payment" id="rdoCash" autocomplete="off" value="Cash">
                                             <label class="btn btn-outline-primary" for="rdoCash">Tunai</label>
 
                                             <input type="radio" class="btn-check" name="payment" id="rdoCredit" autocomplete="off" value="Credit">
@@ -123,6 +138,11 @@
                                         <div class="form-text">
                                             Tipe pembayaran dapat berubah sesuai kesepakatan setelah bertemu.
                                         </div>
+                                        @error('payment')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                        @enderror
                                     </div>
                                 </div>
                                 <input type="hidden" name="user" value="{{ auth()->user()->id }}">
@@ -130,9 +150,6 @@
                                     <div class="d-grid gap-2">
                                         <button class="add-cart btn">Buat Janji Temu</button>
                                     </div>
-                                    <!-- <div class="text-end">
-                                        <button class="add-cart">Buat Janji Temu</button>
-                                    </div> -->
                                 </div>
                             </form>
                         </div>
@@ -187,17 +204,14 @@
 
     // Ubah value waktu mulai dan selesai
     function selectedTime(button) {
-        document.getElementById('start').value = this.getAttribute('data-start');
-        document.getElementById('end').value = this.getAttribute('data-end');
+        document.getElementById('start').value = button.getAttribute('data-start');
+        document.getElementById('end').value = button.getAttribute('data-end');
     }
 
     $(document).ready(function() {
         // Hitung total produk di keranjang
         var total = $('.cardt').length;
         $('#txtTotal').html(total + " produk");
-
-        document.getElementById('start').value = '10:00:00';
-        document.getElementById('end').value = '11:00:00';
 
         // Cek jam aktif saat pertama load page
         var selectedDate = document.getElementById('inputDate').value;

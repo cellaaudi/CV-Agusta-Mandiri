@@ -35,13 +35,13 @@ class AdvertisingAppointmentController extends Controller
      */
     public function store(Request $request)
     {
-        // $request->validate([
-        //     'date' => 'required|date|after:today',
-        //     'start' => 'required|date_format:H:i:s|before:end',
-        //     'end' => 'required|date_format:H:i:s|after:start',
-        //     'payment' => 'required',
-        //     'user' => 'required|numeric',
-        // ]);
+        $request->validate([
+            'date' => 'required|date|after_or_equal:today',
+            'start' => 'required|date_format:H:i:s|before:end',
+            'end' => 'required|date_format:H:i:s|after:start',
+            'payment' => 'required',
+            'user' => 'required|numeric',
+        ]);
 
         AdvertisingAppointment::create([
             'date' => $request->date,

@@ -80,7 +80,7 @@
                                     </div>
                                 </div>
                                 <div class="mb-3 row">
-                                    <label for="inputTime" class="col-sm-2 col-form-label">Jam</label>
+                                    <label for="rdoTime1" class="col-sm-2 col-form-label">Jam</label>
                                     <div class="col-sm-10">
                                         <div class="@error('start') is-invalid @enderror @error('end') is-invalid @enderror">
                                             <input type="radio" class="btn-check" name="rdoTime" id="rdoTime1" autocomplete="off" onclick="selectedTime(this)" data-start="10:00:00" data-end="11:00:00">
@@ -123,7 +123,7 @@
                                     </div>
                                 </div>
                                 <div class="mb-3 row">
-                                    <label for="inputDate" class="col-sm-2 col-form-label">Pembayaran</label>
+                                    <label for="rdoCash" class="col-sm-2 col-form-label">Pembayaran</label>
                                     <div class="col-sm-10 @error('payment') is-invalid @enderror">
                                         <div aria-label="basic radio toggle button group">
                                             <input type="radio" class="btn-check" name="payment" id="rdoCash" autocomplete="off" value="Cash">

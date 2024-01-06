@@ -53,6 +53,15 @@ class AdvertisingAppointmentController extends Controller
 
         return redirect()->route('customer.advertising');
     }
+    public function getAppointmentsByDate(Request $request)
+    {
+        $date = $request->get('date');
+
+        $appointments = AdvertisingAppointment::whereDate('date', $date)->get();
+
+        return response()->json($appointments);
+    }
+
 
     /**
      * Display the specified resource.

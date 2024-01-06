@@ -119,4 +119,13 @@ class AdvertisingCartController extends Controller
     {
         //
     }
+    public function deleteCartItem(Request $request)
+    {
+        try {
+            AdvertisingCart::where('user_id', $request->user_id)->where('adv_product_id', $request->adv_product_id)->delete();
+            return redirect()->route('admin.property.index');
+        } catch (PDOException $e) {
+            return redirect()->back()->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
+        }
+    }
 }

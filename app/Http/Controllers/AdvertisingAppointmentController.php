@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\AdvertisingAppointment;
+use App\Models\AdvertisingCart;
+use Exception;
 use Illuminate\Http\Request;
+use PDOException;
 
 class AdvertisingAppointmentController extends Controller
 {
@@ -41,17 +44,25 @@ class AdvertisingAppointmentController extends Controller
             'end' => 'required|date_format:H:i:s|after:start',
             'payment' => 'required',
             'user' => 'required|numeric',
+            'ids' => 'required',
         ]);
 
-        AdvertisingAppointment::create([
-            'date' => $request->date,
-            'start' => $request->start,
-            'end' => $request->end,
-            'payment' => $request->payment,
-            'user_id' => $request->user,
-        ]);
-
-        return redirect()->route('customer.advertising');
+        // dd($request);
+        try {
+            $product_id = implode(";", $request->ids);
+            AdvertisingAppointment::create([
+                'date' => $request->date,
+                'start' => $request->start,
+                'end' => $request->end,
+                'payment' => $request->payment,
+                'user_id' => $request->user,
+                'product_id' => $product_id,
+            ]);
+            AdvertisingCart::whereIn('user_id', [$request->user])->delete();
+            return redirect()->route('customer.advertising');
+        } catch (PDOException $e) {
+            return redirect()->back()->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
+        }
     }
     public function getAppointmentsByDate(Request $request)
     {

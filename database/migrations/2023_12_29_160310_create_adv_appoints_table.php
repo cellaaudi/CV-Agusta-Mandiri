@@ -20,6 +20,7 @@ class CreateAdvAppointsTable extends Migration
             $table->time("end");
             $table->enum("payment", ["Cash", "Credit", "Trade"]);
             $table->enum("order_status", ["Processed", "Finished", "Cancelled"])->default("Processed");
+            $table->string('product_id');
             $table->foreignId("user_id")->constrained('users');
             $table->timestamps();
         });

@@ -17,6 +17,7 @@ use App\Http\Controllers\PropertyCartController;
 use App\Http\Controllers\PropertyCategoryController;
 use App\Http\Controllers\PropertyController;
 use App\Http\Controllers\UserController;
+use App\Models\AdvertisingCart;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -73,6 +74,8 @@ Route::middleware(['auth'])->group(function () {
             Route::prefix('appointment')->name('appointment.')->group(function () {
                 // kurang pengecekan kalo user tembak langsung di parameter, ganti id bisa langsung lihat keranjang user lain
                 Route::resource('/advertising', AdvertisingAppointmentController::class);
+                Route::post('/advertising/getAppointmentsByDate', [AdvertisingAppointmentController::class, 'getAppointmentsByDate'])->name('advByDate');
+                Route::post('/advertising/delete', [AdvertisingCart::class, 'deleteCartItem'])->name('advDeleteItem');
                 Route::resource('/car', CarCartController::class);
                 Route::resource('/property', PropertyCartController::class);
             });

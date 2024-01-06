@@ -9,12 +9,12 @@
 }
 
 /* PRODUCT FILTERS */
-#filter {
+#filter, #filter-year, #filter-price {
     list-style: none;
     text-align: left;
 }
 
-#filter li {
+#filter li, #filter-year li, #filter-price li {
     cursor: pointer;
     display: inline-block;
     padding: 10px 15px;
@@ -28,13 +28,13 @@
     border: 1px solid #5846f9;
 }
 
-#filter li:hover,
-#filter li.filter-active {
+#filter li:hover, #filter-year li:hover, #filter-price li:hover,
+#filter li.filter-active, #filter-year li.filter-active, #filter-price li.filter-active {
     color: #fff;
     background: #5846f9;
 }
 
-#filter li:last-child {
+#filter li:last-child, #filter-year li:last-child, #filter-price li:last-child {
     margin-right: 0;
 }
 

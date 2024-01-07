@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdvertisingAppointmentController;
+use App\Http\Controllers\AdvertisingCartAppointController;
 use App\Http\Controllers\AdvertisingCartController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
@@ -66,7 +67,9 @@ Route::middleware(['auth'])->group(function () {
             // kalo mau tambah ke keranjang langsung alert suruh login
             Route::prefix('cart')->name('cart.')->group(function () {
                 // kurang pengecekan kalo user tembak langsung di parameter, ganti id bisa langsung lihat keranjang user lain
-                Route::resource('/advertising', AdvertisingCartController::class);
+                // Route::resource('/advertising', AdvertisingCartController::class);
+                Route::post('/advertising', [AdvertisingCartAppointController::class, 'addToCart'])->name('advertising.addToCart');
+                Route::get('/advertising/{id}', [AdvertisingCartAppointController::class, 'showUserCart'])->name('advertising.show')->middleware('checkloggedinuser');
                 Route::resource('/car', CarCartController::class);
                 Route::resource('/property', PropertyCartController::class);
             });

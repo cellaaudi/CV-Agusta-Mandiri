@@ -70,7 +70,7 @@
 
             $.ajax({
                 type: "POST",
-                url: "{{ route('customer.cart.advertising.store') }}",
+                url: "{{ route('customer.cart.advertising.addToCart') }}",
                 data: {
                     "_token": "<?php echo csrf_token(); ?>",
                     "user_id": user,

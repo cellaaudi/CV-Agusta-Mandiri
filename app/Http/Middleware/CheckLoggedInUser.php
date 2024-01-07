@@ -21,7 +21,7 @@ class CheckLoggedInUser
         $authenticatedUserId = Auth::id();
 
         if ($user_id != $authenticatedUserId) {
-            abort(403, 'Unauthorised action.');
+            abort(403, 'Unauthorised Action');
         }
         
         return $next($request);

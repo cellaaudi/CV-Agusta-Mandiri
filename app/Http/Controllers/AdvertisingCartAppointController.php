@@ -10,6 +10,7 @@ use PDOException;
 
 class AdvertisingCartAppointController extends Controller
 {
+    // Cart
     private function duplicated(PDOException $e)
     {
         return $e->getCode() == 23000 || $e->getCode() == 1062;
@@ -52,5 +53,21 @@ class AdvertisingCartAppointController extends Controller
         $photos = AdvertisingPhoto::all();
 
         return view('customer.cart.adv', compact('user', 'photos'));
+    }
+
+    public function deleteCartItem($user_id, $item_id)
+    {
+        try {
+            AdvertisingCart::where('user_id', $user_id)->where('adv_product_id', $item_id)->delete();
+            
+            return response()->json([
+                'status' => 'Success',
+            ], 201);
+        } catch (PDOException $e) {
+            return response()->json([
+                'status' => 'Failed',
+                'message' => 'Terjadi kesalahan. Silahkan coba lagi. ' + $e->getMessage(),
+            ], 500);
+        }
     }
 }

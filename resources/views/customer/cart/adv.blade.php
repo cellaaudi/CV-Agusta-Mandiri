@@ -1,56 +1,63 @@
 @extends('layouts.home')
 
 @section('content')
-    <main id="main">
-        <!-- ======= Breadcrumbs ======= -->
-        <section class="breadcrumbs">
-            <div class="container">
+<main id="main">
+    <!-- ======= Breadcrumbs ======= -->
+    <section class="breadcrumbs">
+        <div class="container">
 
-                <div class="d-flex justify-content-between align-items-center">
-                    <h2></h2>
-                    <ol>
-                        <li><a href="{{ route('customer.home') }}">Halaman Utama</a></li>
-                        <li><a href="{{ route('customer.advertising') }}">Agusta Advertising</a></li>
-                        <li>Keranjang</li>
-                    </ol>
-                </div>
-
+            <div class="d-flex justify-content-between align-items-center">
+                <h2></h2>
+                <ol>
+                    <li><a href="{{ route('customer.home') }}">Halaman Utama</a></li>
+                    <li><a href="{{ route('customer.advertising') }}">Agusta Advertising</a></li>
+                    <li>Keranjang</li>
+                </ol>
             </div>
-        </section><!-- End Breadcrumbs -->
 
-        <section id="pricing" class="pricing portfolio section-bg inner-page">
-            <div class="container" data-aos="fade-up">
-                <div class="section-title">
-                    <h2>Keranjang: Agusta Advertising</h2>
-                </div>
+        </div>
+    </section><!-- End Breadcrumbs -->
 
-                <div class="row flex-lg-row">
-                    <div class="col-lg-5">
-                        @foreach ($user->advertising_cart as $cart)
-                            <div class="card mb-3 cardt" style="max-width: 800px;">
-                                <div class="row g-0">
-                                    <div class="col-md-4 preview">
-                                        @foreach ($photos as $photo)
-                                            @if ($cart->id == $photo->adv_product_id)
-                                                <img id="photoPreview" src="{{ asset('storage/' . $photo->url) }}"
-                                                    class="img-fluid mx-auto d-block rounded-start"
-                                                    alt="{{ $cart->name }}">
-                                            @break
-                                        @endif
-                                    @endforeach
-                                </div>
-                                <div class="col-md-8">
-                                    <div class="card-body">
-                                        <h5 class="card-title fw-bold">{{ $cart->name }}</h5>
-                                        <p class="card-text"><small class="text-muted">Kategori :</small>
-                                            {{ $cart->category == 'IO' ? 'Indoor & Outdoor' : $cart->category }}</p>
-                                        <button class="btn float-end" onclick="removeCartItem({{ $cart->id }})">
-                                            <i class='bx bx-trash text-muted ' style="font-size: 24px"></i>
-                                        </button>
-                                    </div>
+    <section id="pricing" class="pricing portfolio section-bg inner-page">
+        <div class="container" data-aos="fade-up">
+            <div class="section-title">
+                <h2>Keranjang: Agusta Advertising</h2>
+            </div>
+
+            <div class="row flex-lg-row">
+                <div class="col-lg-5">
+                    <div class="row">
+                        <div id="notifSuccess" class="alert alert-success alert-dismissible fade show" role="alert">
+                            <strong>Berhasil - </strong>Produk berhasil dihapus dari keranjangmu
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                        <div id="notifFailed" class="alert alert-danger alert-dismissible fade show" role="alert">
+                        </div>
+                    </div>
+                    @foreach ($user->advertising_cart as $cart)
+                    <div id="cardCartId_{{ $cart->id }}" class="card mb-3 cardt" style="max-width: 800px;">
+                        <div class="row g-0">
+                            <div class="col-md-4 preview">
+                                @foreach ($photos as $photo)
+                                @if ($cart->id == $photo->adv_product_id)
+                                <img id="photoPreview" src="{{ asset('storage/' . $photo->url) }}" class="img-fluid mx-auto d-block rounded-start" alt="{{ $cart->name }}">
+                                @break
+                                @endif
+                                @endforeach
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                    <h5 class="card-title fw-bold">{{ $cart->name }}</h5>
+                                    <p class="card-text"><small class="text-muted">Kategori :</small>
+                                        {{ $cart->category == 'IO' ? 'Indoor & Outdoor' : $cart->category }}
+                                    </p>
+                                    <button class="btn float-end" onclick="removeCartItem({{ auth()->user()->id }}, {{ $cart->id }})">
+                                        <i class='bx bx-trash text-muted ' style="font-size: 24px"></i>
+                                    </button>
                                 </div>
                             </div>
                         </div>
+                    </div>
                     @endforeach
                 </div>
                 <div class="col-lg-7 mb-5">
@@ -69,65 +76,48 @@
                             <form action="{{ route('customer.appointment.advertising.store') }}" method="post">
                                 @csrf
                                 @foreach ($user->advertising_cart as $cart)
-                                    <input id="cartId_{{ $cart->id }}" name="ids[]" type="hidden" value="{{$cart->id}}">
+                                <input id="cartId_{{ $cart->id }}" name="ids[]" type="hidden" value="{{$cart->id}}">
                                 @endforeach
                                 <div class="mb-3 row">
                                     <label for="inputDate" class="col-sm-2 col-form-label">Tanggal</label>
                                     <div class="col-sm-10">
-                                        <input type="date" class="form-control @error('date') is-invalid @enderror"
-                                            id="inputDate" min="<?php echo date('Y-m-d'); ?>" max="<?php echo date('Y-m-d', strtotime('+13 day')); ?>"
-                                            value="<?php echo date('Y-m-d'); ?>" name="date">
+                                        <input type="date" class="form-control @error('date') is-invalid @enderror" id="inputDate" min="<?php echo date('Y-m-d'); ?>" max="<?php echo date('Y-m-d', strtotime('+13 day')); ?>" value="<?php echo date('Y-m-d'); ?>" name="date">
                                         <div class="form-text">
                                             Anda hanya dapat membuat janji temu untuk 2 minggu kedepan.
                                         </div>
                                         @error('date')
-                                            <div class="invalid-feedback">
-                                                {{ $message }}
-                                            </div>
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
                                         @enderror
                                     </div>
                                 </div>
                                 <div class="mb-3 row">
                                     <label for="rdoTime1" class="col-sm-2 col-form-label">Jam</label>
                                     <div class="col-sm-10">
-                                        <div
-                                            class="@error('start') is-invalid @enderror @error('end') is-invalid @enderror">
-                                            <input type="radio" class="btn-check" name="rdoTime" id="rdoTime1"
-                                                autocomplete="off" onclick="selectedTime(this)" data-start="10:00:00"
-                                                data-end="11:00:00">
+                                        <div class="@error('start') is-invalid @enderror @error('end') is-invalid @enderror">
+                                            <input type="radio" class="btn-check" name="rdoTime" id="rdoTime1" autocomplete="off" onclick="selectedTime(this)" data-start="10:00:00" data-end="11:00:00">
                                             <label class="btn btn-outline-primary" for="rdoTime1">10:00 - 11:00</label>
 
-                                            <input type="radio" class="btn-check" name="rdoTime" id="rdoTime2"
-                                                autocomplete="off" onclick="selectedTime(this)" data-start="11:00:00"
-                                                data-end="12:00:00">
+                                            <input type="radio" class="btn-check" name="rdoTime" id="rdoTime2" autocomplete="off" onclick="selectedTime(this)" data-start="11:00:00" data-end="12:00:00">
                                             <label class="btn btn-outline-primary" for="rdoTime2">11:00 - 12:00</label>
 
-                                            <input type="radio" class="btn-check" name="rdoTime" id="rdoTime3"
-                                                autocomplete="off" onclick="selectedTime(this)" data-start="12:00:00"
-                                                data-end="13:00:00">
+                                            <input type="radio" class="btn-check" name="rdoTime" id="rdoTime3" autocomplete="off" onclick="selectedTime(this)" data-start="12:00:00" data-end="13:00:00">
                                             <label class="btn btn-outline-primary" for="rdoTime3">12:00 - 13:00</label>
 
-                                            <input type="radio" class="btn-check" name="rdoTime" id="rdoTime4"
-                                                autocomplete="off" onclick="selectedTime(this)" data-start="13:00:00"
-                                                data-end="14:00:00">
+                                            <input type="radio" class="btn-check" name="rdoTime" id="rdoTime4" autocomplete="off" onclick="selectedTime(this)" data-start="13:00:00" data-end="14:00:00">
                                             <label class="btn btn-outline-primary" for="rdoTime4">13:00 -
                                                 14:00</label>
 
-                                            <input type="radio" class="btn-check" name="rdoTime" id="rdoTime5"
-                                                autocomplete="off" onclick="selectedTime(this)" data-start="14:00:00"
-                                                data-end="15:00:00">
+                                            <input type="radio" class="btn-check" name="rdoTime" id="rdoTime5" autocomplete="off" onclick="selectedTime(this)" data-start="14:00:00" data-end="15:00:00">
                                             <label class="btn btn-outline-primary" for="rdoTime5">14:00 -
                                                 15:00</label>
 
-                                            <input type="radio" class="btn-check" name="rdoTime" id="rdoTime6"
-                                                autocomplete="off" onclick="selectedTime(this)" data-start="15:00:00"
-                                                data-end="16:00:00">
+                                            <input type="radio" class="btn-check" name="rdoTime" id="rdoTime6" autocomplete="off" onclick="selectedTime(this)" data-start="15:00:00" data-end="16:00:00">
                                             <label class="btn btn-outline-primary" for="rdoTime6">15:00 -
                                                 16:00</label>
 
-                                            <input type="radio" class="btn-check" name="rdoTime" id="rdoTime7"
-                                                autocomplete="off" onclick="selectedTime(this)" data-start="16:00:00"
-                                                data-end="17:00:00">
+                                            <input type="radio" class="btn-check" name="rdoTime" id="rdoTime7" autocomplete="off" onclick="selectedTime(this)" data-start="16:00:00" data-end="17:00:00">
                                             <label class="btn btn-outline-primary" for="rdoTime7">16:00 -
                                                 17:00</label>
 
@@ -138,14 +128,14 @@
                                             Waktu yang ditampilkan dalam zona Waktu Indonesia Tengah (WITA) - UTC+08:00.
                                         </div>
                                         @error('start')
-                                            <div class="invalid-feedback">
-                                                {{ $message }}
-                                            </div>
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
                                         @enderror
                                         @error('end')
-                                            <div class="invalid-feedback">
-                                                {{ $message }}
-                                            </div>
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
                                         @enderror
                                     </div>
                                 </div>
@@ -153,26 +143,23 @@
                                     <label for="rdoCash" class="col-sm-2 col-form-label">Pembayaran</label>
                                     <div class="col-sm-10 @error('payment') is-invalid @enderror">
                                         <div aria-label="basic radio toggle button group">
-                                            <input type="radio" class="btn-check" name="payment" id="rdoCash"
-                                                autocomplete="off" value="Cash">
+                                            <input type="radio" class="btn-check" name="payment" id="rdoCash" autocomplete="off" value="Cash">
                                             <label class="btn btn-outline-primary" for="rdoCash">Tunai</label>
 
-                                            <input type="radio" class="btn-check" name="payment" id="rdoCredit"
-                                                autocomplete="off" value="Credit">
+                                            <input type="radio" class="btn-check" name="payment" id="rdoCredit" autocomplete="off" value="Credit">
                                             <label class="btn btn-outline-primary" for="rdoCredit">Debit /
                                                 Kredit</label>
 
-                                            <input type="radio" class="btn-check" name="payment" id="rdoTrade"
-                                                autocomplete="off" value="Trade">
+                                            <input type="radio" class="btn-check" name="payment" id="rdoTrade" autocomplete="off" value="Trade">
                                             <label class="btn btn-outline-primary" for="rdoTrade">Tukar Tambah</label>
                                         </div>
                                         <div class="form-text">
                                             Tipe pembayaran dapat berubah sesuai kesepakatan setelah bertemu.
                                         </div>
                                         @error('payment')
-                                            <div class="invalid-feedback">
-                                                {{ $message }}
-                                            </div>
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
                                         @enderror
                                     </div>
                                 </div>
@@ -240,6 +227,10 @@
     }
 
     $(document).ready(function() {
+        // Hide div notifikasi
+        $('#notifSuccess').hide();
+        $('#notifFailed').hide();
+
         // Hitung total produk di keranjang
         var total = $('.cardt').length;
         $('#txtTotal').html(total + " produk");
@@ -289,20 +280,29 @@
             $('[data-start="' + startTime + '"][data-end="' + endTime + '"]').prop('disabled', true);
         });
     }
-    function removeCartItem(cartId) {
-        // Hapus elemen input hidden berdasarkan ID keranjang
-        $('#cartId_' + cartId).remove();
 
-        // Lakukan aksi lain yang diperlukan, misalnya, mengirimkan permintaan hapus ke server
+    function removeCartItem(userId, cartId) {
+        // Hapus input hidden dan card berdasarkan ID keranjang
+        $('#cartId_' + cartId).remove();
+        $('#cardCartId_' + cartId).remove();
+
+        // Hitung total produk di keranjang
+        var total = $('.cardt').length;
+        $('#txtTotal').html(total + " produk");
+
         $.ajax({
-            url: '/remove-from-cart/' + cartId,
-            type: 'DELETE',
-            success: function(response) {
-                // Tindakan setelah penghapusan berhasil
-                console.log(response);
+            url: '/cart/advertising/delete/' + userId + '/' + cartId,
+            type: 'GET',
+            success: function(data) {
+                if (data.status == "Success") {
+                    $('#notifSuccess').show();
+                    $('#notifFailed').hide();
+                }
             },
             error: function(error) {
-                console.error('Error removing from cart:', error);
+                $('#notifSuccess').hide();
+                $('#notifFailed').html("<strong>Gagal - </strong>" + xhr.responseJSON.message + '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>');
+                $('#notifFailed').show();
             }
         });
     }

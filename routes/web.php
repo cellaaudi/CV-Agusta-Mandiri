@@ -70,6 +70,7 @@ Route::middleware(['auth'])->group(function () {
                 // Route::resource('/advertising', AdvertisingCartController::class);
                 Route::post('/advertising', [AdvertisingCartAppointController::class, 'addToCart'])->name('advertising.addToCart');
                 Route::get('/advertising/{id}', [AdvertisingCartAppointController::class, 'showUserCart'])->name('advertising.show')->middleware('checkloggedinuser');
+                Route::get('/advertising/delete/{user_id}/{item_id}', [AdvertisingCartAppointController::class, 'deleteCartItem'])->name('advertising.deleteCartItem');
                 Route::resource('/car', CarCartController::class);
                 Route::resource('/property', PropertyCartController::class);
             });
@@ -78,7 +79,7 @@ Route::middleware(['auth'])->group(function () {
                 // kurang pengecekan kalo user tembak langsung di parameter, ganti id bisa langsung lihat keranjang user lain
                 Route::resource('/advertising', AdvertisingAppointmentController::class);
                 Route::post('/advertising/getAppointmentsByDate', [AdvertisingAppointmentController::class, 'getAppointmentsByDate'])->name('advByDate');
-                Route::post('/advertising/delete', [AdvertisingCart::class, 'deleteCartItem'])->name('advDeleteItem');
+                // Route::post('/advertising/delete', [AdvertisingCart::class, 'deleteCartItem'])->name('advDeleteItem');
                 Route::resource('/car', CarCartController::class);
                 Route::resource('/property', PropertyCartController::class);
             });

@@ -56,7 +56,6 @@
                                         </ul>
                                     </div>
                                 </div>
-
                             </div>
                             <div class="mb-3">
                                 <p class="mb-1"><strong>Merk</strong></p>
@@ -84,7 +83,6 @@
                                     </div>
                                 @endforeach
                             </div>
-
                         </div>
                     </div>
                     <div class="col-md-10">

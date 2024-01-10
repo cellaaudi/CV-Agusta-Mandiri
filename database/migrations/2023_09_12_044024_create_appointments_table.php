@@ -18,8 +18,9 @@ class CreateAppointmentsTable extends Migration
             $table->date("date");
             $table->time("start");
             $table->time("end");
-            $table->enum("payment", ["Cash", "Credit", "Trade"]);
             $table->enum("order_status", ["Processed", "Finished", "Cancelled"])->default("Processed");
+            $table->enum('product_type', ['Adv', 'Car', 'Prop']);
+            $table->string('product_id');
             $table->foreignId("user_id")->constrained('users');
             $table->timestamps();
         });

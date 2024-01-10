@@ -9,6 +9,9 @@ class Appointment extends Model
 {
     use HasFactory;
 
+    protected $table = "appointments";
+    protected $guarded = ['id'];
+
     public function advertising()
     {
         return $this->belongsToMany("App\Models\Advertising", "adv_carts", "appointment_id", "adv_product_id")->withTrashed();
@@ -29,13 +32,8 @@ class Appointment extends Model
         return $this->hasOne("App\Models\Trade", "appointment_id")->withTrashed();
     }
 
-    public function slot()
-    {
-        return $this->hasOne("App\Models\Slot", "appointment_id")->withTrashed();
-    }
-
     public function user()
     {
-        return $this->belongsTo("App\Models\User", "user_id");
+        return $this->belongsTo(User::class, "user_id");
     }
 }

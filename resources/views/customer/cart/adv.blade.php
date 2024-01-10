@@ -35,16 +35,14 @@
                         </div>
                     </div>
                     @foreach ($user->advertising_cart as $cart)
-                    <div id="cardCartId_{{ $cart->id }}" class="card mb-3 cardt" style="max-width: 800px;">
+                    <div id="cardCartId_{{ $cart->id }}" class="card mb-3 cardt">
                         <div class="row g-0">
-                            <div class="col-md-4 preview">
-                                @foreach ($photos as $photo)
-                                @if ($cart->id == $photo->adv_product_id)
-                                <img id="photoPreview" src="{{ asset('storage/' . $photo->url) }}" class="img-fluid mx-auto d-block rounded-start" alt="{{ $cart->name }}">
-                                @break
-                                @endif
-                                @endforeach
-                            </div>
+                            @foreach ($photos as $photo)
+                            @if ($cart->id == $photo->adv_product_id)
+                            <img src="{{ asset('storage/' . $photo->url) }}" class="col-md-4 img-fluid rounded" alt="{{ $cart->name }}" style="object-fit: cover;">
+                            @break
+                            @endif
+                            @endforeach
                             <div class="col-md-8">
                                 <div class="card-body">
                                     <h5 class="card-title fw-bold">{{ $cart->name }}</h5>
@@ -52,7 +50,7 @@
                                         {{ $cart->category == 'IO' ? 'Indoor & Outdoor' : $cart->category }}
                                     </p>
                                     <button class="btn float-end" onclick="removeCartItem({{ auth()->user()->id }}, {{ $cart->id }})">
-                                        <i class='bx bx-trash text-muted ' style="font-size: 24px"></i>
+                                        <i class='bx bx-trash text-danger' style="font-size: 24px"></i>
                                     </button>
                                 </div>
                             </div>
@@ -75,6 +73,8 @@
                             <p class="h6 card-title mt-5 mb-3 fw-bold">Pilih Jadwal</p>
                             <form action="{{ route('customer.appointment.advertising.store') }}" method="post">
                                 @csrf
+                                <input type="hidden" name="user" value="{{ auth()->user()->id }}">
+                                <input type="hidden" name="type" value="Adv">
                                 @foreach ($user->advertising_cart as $cart)
                                 <input id="cartId_{{ $cart->id }}" name="ids[]" type="hidden" value="{{$cart->id}}">
                                 @endforeach
@@ -139,35 +139,11 @@
                                         @enderror
                                     </div>
                                 </div>
-                                <div class="mb-3 row">
-                                    <label for="rdoCash" class="col-sm-2 col-form-label">Pembayaran</label>
-                                    <div class="col-sm-10 @error('payment') is-invalid @enderror">
-                                        <div aria-label="basic radio toggle button group">
-                                            <input type="radio" class="btn-check" name="payment" id="rdoCash" autocomplete="off" value="Cash">
-                                            <label class="btn btn-outline-primary" for="rdoCash">Tunai</label>
-
-                                            <input type="radio" class="btn-check" name="payment" id="rdoCredit" autocomplete="off" value="Credit">
-                                            <label class="btn btn-outline-primary" for="rdoCredit">Debit /
-                                                Kredit</label>
-
-                                            <input type="radio" class="btn-check" name="payment" id="rdoTrade" autocomplete="off" value="Trade">
-                                            <label class="btn btn-outline-primary" for="rdoTrade">Tukar Tambah</label>
-                                        </div>
-                                        <div class="form-text">
-                                            Tipe pembayaran dapat berubah sesuai kesepakatan setelah bertemu.
-                                        </div>
-                                        @error('payment')
-                                        <div class="invalid-feedback">
-                                            {{ $message }}
-                                        </div>
-                                        @enderror
-                                    </div>
-                                </div>
-                                <input type="hidden" name="user" value="{{ auth()->user()->id }}">
                                 <div class="mt-5 form-actions">
                                     <div class="d-grid gap-2">
-                                        <button class="add-cart btn">Buat Janji Temu</button>
+                                        <button id="btnMake" class="add-cart btn">Buat Janji Temu</button>
                                     </div>
+                                    <div id="txtMake" class="form-text">Pilih produk terlebih dahulu untuk dapat membuat janji temu</div>
                                 </div>
                             </form>
                         </div>
@@ -226,14 +202,26 @@
         document.getElementById('end').value = button.getAttribute('data-end');
     }
 
+    // Able/disable button buat janji temu
+    function totalProduk() {
+        // Hitung total produk di keranjang
+        var total = $('.cardt').length;
+        $('#txtTotal').html(total + " produk");
+        if (total <= 0) {
+            $('#btnMake').prop('disabled', true)
+            $('#txtMake').show();
+        } else {
+            $('#btnMake').prop('disabled', false)
+            $('#txtMake').hide();
+        }
+    }
+
     $(document).ready(function() {
         // Hide div notifikasi
         $('#notifSuccess').hide();
         $('#notifFailed').hide();
 
-        // Hitung total produk di keranjang
-        var total = $('.cardt').length;
-        $('#txtTotal').html(total + " produk");
+        totalProduk();
 
         // Cek jam aktif saat pertama load page
         var selectedDate = document.getElementById('inputDate').value;
@@ -266,8 +254,6 @@
     });
 
     function showAvailableTimes(appointments) {
-        // Reset status jam-jam pada setiap pemilihan tanggal baru
-
         // Loop melalui jam-jam yang tersedia
         $('.btn-check').prop('disabled', false);
 
@@ -286,9 +272,7 @@
         $('#cartId_' + cartId).remove();
         $('#cardCartId_' + cartId).remove();
 
-        // Hitung total produk di keranjang
-        var total = $('.cardt').length;
-        $('#txtTotal').html(total + " produk");
+        totalProduk();
 
         $.ajax({
             url: '/cart/advertising/delete/' + userId + '/' + cartId,

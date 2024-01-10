@@ -68,22 +68,13 @@ class User extends Authenticatable
         return $this->belongsToMany(Property::class, 'prop_carts', 'user_id', 'prop_product_id');
     }
 
-    public function advertising_appointment()
+    public function appoinment()
     {
-        return $this->hasMany(AdvertisingAppointment::class, 'user_id');
+        return $this->hasMany(Appointment::class, 'user_id');
     }
 
-    // public function advCarts()
+    // public function advertising_appointment()
     // {
-    //     return $this->hasMany("App\Models\advCarts", "user_id");
+    //     return $this->hasMany(AdvertisingAppointment::class, 'user_id');
     // }
-    // public function carCarts()
-    // {
-    //     return $this->hasMany("App\Models\carCarts", "user_id");
-    // }
-    // public function propCarts()
-    // {
-    //     return $this->hasMany("App\Models\propCarts", "user_id");
-    // }
-
 }

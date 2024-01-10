@@ -1,8 +1,6 @@
 <?php
 
-use App\Http\Controllers\AdvertisingAppointmentController;
 use App\Http\Controllers\AdvertisingCartAppointController;
-use App\Http\Controllers\AdvertisingCartController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\AdvertisingController;
@@ -11,14 +9,12 @@ use App\Http\Controllers\CarBuyController;
 use App\Http\Controllers\CarCartController;
 use App\Http\Controllers\CarCategoryController;
 use App\Http\Controllers\CarController;
-use App\Http\Controllers\CartController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\IndonesiaController;
 use App\Http\Controllers\PropertyCartController;
 use App\Http\Controllers\PropertyCategoryController;
 use App\Http\Controllers\PropertyController;
 use App\Http\Controllers\UserController;
-use App\Models\AdvertisingCart;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -66,19 +62,19 @@ Route::middleware(['auth'])->group(function () {
             //keranjang
             // kalo mau tambah ke keranjang langsung alert suruh login
             Route::prefix('cart')->name('cart.')->group(function () {
-                // kurang pengecekan kalo user tembak langsung di parameter, ganti id bisa langsung lihat keranjang user lain
-                // Route::resource('/advertising', AdvertisingCartController::class);
-                Route::post('/advertising', [AdvertisingCartAppointController::class, 'addToCart'])->name('advertising.addToCart');
-                Route::get('/advertising/{id}', [AdvertisingCartAppointController::class, 'showUserCart'])->name('advertising.show')->middleware('checkloggedinuser');
-                Route::get('/advertising/delete/{user_id}/{item_id}', [AdvertisingCartAppointController::class, 'deleteCartItem'])->name('advertising.deleteCartItem');
+                Route::prefix('advertising')->name('advertising.')->group(function () {
+                    Route::post('/add-to-cart', [AdvertisingCartAppointController::class, 'addToCart'])->name('addToCart');
+                    Route::get('/{id}', [AdvertisingCartAppointController::class, 'showUserCart'])->name('show')->middleware('checkloggedinuser');
+                    Route::get('/delete/{user_id}/{item_id}', [AdvertisingCartAppointController::class, 'deleteCartItem'])->name('deleteCartItem');
+                });
                 Route::resource('/car', CarCartController::class);
                 Route::resource('/property', PropertyCartController::class);
             });
 
             Route::prefix('appointment')->name('appointment.')->group(function () {
                 // kurang pengecekan kalo user tembak langsung di parameter, ganti id bisa langsung lihat keranjang user lain
-                Route::resource('/advertising', AdvertisingAppointmentController::class);
-                Route::post('/advertising/getAppointmentsByDate', [AdvertisingAppointmentController::class, 'getAppointmentsByDate'])->name('advByDate');
+                Route::post('/advertising/make-appointment', [AdvertisingCartAppointController::class, 'makeAppointment'])->name('advertising.store');
+                Route::post('/advertising/get-appointments-by-date', [AdvertisingCartAppointController::class, 'getAppointmentsByDate'])->name('advByDate');
                 // Route::post('/advertising/delete', [AdvertisingCart::class, 'deleteCartItem'])->name('advDeleteItem');
                 Route::resource('/car', CarCartController::class);
                 Route::resource('/property', PropertyCartController::class);

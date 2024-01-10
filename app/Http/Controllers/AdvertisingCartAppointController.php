@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\AdvertisingCart;
 use App\Models\AdvertisingPhoto;
+use App\Models\Appointment;
 use App\Models\User;
 use Illuminate\Http\Request;
 use PDOException;
@@ -68,6 +69,48 @@ class AdvertisingCartAppointController extends Controller
                 'status' => 'Failed',
                 'message' => 'Terjadi kesalahan. Silahkan coba lagi. ' + $e->getMessage(),
             ], 500);
+        }
+        
+    }
+
+    // Appointment
+    public function getAppointmentsByDate(Request $request)
+    {
+        $date = $request->get('date');
+
+        $appointments = Appointment::whereDate('date', $date)->get();
+
+        return response()->json($appointments);
+    }
+
+    public function makeAppointment(Request $request)
+    {
+        $request->validate([
+            'date' => 'required|date|after_or_equal:today',
+            'start' => 'required|date_format:H:i:s|before:end',
+            'end' => 'required|date_format:H:i:s|after:start',
+            'type' => 'required',
+            'ids' => 'required',
+            'user' => 'required|numeric',
+        ]);
+
+        try {
+            $product_id = implode(";", $request->ids);
+
+            Appointment::create([
+                'date' => $request->date,
+                'start' => $request->start,
+                'end' => $request->end,
+                'product_type' => $request->type,
+                'product_id' => $product_id,
+                'user_id' => $request->user,
+            ]);
+
+            AdvertisingCart::whereIn('user_id', [$request->user])->delete();
+
+            return redirect()->route('customer.advertising');
+        } catch (PDOException $e) {
+            return redirect()->back()->with('Failed', 'Terjadi kesalahan: ' . $e->getMessage());
         }
     }
 }

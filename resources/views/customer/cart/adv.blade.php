@@ -57,6 +57,7 @@
                         </div>
                     </div>
                     @endforeach
+                    <div id="txtEmpty" class="card mb-3 bg-transparent border-0"><div class="card-body text-muted fs-4">Anda belum menambahkan produk apapun ke keranjang</div></div>
                 </div>
                 <div class="col-lg-7 mb-5">
                     <div class="card">
@@ -210,9 +211,11 @@
         if (total <= 0) {
             $('#btnMake').prop('disabled', true)
             $('#txtMake').show();
+            $('#txtEmpty').show();
         } else {
             $('#btnMake').prop('disabled', false)
             $('#txtMake').hide();
+            $('#txtEmpty').hide();
         }
     }
 

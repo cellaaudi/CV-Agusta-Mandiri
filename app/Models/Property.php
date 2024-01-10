@@ -15,11 +15,6 @@ class Property extends Model
     protected $table = "prop_products";
     protected $guarded = ['id'];
 
-    // public function appointment()
-    // {
-    //     return $this->belongsToMany(Appointment::class, "prop_carts", "prop_product_id", "appointment_id");
-    // }
-
     public function property_cart()
     {
         return $this->belongsToMany(User::class, 'prop_carts', 'prop_product_id', 'user_id');

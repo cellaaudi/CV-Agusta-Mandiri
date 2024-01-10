@@ -11,14 +11,4 @@ class AdvertisingCart extends Model
 
     protected $table = 'adv_carts';
     protected $guarded = ['id'];
-
-    // public function advertising()
-    // {
-    //     return $this->belongsTo(Advertising::class, "adv_cart_id");
-    // }
-
-    // public function user()
-    // {
-    //     return $this->belongsTo(User::class, "user_id");
-    // }
 }

@@ -43,6 +43,7 @@
                     <table id="multi_col_order" class="table border table-striped table-bordered text-nowrap" style="width:100%">
                         <thead>
                             <tr>
+                                <th>No.</th>
                                 <th>ID</th>
                                 <th>Nama</th>
                                 <th>Kategori</th>
@@ -50,9 +51,10 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($advs as $adv)
+                            @foreach($advs as $index => $adv)
                             <tr>
-                                <td>{{ $adv -> id }}</td>
+                                <td class="text-right">{{ $index + 1 }} </td>
+                                <td class="text-center">{{ $adv -> id }}</td>
                                 <td>{{ $adv -> name }}</td>
                                 <td>{{ $adv -> category }}</td>
                                 <td>

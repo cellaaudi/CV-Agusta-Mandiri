@@ -23,9 +23,7 @@ class CreateCarProductsTable extends Migration
             $table->enum('capacity', ['1', '2', '3', '4', '5']);
             $table->enum("fuel", ["Petrol", "Diesel", "Electricity", "Hybrid"]);
             $table->longtext("description");
-            $table->enum('status', ['Sell', 'Buy']);
-            $table->enum("sell_status", ["Available", "Sold"])->default("Available")->nullable();
-            $table->enum("buy_status", ["Processed", "Approved", "Finished", "Cancelled"])->nullable();
+            $table->enum("sell_status", ["Available", "Sold"])->default("Available");
             $table->unsignedBigInteger("car_brand_id");
             $table->unsignedBigInteger("car_category_id");
             $table->timestamps();

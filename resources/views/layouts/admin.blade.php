@@ -240,8 +240,7 @@
                         <li class="sidebar-item"> <a class="sidebar-link" href="{{ route('admin.advertising.index') }}" aria-expanded="false"><i data-feather="trending-up" class="feather-icon"></i><span class="hide-menu">Agusta Advertising</span></a></li>
                         <li class="sidebar-item"> <a class="sidebar-link has-arrow" href="javascript:void(0)" aria-expanded="false"><i data-feather="zap" class="feather-icon"></i><span class="hide-menu">Agusta Motor</span></a>
                             <ul aria-expanded="false" class="collapse  first-level base-level-line">
-                                <li class="sidebar-item"><a href="{{ route('admin.car.sell.index') }}" class="sidebar-link"><span class="hide-menu"> Jual Mobil</span></a></li>
-                                <li class="sidebar-item"><a href="{{ route('admin.car.buy.index') }}" class="sidebar-link"><span class="hide-menu"> Beli Mobil</span></a></li>
+                                <li class="sidebar-item"><a href="{{ route('admin.car.sell.index') }}" class="sidebar-link"><span class="hide-menu"> Produk</span></a></li>
                                 <li class="sidebar-item"><a href="{{ route('admin.car.brand.index') }}" class="sidebar-link"><span class="hide-menu"> Merk Mobil</span></a></li>
                                 <li class="sidebar-item"><a href="{{ route('admin.car.category.index') }}" class="sidebar-link"><span class="hide-menu"> Kategori Mobil</span></a></li>
                             </ul>

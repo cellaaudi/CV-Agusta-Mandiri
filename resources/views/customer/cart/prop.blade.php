@@ -10,7 +10,7 @@
                 <h2></h2>
                 <ol>
                     <li><a href="{{ route('customer.home') }}">Halaman Utama</a></li>
-                    <li><a href="{{ route('customer.advertising') }}">Agusta Advertising</a></li>
+                    <li><a href="{{ route('customer.property') }}">Agusta Properti</a></li>
                     <li>Keranjang</li>
                 </ol>
             </div>
@@ -21,7 +21,7 @@
     <section id="pricing" class="pricing portfolio section-bg inner-page">
         <div class="container" data-aos="fade-up">
             <div class="section-title">
-                <h2>Keranjang: Agusta Advertising</h2>
+                <h2>Keranjang: Agusta Properti</h2>
             </div>
 
             <div class="row flex-lg-row">
@@ -34,20 +34,25 @@
                         <div id="notifFailed" class="alert alert-danger alert-dismissible fade show" role="alert">
                         </div>
                     </div>
-                    @foreach ($user->advertising_cart as $cart)
+                    @foreach ($user->property_cart as $cart)
                     <div id="cardCartId_{{ $cart->id }}" class="card mb-3 cardt border-0 shadow">
                         <div class="row g-0">
                             @foreach ($photos as $photo)
-                            @if ($cart->id == $photo->adv_product_id)
+                            @if ($cart->id == $photo->prop_product_id)
                             <img src="{{ asset('storage/' . $photo->url) }}" class="col-md-4 img-fluid rounded" alt="{{ $cart->name }}" style="object-fit: cover;">
                             @break
                             @endif
                             @endforeach
                             <div class="col-md-8">
                                 <div class="card-body">
-                                    <h5 class="card-title fw-bold">{{ $cart->name }}</h5>
+                                    <h5 class="card-title fw-bold">{{ $cart->title }}</h5>
                                     <p class="card-text"><small class="text-muted">Kategori :</small>
-                                        {{ $cart->category == 'IO' ? 'Indoor & Outdoor' : $cart->category }}
+                                        {{ $cart->category == 'House' ? 'Rumah' : ($cart->category == 'Land' ? 'Tanah' : 'Villa') }}
+                                        <br>
+                                        <small class="text-muted">Harga :</small>
+                                        <span class="rupiah">
+                                            {{ $cart->price }}
+                                        </span>
                                     </p>
                                     <button class="btn float-end" onclick="removeCartItem({{ auth()->user()->id }}, {{ $cart->id }})">
                                         <i class='bx bx-trash text-danger' style="font-size: 24px"></i>
@@ -57,7 +62,9 @@
                         </div>
                     </div>
                     @endforeach
-                    <div id="txtEmpty" class="card mb-3 bg-transparent border-0"><div class="card-body text-muted fs-4">Anda belum menambahkan produk apapun ke keranjang</div></div>
+                    <div id="txtEmpty" class="card mb-3 bg-transparent border-0">
+                        <div class="card-body text-muted fs-4">Anda belum menambahkan produk apapun ke keranjang</div>
+                    </div>
                 </div>
                 <div class="col-lg-7 mb-5">
                     <div class="card border-0 shadow">
@@ -65,7 +72,7 @@
                             <h5 class="card-title mb-3 fw-bold">Buat Janji Temu</h5>
                             <p class="card-text d-flex justify-content-between mb-1">
                                 <span class="text-muted"><small>Jenis Produk</small></span>
-                                <span>Advertising</span>
+                                <span>Properti</span>
                             </p>
                             <p class="card-text d-flex justify-content-between mb-4">
                                 <span class="text-muted"><small>Jumlah Produk</small></span>
@@ -75,8 +82,8 @@
                             <form action="{{ route('customer.appointment.makeAppointment') }}" method="post">
                                 @csrf
                                 <input type="hidden" name="user" value="{{ auth()->user()->id }}">
-                                <input type="hidden" name="type" value="Adv">
-                                @foreach ($user->advertising_cart as $cart)
+                                <input type="hidden" name="type" value="Prop">
+                                @foreach ($user->property_cart as $cart)
                                 <input id="cartId_{{ $cart->id }}" name="ids[]" type="hidden" value="{{$cart->id}}">
                                 @endforeach
                                 <div class="mb-3 row">
@@ -278,7 +285,7 @@
         totalProduk();
 
         $.ajax({
-            url: '/cart/advertising/delete/' + userId + '/' + cartId,
+            url: '/cart/property/delete/' + userId + '/' + cartId,
             type: 'GET',
             success: function(data) {
                 if (data.status == "Success") {

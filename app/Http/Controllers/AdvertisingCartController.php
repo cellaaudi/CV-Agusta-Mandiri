@@ -8,7 +8,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use PDOException;
 
-class AdvertisingCartAppointController extends Controller
+class AdvertisingCartController extends Controller
 {
     private function duplicated(PDOException $e)
     {

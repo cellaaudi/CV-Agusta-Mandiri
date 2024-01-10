@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class PropertyCart extends Model
 {
     use HasFactory;
+    
     protected $table = 'prop_carts';
     protected $guarded = ['id'];
 }

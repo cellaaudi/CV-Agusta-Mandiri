@@ -127,7 +127,8 @@
                                     @endforeach
                                     <div class="card-body">
                                         <h5 class="card-title">{{ $prop->title }}</h5>
-                                        <p class="card-text text-primary h4"><strong>Rp. {{ $prop->price }}</strong>
+                                        <br>
+                                        <p class="card-text text-primary h4 rupiah fw-bolder float-end">{{ $prop->price }}
                                         </p>
                                     </div>
                                 </div>

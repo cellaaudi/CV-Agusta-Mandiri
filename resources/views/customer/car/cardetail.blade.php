@@ -77,15 +77,15 @@
                                 <span class="col-sm-5 text-muted"><small>Kapasitas Mesin</small></span>
                                 <span class="col-sm-7 ">
                                     @if ($car->capacity == 1)
-                                        > 1000 cc
+                                        > 1,000 cc
                                     @elseif($car->capacity == 2)
-                                        1000 - 1500 cc
+                                        1,000 - 1,500 cc
                                     @elseif($car->capacity == 3)
-                                        1500 - 2000 cc
+                                        1,500 - 2,000 cc
                                     @elseif($car->capacity == 4)
-                                        2000 - 3000 cc
+                                        2,000 - 3,000 cc
                                     @else
-                                        > 3000 cc
+                                        > 3,000 cc
                                     @endif
                                 </span>
                             </div>

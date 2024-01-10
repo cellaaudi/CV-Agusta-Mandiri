@@ -76,7 +76,7 @@
                                 <span id="txtTotal"></span>
                             </p>
                             <p class="h6 card-title mt-5 mb-3 fw-bold">Pilih Jadwal</p>
-                            <form action="{{ route('customer.appointment.car.store') }}" method="post">
+                            <form action="{{ route('customer.appointment.makeAppointment') }}" method="post">
                                 @csrf
                                 <input type="hidden" name="user" value="{{ auth()->user()->id }}">
                                 <input type="hidden" name="type" value="Car">

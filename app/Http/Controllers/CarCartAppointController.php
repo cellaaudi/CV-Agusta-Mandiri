@@ -71,36 +71,4 @@ class CarCartAppointController extends Controller
             ], 500);
         }
     }
-
-    // Appointment
-    public function makeAppointment(Request $request)
-    {
-        $request->validate([
-            'date' => 'required|date|after_or_equal:today',
-            'start' => 'required|date_format:H:i:s|before:end',
-            'end' => 'required|date_format:H:i:s|after:start',
-            'type' => 'required',
-            'ids' => 'required',
-            'user' => 'required|numeric',
-        ]);
-
-        try {
-            $product_id = implode(";", $request->ids);
-
-            Appointment::create([
-                'date' => $request->date,
-                'start' => $request->start,
-                'end' => $request->end,
-                'product_type' => $request->type,
-                'product_id' => $product_id,
-                'user_id' => $request->user,
-            ]);
-
-            CarCart::whereIn('user_id', [$request->user])->delete();
-
-            return redirect()->route('customer.car');
-        } catch (PDOException $e) {
-            return redirect()->back()->with('Failed', 'Terjadi kesalahan: ' . $e->getMessage());
-        }
-    }
 }

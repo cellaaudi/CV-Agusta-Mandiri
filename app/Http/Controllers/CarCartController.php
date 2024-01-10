@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\CarCart;
-use Illuminate\Http\Request;
-use App\Models\User;
 use App\Models\CarPhoto;
+use App\Models\User;
+use Illuminate\Http\Request;
 use PDOException;
 
 class CarCartController extends Controller
@@ -14,33 +14,8 @@ class CarCartController extends Controller
     {
         return $e->getCode() == 23000 || $e->getCode() == 1062;
     }
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function addToCart(Request $request)
     {
         $request->validate([
             'user_id' => 'required|numeric',
@@ -71,13 +46,7 @@ class CarCartController extends Controller
         }
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
+    public function showUserCart($id)
     {
         $user = User::find($id);
         $photos = CarPhoto::all();
@@ -85,37 +54,19 @@ class CarCartController extends Controller
         return view('customer.cart.car', compact('user', 'photos'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
+    public function deleteCartItem($user_id, $item_id)
     {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        try {
+            CarCart::where('user_id', $user_id)->where('car_product_id', $item_id)->delete();
+            
+            return response()->json([
+                'status' => 'Success',
+            ], 201);
+        } catch (PDOException $e) {
+            return response()->json([
+                'status' => 'Failed',
+                'message' => 'Terjadi kesalahan. Silahkan coba lagi. ' + $e->getMessage(),
+            ], 500);
+        }
     }
 }

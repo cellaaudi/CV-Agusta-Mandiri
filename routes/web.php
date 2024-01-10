@@ -1,9 +1,11 @@
 <?php
 
 use App\Http\Controllers\AdvertisingCartAppointController;
+use App\Http\Controllers\AdvertisingCartController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\AdvertisingController;
+use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\CarBrandController;
 use App\Http\Controllers\CarBuyController;
 use App\Http\Controllers\CarCartAppointController;
@@ -63,25 +65,27 @@ Route::middleware(['auth'])->group(function () {
             // Cart
             Route::prefix('cart')->name('cart.')->group(function () {
                 Route::prefix('advertising')->name('advertising.')->group(function () {
-                    Route::post('/add-to-cart', [AdvertisingCartAppointController::class, 'addToCart'])->name('addToCart');
-                    Route::get('/{id}', [AdvertisingCartAppointController::class, 'showUserCart'])->name('show')->middleware('checkloggedinuser');
-                    Route::get('/delete/{user_id}/{item_id}', [AdvertisingCartAppointController::class, 'deleteCartItem'])->name('deleteCartItem');
+                    Route::post('/add-to-cart', [AdvertisingCartController::class, 'addToCart'])->name('addToCart');
+                    Route::get('/{id}', [AdvertisingCartController::class, 'showUserCart'])->name('show')->middleware('checkloggedinuser');
+                    Route::get('/delete/{user_id}/{item_id}', [AdvertisingCartController::class, 'deleteCartItem'])->name('deleteCartItem');
                 });
                 Route::prefix('car')->name('car.')->group(function () {
-                    Route::post('/add-to-cart', [CarCartAppointController::class, 'addToCart'])->name('addToCart');
-                    Route::get('/{id}', [CarCartAppointController::class, 'showUserCart'])->name('show')->middleware('checkloggedinuser');
-                    Route::get('/delete/{user_id}/{item_id}', [CarCartAppointController::class, 'deleteCartItem'])->name('deleteCartItem');
+                    Route::post('/add-to-cart', [CarCartController::class, 'addToCart'])->name('addToCart');
+                    Route::get('/{id}', [CarCartController::class, 'showUserCart'])->name('show')->middleware('checkloggedinuser');
+                    Route::get('/delete/{user_id}/{item_id}', [CarCartController::class, 'deleteCartItem'])->name('deleteCartItem');
                 });
-                Route::resource('/property', PropertyCartController::class);
+                Route::prefix('property')->name('property.')->group(function () {
+                    Route::post('/add-to-cart', [PropertyCartController::class, 'addToCart'])->name('addToCart');
+                    Route::get('/{id}', [PropertyCartController::class, 'showUserCart'])->name('show')->middleware('checkloggedinuser');
+                    Route::get('/delete/{user_id}/{item_id}', [PropertyCartController::class, 'deleteCartItem'])->name('deleteCartItem');
+                });
             });
 
             Route::prefix('appointment')->name('appointment.')->group(function () {
-                Route::post('/get-appointments-by-date', [AdvertisingCartAppointController::class, 'getAppointmentsByDate'])->name('listByDate');
-                Route::post('/advertising/make-appointment', [AdvertisingCartAppointController::class, 'makeAppointment'])->name('advertising.store');
-                Route::post('/car/make-appointment', [CarCartAppointController::class, 'makeAppointment'])->name('car.store');
-                Route::resource('/property', PropertyCartController::class);
+                Route::post('/get-appointments-by-date', [AppointmentController::class, 'getAppointmentsByDate'])->name('listByDate');
+                Route::post('/make-appointment', [AppointmentController::class, 'makeAppointment'])->name('makeAppointment');
             });
-            
+
             Route::resource('/profile', UserController::class);
         });
     });

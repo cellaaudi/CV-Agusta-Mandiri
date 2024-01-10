@@ -10,18 +10,17 @@
                 <h2></h2>
                 <ol>
                     <li><a href="{{ route('customer.home') }}">Halaman Utama</a></li>
-                    <li><a href="{{ route('customer.advertising') }}">Agusta Advertising</a></li>
-                    <li>Keranjang</li>
+                    <li>Janji Temu</li>
                 </ol>
             </div>
 
         </div>
     </section><!-- End Breadcrumbs -->
 
-    <section id="pricing" class="pricing portfolio section-bg inner-page">
+    <section class="inner-page">
         <div class="container" data-aos="fade-up">
             <div class="section-title">
-                <h2>Keranjang: Agusta Advertising</h2>
+                <h2>Janji Temu</h2>
             </div>
 
             <div class="row flex-lg-row">
@@ -155,143 +154,4 @@
         </div>
     </section>
 </main>
-@endsection
-
-@section('jquery')
-<script>
-    // Cek validitas waktu
-    function validTime(selectedDate) {
-        // Ambil tanggal dan waktu sekarang
-        var today = new Date();
-        var year = today.getFullYear();
-        var month = today.getMonth() + 1;
-        var date = today.getDate();
-        var hour = today.getHours();
-        var min = today.getMinutes();
-        // Ubah tanggal dan waktu sekarang dalam menit
-        var nowMin = year * 525600 + month * 43800 + date * 1440 + hour * 60 + min;
-
-        // Ambil tanggal terpilih
-        var selectedDateSplit = selectedDate.split('-');
-        var selectedYear = parseInt(selectedDateSplit[0]);
-        var selectedMonth = parseInt(selectedDateSplit[1]);
-        var selectedDay = parseInt(selectedDateSplit[2]);
-        // Ubah tanggal terpilih dalam menit
-        var selectedDateMin = selectedYear * 525600 + selectedMonth * 43800 + selectedDay * 1440;
-
-        // Ambil radio button jam
-        var rdoTime = document.getElementsByName('rdoTime');
-
-        for (var i = 0; i < rdoTime.length; i++) {
-            // Tambahkan tanggal terpilih dengan waktu dari tiap radio button
-            var end = rdoTime[i].getAttribute('data-end');
-            var endMin = selectedDateMin + parseInt(end.split(':')[0]) * 60 + parseInt(end.split(':')[1]);
-
-            if (selectedDateMin < nowMin && endMin < nowMin) {
-                rdoTime[i].disabled = true;
-                rdoTime[i].classList.add('disabled');
-            } else {
-                rdoTime[i].disabled = false;
-                rdoTime[i].classList.remove('disabled');
-            }
-        }
-    }
-
-    // Ubah value waktu mulai dan selesai
-    function selectedTime(button) {
-        document.getElementById('start').value = button.getAttribute('data-start');
-        document.getElementById('end').value = button.getAttribute('data-end');
-    }
-
-    // Able/disable button buat janji temu
-    function totalProduk() {
-        // Hitung total produk di keranjang
-        var total = $('.cardt').length;
-        $('#txtTotal').html(total + " produk");
-        if (total <= 0) {
-            $('#btnMake').prop('disabled', true)
-            $('#txtMake').show();
-            $('#txtEmpty').show();
-        } else {
-            $('#btnMake').prop('disabled', false)
-            $('#txtMake').hide();
-            $('#txtEmpty').hide();
-        }
-    }
-
-    $(document).ready(function() {
-        // Hide div notifikasi
-        $('#notifSuccess').hide();
-        $('#notifFailed').hide();
-
-        totalProduk();
-
-        // Cek jam aktif saat pertama load page
-        var selectedDate = document.getElementById('inputDate').value;
-        validTime(selectedDate);
-
-        // Cek jam aktif saat ubah tanggal
-        $('#inputDate').on('change', function() {
-            // Ambil tanggal yang dipilih
-            validTime(this.value);
-            var selectedDate = $(this).val();
-            console.log(selectedDate);
-
-            // Lakukan permintaan AJAX untuk mendapatkan janji temu yang sudah ada pada tanggal tersebut
-            $.ajax({
-                url: "{{ route('customer.appointment.listByDate') }}",
-                type: "POST",
-                data: {
-                    "_token": "<?php echo csrf_token(); ?>",
-                    'date': selectedDate
-                },
-                success: function(response) {
-                    // Tampilkan jam-jam yang tersedia
-                    showAvailableTimes(response);
-                },
-                error: function(error) {
-                    console.error('Error fetching appointments:', error);
-                }
-            });
-        });
-    });
-
-    function showAvailableTimes(appointments) {
-        // Loop melalui jam-jam yang tersedia
-        $('.btn-check').prop('disabled', false);
-
-        // Loop melalui janji temu yang sudah ada
-        $.each(appointments, function(index, appointment) {
-            var startTime = appointment.start;
-            var endTime = appointment.end;
-
-            // Nonaktifkan tombol radio untuk jam yang sudah dibooking
-            $('[data-start="' + startTime + '"][data-end="' + endTime + '"]').prop('disabled', true);
-        });
-    }
-
-    function removeCartItem(userId, cartId) {
-        // Hapus input hidden dan card berdasarkan ID keranjang
-        $('#cartId_' + cartId).remove();
-        $('#cardCartId_' + cartId).remove();
-
-        totalProduk();
-
-        $.ajax({
-            url: '/cart/advertising/delete/' + userId + '/' + cartId,
-            type: 'GET',
-            success: function(data) {
-                if (data.status == "Success") {
-                    $('#notifSuccess').show();
-                    $('#notifFailed').hide();
-                }
-            },
-            error: function(error) {
-                $('#notifSuccess').hide();
-                $('#notifFailed').html("<strong>Gagal - </strong>" + xhr.responseJSON.message + '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>');
-                $('#notifFailed').show();
-            }
-        });
-    }
-</script>
 @endsection

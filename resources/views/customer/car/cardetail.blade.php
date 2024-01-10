@@ -48,7 +48,7 @@
                                 onclick="addToCart(this)">+ Keranjang</button>
                         </div>
                         <div class="portfolio-info">
-                            <h3>Rp. {{ $car->price }}</h3>
+                            <h3 class="rupiah">{{ $car->price }}</h3>
                             <div class="row mb-2">
                                 <span class="col-sm-5 text-muted"><small>Judul</small></span>
                                 <span class="col-sm-7">{{ $car->title }}</span>
@@ -67,7 +67,7 @@
                             </div>
                             <div class="row mb-2">
                                 <span class="col-sm-5 text-muted"><small>Kilometer</small></span>
-                                <span class="col-sm-7 ">{{ $car->kilometre }} km</span>
+                                <span class="col-sm-7 kilometre">{{ $car->kilometre }}</span>
                             </div>
                             <div class="row mb-2">
                                 <span class="col-sm-5 text-muted"><small>Transmisi</small></span>
@@ -125,7 +125,7 @@
 
             $.ajax({
                 type: "POST",
-                url: "{{ route('customer.cart.car.store') }}",
+                url: "{{ route('customer.cart.car.addToCart') }}",
                 data: {
                     "_token": "<?php echo csrf_token(); ?>",
                     "user_id": user,

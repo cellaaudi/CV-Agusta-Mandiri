@@ -188,6 +188,30 @@
         <!-- Template Main JS File -->
         <script src="{{ asset('customer/js/main.js') }}"></script>
 
+        <!-- numeral.js -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/numeral.min.js"></script>
+        <script>
+            function rupiah(rp) {
+                return 'Rp ' + numeral(rp).format(0,0);
+            }
+
+            function kilometre(km) {
+                return numeral(km).format(0,0) + ' km';
+            }
+
+            $(document).ready(function() {
+                $('.rupiah').each(function() {
+                    var num = $(this).text();
+                    $(this).text(rupiah(num));
+                });
+
+                $('.kilometre').each(function() {
+                    var num = $(this).text();
+                    $(this).text(kilometre(num));
+                });
+            });
+        </script>
+
         @yield('jquery')
 
 </body>

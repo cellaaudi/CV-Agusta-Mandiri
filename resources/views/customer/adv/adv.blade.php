@@ -21,7 +21,7 @@
         <div class="container" data-aos="fade-up">
             <div class="section-title">
                 <h2>Agusta Advertising</h2>
-                <p>Berikut berbagai jenis periklanan yang dapat Anda pesan dari kami</p>
+                <p id="subAdv">Berikut berbagai jenis periklanan yang dapat Anda pesan dari kami</p>
             </div>
 
             <div class="row">
@@ -55,53 +55,6 @@
 
         </div>
     </section>
-
-    <!-- <section class="portfolio inner-page">
-        <div class="container" data-aos="fade-up">
-            <div class="section-title">
-                <h2>Agusta Advertising</h2>
-                <p>Berikut berbagai jenis periklanan yang dapat Anda pesan dari kami</p>
-            </div>
-
-            <div class="row">
-                <div class="col-lg-12 d-flex justify-content-center">
-                    <ul id="portfolio-flters">
-                        <li data-filter="*" class="filter-active">Semua</li>
-                        <li data-filter=".filter-Indoor">Indoor</li>
-                        <li data-filter=".filter-Outdoor">Outdoor</li>
-                        <li data-filter=".filter-IO">Indoor & Outdoor</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="row portfolio-container">
-                @foreach($advs as $adv)
-                <div class="col-lg-4 col-md-6 portfolio-item filter-{{ $adv -> category }}">
-                    <div class="portfolio-wrap">
-                        @foreach($photos as $photo)
-                        @if ($adv -> id == $photo -> adv_product_id)
-                        <img src="{{ asset('storage/' . $photo -> url) }}" class="img-fluid" alt="">
-                        @break
-                        @endif
-                        @endforeach
-                        <div class="portfolio-info">
-                            <h4>{{ $adv -> name }}</h4>
-                            <p>{{ $adv -> category }}</p>
-                        </div>
-                        <div class="portfolio-links">
-                            <form action="{{ route('customer.advertising.detail', $adv) }}" method="post">
-                                @csrf
-                                <button type="submit" title="More Details" class="btn btn-outline-light">Lihat Detail&nbsp;&nbsp;<i class="fa fa-angle-right" aria-hidden="true"></i></button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-                @endforeach
-
-            </div>
-
-        </div>
-    </section> -->
 </main>
 @endsection
 
@@ -148,12 +101,36 @@
                         filter: this.getAttribute('data-filter')
                     });
                     cardIsotope.on('arrangeComplete', function() {
-                        AOS.refresh()
+                        AOS.refresh();
+                        updateSubAdvText(this.options.filter);
                     });
                 }, true);
             }
-
         });
+
+        function updateSubAdvText(filter) {
+            let subAdvText = "";
+
+            switch (filter) {
+                case "*":
+                    subAdvText = "Berikut berbagai jenis periklanan yang dapat Anda pesan dari kami";
+                    break;
+                case ".filter-Indoor":
+                    subAdvText = "Berikut berbagai jenis periklanan yang cocok digunakan untuk promosi di dalam ruangan";
+                    break;
+                case ".filter-Outdoor":
+                    subAdvText = "Berikut berbagai jenis periklanan yang cocok digunakan untuk promosi di luar ruangan";
+                    break;
+                case ".filter-IO":
+                    subAdvText = "Berikut berbagai jenis periklanan yang cocok digunakan untuk promosi baik di dalam maupun luar ruangan";
+                    break;
+                default:
+                    subAdvText = "";
+                    break;
+            }
+
+            select('#subAdv').textContent = subAdvText;
+        }
     });
 </script>
 @endsection

@@ -14,11 +14,11 @@ class AdvertisingCart extends Model
 
     // public function advertising()
     // {
-    //     return $this->belongsTo("App\Models\Advertising", "adv_cart_id");
+    //     return $this->belongsTo(Advertising::class, "adv_cart_id");
     // }
 
     // public function user()
     // {
-    //     return $this->belongsTo("App\Models\User", "user_id");
+    //     return $this->belongsTo(User::class, "user_id");
     // }
 }

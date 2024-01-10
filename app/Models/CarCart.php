@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class CarCart extends Model
 {
     use HasFactory;
+    
     protected $table = 'car_carts';
     protected $guarded = ['id'];
 }

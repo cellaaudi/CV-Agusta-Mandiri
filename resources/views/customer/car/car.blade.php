@@ -105,7 +105,8 @@
                                     @endforeach
                                     <div class="card-body">
                                         <h5 class="card-title">[{{ $car->year }}] {{ $car->title }}</h5>
-                                        <p class="card-text text-primary h4"><strong>Rp. {{ $car->price }}</strong>
+                                        <br>
+                                        <p class="card-text text-primary h4 rupiah fw-bolder float-end">{{ $car->price }}
                                         </p>
                                     </div>
                                 </div>

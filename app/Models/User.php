@@ -48,11 +48,6 @@ class User extends Authenticatable
         }
     }
 
-    // public function appoinments()
-    // {
-    //     return $this->hasMany("App\Models\Appointment", "user_id");
-    // }
-
     public function advertising_cart()
     {
         return $this->belongsToMany(Advertising::class, 'adv_carts', 'user_id', 'adv_product_id');
@@ -72,9 +67,4 @@ class User extends Authenticatable
     {
         return $this->hasMany(Appointment::class, 'user_id');
     }
-
-    // public function advertising_appointment()
-    // {
-    //     return $this->hasMany(AdvertisingAppointment::class, 'user_id');
-    // }
 }

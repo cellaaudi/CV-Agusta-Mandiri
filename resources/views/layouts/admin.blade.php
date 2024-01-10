@@ -403,6 +403,21 @@
     <!-- Select2 -->
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
+    <!-- numeral.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/numeral.min.js"></script>
+    <script>
+        function rupiah(rp) {
+            return 'Rp ' + numeral(rp).format(0, 0);
+        }
+
+        $(document).ready(function() {
+            $('.rupiah').each(function() {
+                var num = $(this).text();
+                $(this).text(rupiah(num));
+            });
+        });
+    </script>
+
     @yield('jquery')
 
 </body>

@@ -239,7 +239,7 @@
 
             // Lakukan permintaan AJAX untuk mendapatkan janji temu yang sudah ada pada tanggal tersebut
             $.ajax({
-                url: "{{ route('customer.appointment.advByDate') }}",
+                url: "{{ route('customer.appointment.listByDate') }}",
                 type: "POST",
                 data: {
                     "_token": "<?php echo csrf_token(); ?>",

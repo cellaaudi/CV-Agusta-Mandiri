@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\AdvertisingCart;
-use App\Models\AdvertisingPhoto;
 use App\Models\Appointment;
+use App\Models\CarCart;
+use App\Models\CarPhoto;
 use App\Models\User;
 use Illuminate\Http\Request;
 use PDOException;
 
-class AdvertisingCartAppointController extends Controller
+class CarCartAppointController extends Controller
 {
     // Cart
     private function duplicated(PDOException $e)
@@ -21,13 +21,13 @@ class AdvertisingCartAppointController extends Controller
     {
         $request->validate([
             'user_id' => 'required|numeric',
-            'adv_product_id' => 'required|numeric'
+            'car_product_id' => 'required|numeric'
         ]);
 
         try {
-            AdvertisingCart::create([
+            CarCart::create([
                 'user_id' => $request->user_id,
-                'adv_product_id' => $request->adv_product_id,
+                'car_product_id' => $request->car_product_id,
             ]);
 
             return response()->json([
@@ -51,15 +51,15 @@ class AdvertisingCartAppointController extends Controller
     public function showUserCart($id)
     {
         $user = User::find($id);
-        $photos = AdvertisingPhoto::all();
+        $photos = CarPhoto::all();
 
-        return view('customer.cart.adv', compact('user', 'photos'));
+        return view('customer.cart.car', compact('user', 'photos'));
     }
 
     public function deleteCartItem($user_id, $item_id)
     {
         try {
-            AdvertisingCart::where('user_id', $user_id)->where('adv_product_id', $item_id)->delete();
+            CarCart::where('user_id', $user_id)->where('car_product_id', $item_id)->delete();
             
             return response()->json([
                 'status' => 'Success',
@@ -69,19 +69,10 @@ class AdvertisingCartAppointController extends Controller
                 'status' => 'Failed',
                 'message' => 'Terjadi kesalahan. Silahkan coba lagi. ' + $e->getMessage(),
             ], 500);
-        } 
+        }
     }
 
     // Appointment
-    public function getAppointmentsByDate(Request $request)
-    {
-        $date = $request->get('date');
-
-        $appointments = Appointment::whereDate('date', $date)->get();
-
-        return response()->json($appointments);
-    }
-
     public function makeAppointment(Request $request)
     {
         $request->validate([
@@ -105,9 +96,9 @@ class AdvertisingCartAppointController extends Controller
                 'user_id' => $request->user,
             ]);
 
-            AdvertisingCart::whereIn('user_id', [$request->user])->delete();
+            CarCart::whereIn('user_id', [$request->user])->delete();
 
-            return redirect()->route('customer.advertising');
+            return redirect()->route('customer.car');
         } catch (PDOException $e) {
             return redirect()->back()->with('Failed', 'Terjadi kesalahan: ' . $e->getMessage());
         }

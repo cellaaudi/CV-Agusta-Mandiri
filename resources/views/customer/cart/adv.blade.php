@@ -35,7 +35,7 @@
                         </div>
                     </div>
                     @foreach ($user->advertising_cart as $cart)
-                    <div id="cardCartId_{{ $cart->id }}" class="card mb-3 cardt">
+                    <div id="cardCartId_{{ $cart->id }}" class="card mb-3 cardt border-0 shadow">
                         <div class="row g-0">
                             @foreach ($photos as $photo)
                             @if ($cart->id == $photo->adv_product_id)
@@ -60,7 +60,7 @@
                     <div id="txtEmpty" class="card mb-3 bg-transparent border-0"><div class="card-body text-muted fs-4">Anda belum menambahkan produk apapun ke keranjang</div></div>
                 </div>
                 <div class="col-lg-7 mb-5">
-                    <div class="card">
+                    <div class="card border-0 shadow">
                         <div class="card-body">
                             <h5 class="card-title mb-3 fw-bold">Buat Janji Temu</h5>
                             <p class="card-text d-flex justify-content-between mb-1">

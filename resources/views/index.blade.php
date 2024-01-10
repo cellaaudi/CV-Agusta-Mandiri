@@ -774,7 +774,7 @@
                 </div>
 
                 <div class="col-lg-3 col-md-6">
-                    <div class="info-box  mb-4">
+                    <div class="info-box mb-4">
                         <i class="bx bx-phone-call"></i>
                         <h3>Telepon / WhatsApp</h3>
                         <p><a href="https://wa.me/6281318733001" target="_blank" style="color: inherit;">081318733001</a></p>

@@ -60,34 +60,35 @@ Route::middleware(['auth'])->group(function () {
     });
 
     // Route for Customer Only
-    Route::name('customer.')->group(function () {
-        Route::middleware("can:customer")->group(function () {
-            // Cart
-            Route::prefix('cart')->name('cart.')->group(function () {
-                Route::prefix('advertising')->name('advertising.')->group(function () {
-                    Route::post('/add-to-cart', [AdvertisingCartController::class, 'addToCart'])->name('addToCart');
-                    Route::get('/{id}', [AdvertisingCartController::class, 'showUserCart'])->name('show')->middleware('checkloggedinuser');
-                    Route::get('/delete/{user_id}/{item_id}', [AdvertisingCartController::class, 'deleteCartItem'])->name('deleteCartItem');
-                });
-                Route::prefix('car')->name('car.')->group(function () {
-                    Route::post('/add-to-cart', [CarCartController::class, 'addToCart'])->name('addToCart');
-                    Route::get('/{id}', [CarCartController::class, 'showUserCart'])->name('show')->middleware('checkloggedinuser');
-                    Route::get('/delete/{user_id}/{item_id}', [CarCartController::class, 'deleteCartItem'])->name('deleteCartItem');
-                });
-                Route::prefix('property')->name('property.')->group(function () {
-                    Route::post('/add-to-cart', [PropertyCartController::class, 'addToCart'])->name('addToCart');
-                    Route::get('/{id}', [PropertyCartController::class, 'showUserCart'])->name('show')->middleware('checkloggedinuser');
-                    Route::get('/delete/{user_id}/{item_id}', [PropertyCartController::class, 'deleteCartItem'])->name('deleteCartItem');
-                });
+    Route::name('customer.')->middleware("can:customer")->group(function () {
+        // Cart
+        // harusnya ada pengecekan apa barang (car dan properti) masih tersedia atau sudah terjual
+        Route::prefix('cart')->name('cart.')->group(function () {
+            Route::prefix('advertising')->name('advertising.')->group(function () {
+                Route::post('/add-to-cart', [AdvertisingCartController::class, 'addToCart'])->name('addToCart');
+                Route::get('/{id}', [AdvertisingCartController::class, 'showUserCart'])->name('show')->middleware('checkloggedinuser');
+                Route::get('/delete/{user_id}/{item_id}', [AdvertisingCartController::class, 'deleteCartItem'])->name('deleteCartItem');
             });
-
-            Route::prefix('appointment')->name('appointment.')->group(function () {
-                Route::post('/get-appointments-by-date', [AppointmentController::class, 'getAppointmentsByDate'])->name('listByDate');
-                Route::post('/make-appointment', [AppointmentController::class, 'makeAppointment'])->name('makeAppointment');
+            Route::prefix('car')->name('car.')->group(function () {
+                Route::post('/add-to-cart', [CarCartController::class, 'addToCart'])->name('addToCart');
+                Route::get('/{id}', [CarCartController::class, 'showUserCart'])->name('show')->middleware('checkloggedinuser');
+                Route::get('/delete/{user_id}/{item_id}', [CarCartController::class, 'deleteCartItem'])->name('deleteCartItem');
             });
-
-            Route::resource('/profile', UserController::class);
+            Route::prefix('property')->name('property.')->group(function () {
+                Route::post('/add-to-cart', [PropertyCartController::class, 'addToCart'])->name('addToCart');
+                Route::get('/{id}', [PropertyCartController::class, 'showUserCart'])->name('show')->middleware('checkloggedinuser');
+                Route::get('/delete/{user_id}/{item_id}', [PropertyCartController::class, 'deleteCartItem'])->name('deleteCartItem');
+            });
         });
+
+        Route::prefix('appointment')->name('appointment.')->group(function () {
+            Route::post('/get-appointments-by-date', [AppointmentController::class, 'getAppointmentsByDate'])->name('listByDate');
+            Route::post('/make-appointment', [AppointmentController::class, 'makeAppointment'])->name('makeAppointment');
+            Route::get('/{id}', [AppointmentController::class, 'showAllMine'])->name('index')->middleware('checkloggedinuser');
+            Route::get('/{id}/cancel', [AppointmentController::class, 'cancel'])->name('cancel');
+        });
+
+        Route::resource('/profile', UserController::class);
     });
 });
 

@@ -57,7 +57,9 @@
                         </div>
                     </div>
                     @endforeach
-                    <div id="txtEmpty" class="card mb-3 bg-transparent border-0"><div class="card-body text-muted fs-4">Anda belum menambahkan produk apapun ke keranjang</div></div>
+                    <div id="txtEmpty" class="card mb-3 bg-transparent border-0">
+                        <div class="card-body text-muted fs-4">Anda belum menambahkan produk apapun ke keranjang</div>
+                    </div>
                 </div>
                 <div class="col-lg-7 mb-5">
                     <div class="card border-0 shadow">
@@ -138,6 +140,13 @@
                                             {{ $message }}
                                         </div>
                                         @enderror
+                                    </div>
+                                </div>
+                                <div class="mb-3 row">
+                                    <label for="rdoTime1" class="col-sm-2 col-form-label">Lokasi</label>
+                                    <div class="col-sm-10">
+                                        <p type="text" readonly class="form-control-plaintext" id="staticEmail">Agusta Motor - Jl. Raya Munggu-Kapal No.27, Kapal, Kec. Mengwi, Kabupaten Badung, Bali 80351</p>
+                                        <iframe class="form-control-plaintext rounded" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3945.153577723857!2d115.17234427401867!3d-8.581228591463304!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd239a2edf729b9%3A0xec4d1cd867a12284!2sAgusta%20Motor!5e0!3m2!1sen!2sid!4v1704902549953!5m2!1sen!2sid" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                                     </div>
                                 </div>
                                 <div class="mt-5 form-actions">

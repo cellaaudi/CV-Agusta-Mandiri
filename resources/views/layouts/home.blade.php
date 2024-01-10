@@ -74,7 +74,7 @@
                         <li class="dropdown hello clear"><span style="font-weight: normal;">Halo,&nbsp</span><span>{{ auth()->user()->name }}</span>
                             <i class="bi bi-chevron-down"></i>
                             <ul>
-                                <li><a href="">Janji Temu <i class='bx bx-calendar'></i></a></li>
+                                <li><a href="{{ route('customer.appointment.index', auth()->user()->id) }}">Janji Temu <i class='bx bx-calendar'></i></a></li>
                                 <li><a href="{{ route('customer.profile.edit', auth()->user()->id) }}">Profil <i class='bx bx-user fs-4'></i></a></li>
                                 <li><a href="{{ route('logout') }}" style="color: red;">Keluar <i class='bx bx-log-out fs-4'></i></a></li>
                             </ul>

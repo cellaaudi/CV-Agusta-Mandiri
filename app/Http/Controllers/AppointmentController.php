@@ -2,10 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Advertising;
 use App\Models\AdvertisingCart;
 use App\Models\Appointment;
+use App\Models\Car;
 use App\Models\CarCart;
+use App\Models\Property;
 use App\Models\PropertyCart;
+use Illuminate\Support\Carbon;
 use Illuminate\Http\Request;
 use PDOException;
 
@@ -15,7 +19,7 @@ class AppointmentController extends Controller
     {
         $date = $request->get('date');
 
-        $appointments = Appointment::whereDate('date', $date)->get();
+        $appointments = Appointment::whereDate('date', $date)->where('order_status', 'Processed')->get();
 
         return response()->json($appointments);
     }
@@ -60,8 +64,29 @@ class AppointmentController extends Controller
 
     public function showAllMine($id)
     {
-        $apps = Appointment::where('user_id', $id)->orderByDesc('date')->get();
+        $apps = Appointment::where('user_id', $id)->whereDate('date', '>=', Carbon::today())->where('order_status', 'Processed')->orderBy('date')->orderBy('start')->get();
+        $adv = Advertising::all();
+        $car = Car::all();
+        $prop = Property::all();
 
-        return view('customer.appointment', compact('apps'));
+        return view('customer.appointment', compact('apps', 'adv', 'car', 'prop'));
+    }
+
+    public function cancel($id)
+    {
+        try {
+            $app = Appointment::find($id);
+            $app->order_status = 'Cancelled';
+            $app->save();
+
+            return response()->json([
+                'status' => 'Success',
+            ], 201);
+        } catch (PDOException $e) {
+            return response()->json([
+                'status' => 'Failed',
+                'message' => 'Terjadi kesalahan. Silahkan coba lagi. ' + $e->getMessage(),
+            ], 500);
+        }
     }
 }

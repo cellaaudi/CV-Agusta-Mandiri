@@ -53,10 +53,10 @@
                         <tbody>
                             @foreach($advs as $index => $adv)
                             <tr>
-                                <td class="text-right">{{ $index + 1 }} </td>
+                                <td>{{ $index + 1 }}.</td>
                                 <td class="text-center">{{ $adv -> id }}</td>
                                 <td>{{ $adv -> name }}</td>
-                                <td>{{ $adv -> category }}</td>
+                                <td>{{ $adv->category == 'IO' ? 'Indoor & Outdoor' : $adv->category }}</td>
                                 <td>
                                     <a href="{{ route('admin.advertising.show', $adv) }}" type="button" class="btn btn-success btn-rounded"><i class="far fa-folder-open"></i> Detail</a>
                                     <a href="{{ route('admin.advertising.edit', $adv) }}" type="button" class="btn btn-warning btn-rounded"><i class="far fa-edit"></i> Edit</a>

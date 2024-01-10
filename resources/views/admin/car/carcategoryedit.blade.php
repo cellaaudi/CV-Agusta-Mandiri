@@ -44,7 +44,7 @@
                     </div>
                     <div class="form-actions">
                         <div class="text-end">
-                            <a href="{{ route('admin.car.category.index') }}" type="reset" class="btn btn-outline-danger btn-rounded">Batal</a>
+                            <a href="{{ URL::previous() }}" type="reset" class="btn btn-outline-danger btn-rounded">Batal</a>
                             <button type="submit" class="btn btn-primary btn-rounded">Simpan</button>
                         </div>
                     </div>

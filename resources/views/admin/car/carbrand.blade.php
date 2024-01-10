@@ -44,16 +44,22 @@
                     <table id="multi_col_order" class="table border table-striped table-bordered text-nowrap" style="width:100%">
                         <thead>
                             <tr>
+                                <th>No.</th>
                                 <th>ID</th>
                                 <th>Merk</th>
+                                <th>Ditambahkan Pada</th>
+                                <th>Edit Terakhir</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($brands as $brand)
+                            @foreach($brands as $index => $brand)
                             <tr>
-                                <td>{{ $brand -> id }}</td>
+                                <td>{{ $index + 1 }}.</td>
+                                <td class="text-center">{{ $brand -> id }}</td>
                                 <td>{{ $brand -> brand }}</td>
+                                <td>{{ \Carbon\Carbon::parse($brand->created_at)->format('Y-m-d') }}</td>
+                                <td>{{ \Carbon\Carbon::parse($brand->updated_at)->format('Y-m-d') }}</td>
                                 <td>
                                     <a href="{{ route('admin.car.brand.edit', $brand) }}" type="button" class="btn btn-warning btn-rounded"><i class="far fa-edit"></i> Edit</a>
                                     <button type="button" class="btn btn-danger btn-rounded" data-bs-toggle="modal" data-bs-target="#delModal" data-brand="{{ json_encode($brand) }}" onclick="deleteSelected(this)"><i class="far fa-trash-alt"></i> Hapus</button>

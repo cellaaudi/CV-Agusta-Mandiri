@@ -42,7 +42,7 @@ class CustomerController extends Controller
 
     public function cars()
     {
-        $cars = Car::where('status', 'Sell')->where('sell_status', 'Available')->get();
+        $cars = Car::where('sell_status', 'Available')->get();
         $photos = CarPhoto::all();
         $brands = CarBrand::orderBy('brand', 'asc')->get();
         $categories = CarCategory::orderBy('category', 'asc')->get();

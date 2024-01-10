@@ -206,6 +206,21 @@
         }
     }
 
+    function availableTimes(date) {
+        // Lakukan permintaan AJAX untuk mendapatkan janji temu yang sudah ada pada tanggal tersebut
+        $.ajax({
+            url: "/appointment/" +date +"/get-appointments",
+            type: "GET",
+            success: function(response) {
+                // Tampilkan jam-jam yang tersedia
+                showAvailableTimes(response);
+            },
+            error: function(error) {
+                console.error('Error fetching appointments:', error);
+            }
+        });
+    }
+
     // Ubah value waktu mulai dan selesai
     function selectedTime(button) {
         document.getElementById('start').value = button.getAttribute('data-start');
@@ -235,33 +250,16 @@
 
         totalProduk();
 
-        // Cek jam aktif saat pertama load page
+        // Cek jam aktif dan tersedia saat pertama load page
         var selectedDate = document.getElementById('inputDate').value;
         validTime(selectedDate);
+        availableTimes(selectedDate);
 
         // Cek jam aktif saat ubah tanggal
         $('#inputDate').on('change', function() {
             // Ambil tanggal yang dipilih
             validTime(this.value);
-            var selectedDate = $(this).val();
-            console.log(selectedDate);
-
-            // Lakukan permintaan AJAX untuk mendapatkan janji temu yang sudah ada pada tanggal tersebut
-            $.ajax({
-                url: "{{ route('customer.appointment.listByDate') }}",
-                type: "POST",
-                data: {
-                    "_token": "<?php echo csrf_token(); ?>",
-                    'date': selectedDate
-                },
-                success: function(response) {
-                    // Tampilkan jam-jam yang tersedia
-                    showAvailableTimes(response);
-                },
-                error: function(error) {
-                    console.error('Error fetching appointments:', error);
-                }
-            });
+            availableTimes(this.value);
         });
     });
 

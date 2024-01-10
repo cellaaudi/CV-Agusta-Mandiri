@@ -43,6 +43,7 @@
                     <table id="multi_col_order" class="table border table-striped table-bordered text-nowrap" style="width:100%">
                         <thead>
                             <tr>
+                                <th>No.</th>
                                 <th>ID</th>
                                 <th>Judul</th>
                                 <th>Harga</th>
@@ -53,11 +54,12 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($props as $prop)
+                            @foreach($props as $index => $prop)
                             <tr>
-                                <td>{{ $prop -> id }}</td>
+                                <td>{{ $index + 1 }}.</td>
+                                <td class="text-center">{{ $prop -> id }}</td>
                                 <td>{{ $prop -> title }}</td>
-                                <td>Rp. {{ $prop -> price }}</td>
+                                <td class="rupiah">{{ $prop -> price }}</td>
                                 <td>{{ $prop -> category == 'House' ? 'Rumah' : ( $prop -> category == 'Land' ? 'Tanah' : 'Villa') }}</td>
                                 <td>{{ $prop -> type == 'Sell' ? 'Jual' : ( $prop -> type == 'Rent' ? 'Sewa' : 'Jual dan Sewa') }}</td>
                                 <td class="{{ $prop -> status == 'Available' ? 'bg-success' : 'bg-danger' }}" style="color: #fff;">{{ $prop -> status == 'Available' ? 'Tersedia' : 'Terjual/Tersewa'}}</td>

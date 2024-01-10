@@ -18,6 +18,11 @@
     <!-- Custom CSS -->
     <link href="{{ asset('admin/dist/css/style.min.css') }}" rel="stylesheet">
 
+    <link rel="stylesheet" type="text/css" href="{{ asset('admin/extra-libs/prism/prism.css') }}">
+
+    <link rel="stylesheet" href="{{ asset('admin/extra-libs/datatables.net-bs4/css/dataTables.bootstrap4.css') }}">
+    <link rel="stylesheet" href="{{ asset('admin/extra-libs/datatables.net-bs4/css/responsive.dataTables.min.css') }}">
+
     <!-- Custom -->
     <link href="{{ asset('admin/dist/css/styles.css') }}" rel="stylesheet">
 
@@ -248,90 +253,14 @@
                         <li class="sidebar-item"> <a class="sidebar-link" href="{{ route('admin.property.index') }}" aria-expanded="false"><i data-feather="home" class="feather-icon"></i><span class="hide-menu">Agusta Properti</span></a></li>
 
                         <li class="list-divider"></li>
-                        <li class="nav-small-cap"><span class="hide-menu">Components</span></li>
-                        <li class="sidebar-item"> <a class="sidebar-link has-arrow" href="javascript:void(0)" aria-expanded="false"><i data-feather="file-text" class="feather-icon"></i><span class="hide-menu">Forms </span></a>
-                            <ul aria-expanded="false" class="collapse  first-level base-level-line">
-                                <li class="sidebar-item"><a href="form-inputs.html" class="sidebar-link"><span class="hide-menu"> Form Inputs
-                                        </span></a>
-                                </li>
-                                <li class="sidebar-item"><a href="form-input-grid.html" class="sidebar-link"><span class="hide-menu"> Form Grids
-                                        </span></a>
-                                </li>
-                                <li class="sidebar-item"><a href="form-checkbox-radio.html" class="sidebar-link"><span class="hide-menu"> Checkboxes &
-                                            Radios
-                                        </span></a>
-                                </li>
-                            </ul>
+                        <li class="nav-small-cap"><span class="hide-menu">Janji Temu</span></li>
+                        <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="{{ route('admin.appointment.indexProcess') }}" aria-expanded="false"><i data-feather="clock" class="feather-icon"></i><span class="hide-menu">Sedang Berjalan
+                                </span></a>
                         </li>
-                        <li class="sidebar-item"> <a class="sidebar-link has-arrow" href="javascript:void(0)" aria-expanded="false"><i data-feather="grid" class="feather-icon"></i><span class="hide-menu">Tables </span></a>
-                            <ul aria-expanded="false" class="collapse  first-level base-level-line">
-                                <li class="sidebar-item"><a href="table-basic.html" class="sidebar-link"><span class="hide-menu"> Basic Table
-                                        </span></a>
-                                </li>
-                                <li class="sidebar-item"><a href="table-dark-basic.html" class="sidebar-link"><span class="hide-menu"> Dark Basic Table
-                                        </span></a>
-                                </li>
-                                <li class="sidebar-item"><a href="table-sizing.html" class="sidebar-link"><span class="hide-menu">
-                                            Sizing Table
-                                        </span></a>
-                                </li>
-                                <li class="sidebar-item"><a href="table-layout-coloured.html" class="sidebar-link"><span class="hide-menu">
-                                            Coloured
-                                            Table Layout
-                                        </span></a>
-                                </li>
-                                <li class="sidebar-item"><a href="table-datatable-basic.html" class="sidebar-link"><span class="hide-menu">
-                                            Basic
-                                            Datatables
-                                            Layout
-                                        </span></a>
-                                </li>
-                            </ul>
+                        <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="{{ route('admin.appointment.indexFinish') }}" aria-expanded="false"><i data-feather="check-circle" class="feather-icon"></i><span class="hide-menu">Selesai
+                                </span></a>
                         </li>
-                        <li class="sidebar-item"> <a class="sidebar-link has-arrow" href="javascript:void(0)" aria-expanded="false"><i data-feather="bar-chart" class="feather-icon"></i><span class="hide-menu">Charts </span></a>
-                            <ul aria-expanded="false" class="collapse  first-level base-level-line">
-                                <li class="sidebar-item"><a href="chart-morris.html" class="sidebar-link"><span class="hide-menu"> Morris Chart
-                                        </span></a>
-                                </li>
-                                <li class="sidebar-item"><a href="chart-chart-js.html" class="sidebar-link"><span class="hide-menu"> ChartJs
-                                        </span></a>
-                                </li>
-                                <li class="sidebar-item"><a href="chart-knob.html" class="sidebar-link"><span class="hide-menu">
-                                            Knob Chart
-                                        </span></a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="sidebar-item"> <a class="sidebar-link has-arrow" href="javascript:void(0)" aria-expanded="false"><i data-feather="box" class="feather-icon"></i><span class="hide-menu">UI Elements </span></a>
-                            <ul aria-expanded="false" class="collapse  first-level base-level-line">
-                                <li class="sidebar-item"><a href="ui-buttons.html" class="sidebar-link"><span class="hide-menu"> Buttons
-                                        </span></a>
-                                </li>
-                                <li class="sidebar-item"><a href="ui-modals.html" class="sidebar-link"><span class="hide-menu"> Modals </span></a>
-                                </li>
-                                <li class="sidebar-item"><a href="ui-tab.html" class="sidebar-link"><span class="hide-menu"> Tabs </span></a></li>
-                                <li class="sidebar-item"><a href="ui-tooltip-popover.html" class="sidebar-link"><span class="hide-menu"> Tooltip &
-                                            Popover</span></a></li>
-                                <li class="sidebar-item"><a href="ui-notification.html" class="sidebar-link"><span class="hide-menu">Notification</span></a></li>
-                                <li class="sidebar-item"><a href="ui-progressbar.html" class="sidebar-link"><span class="hide-menu">Progressbar</span></a></li>
-                                <li class="sidebar-item"><a href="ui-typography.html" class="sidebar-link"><span class="hide-menu">Typography</span></a></li>
-                                <li class="sidebar-item"><a href="ui-bootstrap.html" class="sidebar-link"><span class="hide-menu">Bootstrap
-                                            UI</span></a></li>
-                                <li class="sidebar-item"><a href="ui-breadcrumb.html" class="sidebar-link"><span class="hide-menu">Breadcrumb</span></a></li>
-                                <li class="sidebar-item"><a href="ui-list-media.html" class="sidebar-link"><span class="hide-menu">List
-                                            Media</span></a></li>
-                                <li class="sidebar-item"><a href="ui-grid.html" class="sidebar-link"><span class="hide-menu"> Grid </span></a></li>
-                                <li class="sidebar-item"><a href="ui-carousel.html" class="sidebar-link"><span class="hide-menu">
-                                            Carousel</span></a></li>
-                                <li class="sidebar-item"><a href="ui-scrollspy.html" class="sidebar-link"><span class="hide-menu">
-                                            Scrollspy</span></a></li>
-                                <li class="sidebar-item"><a href="ui-toasts.html" class="sidebar-link"><span class="hide-menu"> Toasts</span></a>
-                                </li>
-                                <li class="sidebar-item"><a href="ui-spinner.html" class="sidebar-link"><span class="hide-menu"> Spinner </span></a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="ui-cards.html" aria-expanded="false"><i data-feather="sidebar" class="feather-icon"></i><span class="hide-menu">Cards
+                        <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="{{ route('admin.appointment.indexCancel') }}" aria-expanded="false"><i data-feather="x-circle" class="feather-icon"></i><span class="hide-menu">Dibatalkan
                                 </span></a>
                         </li>
 
@@ -398,6 +327,30 @@
     <script src="{{ asset('admin/extra-libs/jvector/jquery-jvectormap-2.0.2.min.js') }}"></script>
     <script src="{{ asset('admin/extra-libs/jvector/jquery-jvectormap-world-mill-en.js') }}"></script>
     <script src="{{ asset('admin/dist/js/pages/dashboards/dashboard1.min.js') }}"></script>
+
+    <!-- Bootstrap tether Core JavaScript -->
+    <script src="{{ asset('admin/libs/popper.js/dist/umd/popper.min.js') }}"></script>
+    <script src="{{ asset('admin/libs/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script>
+    <!-- apps -->
+    <!-- apps -->
+    <!-- <script src="{{ asset('admin/dist/js/app-style-switcher.js') }}"></script> -->
+    <!-- <script src="{{ asset('admin/dist/js/feather.min.js') }}"></script> -->
+    <!-- slimscrollbar scrollbar JavaScript -->
+    <!-- <script src="{{ asset('admin/libs/perfect-scrollbar/dist/perfect-scrollbar.jquery.min.js') }}"></script> -->
+    <script src="{{ asset('admin/extra-libs/sparkline/sparkline.js') }}"></script>
+    <!--Wave Effects -->
+    <!-- themejs -->
+    <!--Menu sidebar -->
+    <!-- <script src="{{ asset('admin/dist/js/sidebarmenu.js') }}"></script> -->
+    <!--Custom JavaScript -->
+    <!-- <script src="{{ asset('admin/dist/js/custom.min.js') }}"></script> -->
+    <!--This page plugins -->
+    <script src="{{ asset('admin/extra-libs/datatables.net/js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('admin/extra-libs/datatables.net-bs4/js/dataTables.responsive.min.js') }}"></script>
+    <script src="{{ asset('admin/dist/js/pages/datatable/datatable-basic.init.js') }}"></script>
+    <!-- <script src="{{ asset('DataTables/datatables.min.js') }}"></script> -->
+
+    <script src="{{ asset('admin/extra-libs/prism/prism.js') }}"></script>
 
     <!-- Select2 -->
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>

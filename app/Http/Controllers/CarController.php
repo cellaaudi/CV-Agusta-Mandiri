@@ -17,7 +17,7 @@ class CarController extends Controller
      */
     public function index()
     {
-        $cars = Car::where('status', 'Sell')->get();
+        $cars = Car::orderByDesc('created_at')->get();
 
         return view('admin.car.carsell', compact('cars'));
     }
@@ -70,7 +70,6 @@ class CarController extends Controller
                 'capacity' => $request->capacity,
                 'fuel' => $request->fuel,
                 'description' => $request->desc,
-                'status' => 'Sell',
                 'sell_status' => 'Available',
                 'car_brand_id' => $request->brand,
                 'car_category_id' => $request->category

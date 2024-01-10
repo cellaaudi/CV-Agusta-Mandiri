@@ -18,7 +18,6 @@ class DatabaseSeeder extends Seeder
         $this->call(CarCategorySeeder::class);
         $this->call(CarProductSeeder::class);
         $this->call(PropProductSeeder::class);
-        $this->call(TradeCategorySeeder::class);
         $this->call(UserSeeder::class);
         
         $this->call(AdvPhotoSeeder::class);

@@ -108,7 +108,7 @@
                     <input type="hidden" name="del_photos[]" id="del_photos" value="">
                     <div class="form-actions">
                         <div class="text-end">
-                            <a href="{{ route('admin.advertising.index') }}" type="reset" class="btn btn-outline-danger btn-rounded">Batal</a>
+                            <a href="{{ URL::previous() }}" type="reset" class="btn btn-outline-danger btn-rounded">Batal</a>
                             <button type="submit" class="btn btn-primary btn-rounded">Simpan</button>
                         </div>
                     </div>

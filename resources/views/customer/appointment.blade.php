@@ -37,7 +37,7 @@
                     </div>
                     @foreach ($apps as $index => $a)
                     <div id="app_{{ $a->id }}" class="card w-100 border-0 shadow mb-3 cardt">
-                        <div class="card-header bg-primary text-white fw-bolder">Agusta {{ $a->product_type == 'Adv' ? 'Advertising' : ($a->product_type == 'Car' ? 'Motor' : 'Properti') }}</div>
+                        <div class="card-header text-white fw-bolder {{ $a->product_type == 'Adv' ? 'bg-success' : ($a->product_type == 'Car' ? 'bg-danger' : 'bg-info') }}">Agusta {{ $a->product_type == 'Adv' ? 'Advertising' : ($a->product_type == 'Car' ? 'Motor' : 'Properti') }}</div>
                         <div class="card-body">
                             <p class="card-text row">
                                 <span class="col-lg-2 text-muted"><small>Tanggal</small></span>

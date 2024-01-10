@@ -16,7 +16,7 @@ class AdvertisingController extends Controller
      */
     public function index()
     {
-        $advs = Advertising::all();
+        $advs = Advertising::orderBy('name')->get();
 
         return view('admin.adv.adv', compact('advs'));
     }

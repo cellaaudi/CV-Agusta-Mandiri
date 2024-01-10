@@ -59,7 +59,7 @@
                 </div>
                 <div class="form-actions mt-5">
                     <div class="text-end">
-                        <a href="{{ route('customer.profile.edit', $user->id) }}" type="reset" class="btn btn-outline-danger btn-rounded">Batal</a>
+                        <a href="{{ URL::previous() }}" type="reset" class="btn btn-outline-danger btn-rounded">Batal</a>
                         <button type="submit" class="btn btn-primary btn-rounded">Simpan</button>
                     </div>
                 </div>

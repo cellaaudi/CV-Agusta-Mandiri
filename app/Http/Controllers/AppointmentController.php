@@ -15,10 +15,8 @@ use PDOException;
 
 class AppointmentController extends Controller
 {
-    public function getAppointmentsByDate(Request $request)
+    public function getAppointmentsByDate($date)
     {
-        $date = $request->get('date');
-
         $appointments = Appointment::whereDate('date', $date)->where('order_status', 'Processed')->get();
 
         return response()->json($appointments);
@@ -56,7 +54,7 @@ class AppointmentController extends Controller
                 PropertyCart::whereIn('user_id', [$request->user])->delete();
             }
 
-            return redirect()->route('customer.advertising');
+            return redirect()->route('customer.appointment.index', $request->user);
         } catch (PDOException $e) {
             return redirect()->back()->with('Failed', 'Terjadi kesalahan: ' . $e->getMessage());
         }

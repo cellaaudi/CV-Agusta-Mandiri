@@ -147,6 +147,13 @@
                                         @enderror
                                     </div>
                                 </div>
+                                <div class="mb-3 row">
+                                    <label for="rdoTime1" class="col-sm-2 col-form-label">Lokasi</label>
+                                    <div class="col-sm-10">
+                                        <p type="text" readonly class="form-control-plaintext" id="staticEmail">Agusta Motor - Jl. Raya Munggu-Kapal No.27, Kapal, Kec. Mengwi, Kabupaten Badung, Bali 80351</p>
+                                        <iframe class="form-control-plaintext rounded" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3945.153577723857!2d115.17234427401867!3d-8.581228591463304!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd239a2edf729b9%3A0xec4d1cd867a12284!2sAgusta%20Motor!5e0!3m2!1sen!2sid!4v1704902549953!5m2!1sen!2sid" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                                    </div>
+                                </div>
                                 <div class="mt-5 form-actions">
                                     <div class="d-grid gap-2">
                                         <button id="btnMake" class="add-cart btn">Buat Janji Temu</button>
@@ -204,6 +211,21 @@
         }
     }
 
+    function availableTimes(date) {
+        // Lakukan permintaan AJAX untuk mendapatkan janji temu yang sudah ada pada tanggal tersebut
+        $.ajax({
+            url: "/appointment/" + date + "/get-appointments",
+            type: "GET",
+            success: function(response) {
+                // Tampilkan jam-jam yang tersedia
+                showAvailableTimes(response);
+            },
+            error: function(error) {
+                console.error('Error fetching appointments:', error);
+            }
+        });
+    }
+
     // Ubah value waktu mulai dan selesai
     function selectedTime(button) {
         document.getElementById('start').value = button.getAttribute('data-start');
@@ -236,30 +258,13 @@
         // Cek jam aktif saat pertama load page
         var selectedDate = document.getElementById('inputDate').value;
         validTime(selectedDate);
+        availableTimes(selectedDate);
 
         // Cek jam aktif saat ubah tanggal
         $('#inputDate').on('change', function() {
             // Ambil tanggal yang dipilih
             validTime(this.value);
-            var selectedDate = $(this).val();
-            console.log(selectedDate);
-
-            // Lakukan permintaan AJAX untuk mendapatkan janji temu yang sudah ada pada tanggal tersebut
-            $.ajax({
-                url: "{{ route('customer.appointment.listByDate') }}",
-                type: "POST",
-                data: {
-                    "_token": "<?php echo csrf_token(); ?>",
-                    'date': selectedDate
-                },
-                success: function(response) {
-                    // Tampilkan jam-jam yang tersedia
-                    showAvailableTimes(response);
-                },
-                error: function(error) {
-                    console.error('Error fetching appointments:', error);
-                }
-            });
+            availableTimes(this.value);
         });
     });
 

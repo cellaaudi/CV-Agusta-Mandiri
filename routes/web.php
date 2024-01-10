@@ -1,21 +1,18 @@
 <?php
 
-use App\Http\Controllers\AdvertisingCartAppointController;
 use App\Http\Controllers\AdvertisingCartController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\AdvertisingController;
+use App\Http\Controllers\AppointmentAdminController;
 use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\CarBrandController;
-use App\Http\Controllers\CarBuyController;
-use App\Http\Controllers\CarCartAppointController;
 use App\Http\Controllers\CarCartController;
 use App\Http\Controllers\CarCategoryController;
 use App\Http\Controllers\CarController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\IndonesiaController;
 use App\Http\Controllers\PropertyCartController;
-use App\Http\Controllers\PropertyCategoryController;
 use App\Http\Controllers\PropertyController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -49,14 +46,24 @@ Route::middleware(['auth'])->group(function () {
             return view('admin.index');
         })->name('home');
 
+        // Products
         Route::resource('/advertising', AdvertisingController::class);
         Route::prefix('car')->name('car.')->group(function () {
             Route::resource('/sell', CarController::class);
-            Route::resource('/buy', CarBuyController::class);
             Route::resource('/brand', CarBrandController::class);
             Route::resource('/category', CarCategoryController::class);
         });
         Route::resource('/property', PropertyController::class);
+
+        // Appointments
+        Route::prefix('appointment')->name('appointment.')->group(function () {
+            Route::get('/process', [AppointmentAdminController::class, 'indexProcess'])->name('indexProcess');
+            Route::get('/finish', [AppointmentAdminController::class, 'indexFinish'])->name('indexFinish');
+            Route::get('/cancel', [AppointmentAdminController::class, 'indexCancel'])->name('indexCancel');
+            Route::get('/{id}/detail', [AppointmentAdminController::class, 'detail'])->name('detail');
+            Route::get('/{id}/edit', [AppointmentAdminController::class, 'edit'])->name('edit');
+            Route::post('/update', [AppointmentAdminController::class, 'update'])->name('update');
+        });
     });
 
     // Route for Customer Only
@@ -82,7 +89,7 @@ Route::middleware(['auth'])->group(function () {
         });
 
         Route::prefix('appointment')->name('appointment.')->group(function () {
-            Route::post('/get-appointments-by-date', [AppointmentController::class, 'getAppointmentsByDate'])->name('listByDate');
+            Route::get('/{date}/get-appointments', [AppointmentController::class, 'getAppointmentsByDate'])->name('listByDate');
             Route::post('/make-appointment', [AppointmentController::class, 'makeAppointment'])->name('makeAppointment');
             Route::get('/{id}', [AppointmentController::class, 'showAllMine'])->name('index')->middleware('checkloggedinuser');
             Route::get('/{id}/cancel', [AppointmentController::class, 'cancel'])->name('cancel');

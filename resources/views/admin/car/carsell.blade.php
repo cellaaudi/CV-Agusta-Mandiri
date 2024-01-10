@@ -14,13 +14,13 @@
 <div class="page-breadcrumb">
     <div class="row">
         <div class="col-7 align-self-center">
-            <h4 class="page-title text-truncate text-dark font-weight-medium mb-1">Agusta Motor: Jual Mobil</h4>
+            <h4 class="page-title text-truncate text-dark font-weight-medium mb-1">Agusta Motor: Produk</h4>
             <div class="d-flex align-items-center">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb m-0 p-0">
                         <li class="breadcrumb-item"><a href="{{ route('admin.home') }}" class="text-muted">Beranda</a></li>
                         <li class="breadcrumb-item text-muted active" aria-current="page">Agusta Motor</li>
-                        <li class="breadcrumb-item text-muted active" aria-current="page">Jual Mobil</li>
+                        <li class="breadcrumb-item text-muted active" aria-current="page">Produk</li>
                     </ol>
                 </nav>
             </div>
@@ -44,6 +44,7 @@
                     <table id="multi_col_order" class="table border table-striped table-bordered text-nowrap" style="width:100%">
                         <thead>
                             <tr>
+                                <th>No.</th>
                                 <th>ID</th>
                                 <th>Judul</th>
                                 <th>Tahun</th>
@@ -55,14 +56,15 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($cars as $car)
+                            @foreach($cars as $index => $car)
                             <tr>
-                                <td>{{ $car -> id }}</td>
+                                <td>{{ $index + 1 }}.</td>
+                                <td class="text-center">{{ $car -> id }}</td>
                                 <td>{{ $car -> title }}</td>
                                 <td>{{ $car -> year }}</td>
                                 <td>{{ $car -> car_brand -> brand }}</td>
                                 <td>{{ $car -> car_category -> category }}</td>
-                                <td>Rp. {{ $car -> price }}</td>
+                                <td class="rupiah">{{ $car -> price }}</td>
                                 <td class="{{ $car -> sell_status == 'Available' ? 'bg-success' : 'bg-danger' }}" style="color: #fff;">{{ $car -> sell_status == 'Available' ? 'Tersedia' : 'Terjual' }}</td>
                                 <td>
                                     <a href="{{ route('admin.car.sell.show', $car) }}" type="button" class="btn btn-success btn-rounded"><i class="far fa-folder-open"></i> Detail</a>

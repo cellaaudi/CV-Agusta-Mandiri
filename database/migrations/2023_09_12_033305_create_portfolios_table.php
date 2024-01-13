@@ -18,7 +18,7 @@ class CreatePortfoliosTable extends Migration
             $table->string('title');
             $table->text('photo');
             $table->longText('description');
-            $table->enum('category', ['Adv', 'Car', 'Properties']);
+            $table->enum('category', ['Adv', 'Car', 'Prop']);
             $table->timestamps();
         });
     }

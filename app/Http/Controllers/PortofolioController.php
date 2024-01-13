@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Portofolio;
 use Illuminate\Http\Request;
+use PDOException;
 
 class PortofolioController extends Controller
 {
@@ -13,7 +15,9 @@ class PortofolioController extends Controller
      */
     public function index()
     {
-        //
+        $ports = Portofolio::all();
+
+        return view('admin.portfolio.portfolio', compact('ports'));
     }
 
     /**
@@ -23,7 +27,7 @@ class PortofolioController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.portfolio.portfoliocreate');
     }
 
     /**
@@ -34,7 +38,34 @@ class PortofolioController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'title' => 'required',
+            'description' => 'required',
+            'category' => 'required',
+            'photo' => 'required',
+            'photo.*' => 'image|mimes:jpeg,jpg,png,svg,gif'
+        ]);
+
+        try {
+            if ($request->hasFile('photo')) {
+                $file = $request->file('photo');
+                $filename = $file->store('porto');
+
+                Portofolio::create([
+                    'title' => $request->title,
+                    'description' => $request->description,
+                    'category' => $request->category,
+                    'photo' => $filename
+                ]);
+            }
+
+            return redirect()->route('admin.portfolio.index');
+        } catch (PDOException $e) {
+            return response()->json([
+                'status' => 'Failed',
+                'message' => 'Terjadi kesalahan. ' + $e->getMessage(),
+            ]);
+        }
     }
 
     /**
@@ -45,7 +76,9 @@ class PortofolioController extends Controller
      */
     public function show($id)
     {
-        //
+        $port = Portofolio::find($id);
+
+        return view('admin.portfolio.portfolioshow', compact('port'));
     }
 
     /**
@@ -56,7 +89,9 @@ class PortofolioController extends Controller
      */
     public function edit($id)
     {
-        //
+        $port = Portofolio::find($id);
+
+        return view('admin.portfolio.portfolioedit', compact('port'));
     }
 
     /**
@@ -68,7 +103,41 @@ class PortofolioController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'title' => 'required',
+            'description' => 'required',
+            'category' => 'required',
+            'photo' => 'required',
+            'photo.*' => 'image|mimes:jpeg,jpg,png,svg,gif'
+        ]);
+
+        try {
+            $port = Portofolio::find($id);
+            $port->title = $request->title;
+            $port->description = $request->description;
+            $port->category = $request->category;
+
+            if ($request->hasFile('photo')) {
+                $storage = public_path('storage/' . $port->photo);
+                if (file_exists($storage)) {
+                    unlink($storage);
+                }
+
+                $file = $request->file('photo');
+                $filename = $file->store('porto');
+
+                $port->photo = $filename;
+            }
+
+            $port->save();
+
+            return redirect()->route('admin.portfolio.index');
+        } catch (PDOException $e) {
+            return response()->json([
+                'status' => 'Failed',
+                'message' => 'Terjadi kesalahan. ' + $e->getMessage(),
+            ]);
+        }
     }
 
     /**
@@ -79,6 +148,17 @@ class PortofolioController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $img = Portofolio::find($id);
+
+        if ($img) {
+            $storage = public_path('storage/' . $img->photo);
+            if (file_exists($storage)) {
+                unlink($storage);
+            }
+        }
+
+        Portofolio::find($id)->delete();
+
+        return redirect()->route('admin.portfolio.index');
     }
 }

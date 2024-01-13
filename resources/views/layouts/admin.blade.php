@@ -189,6 +189,12 @@
                         <li class="list-divider"></li>
                         <li class="nav-small-cap"><span class="hide-menu">Laporan</span></li>
                         <li class="sidebar-item">
+                            <a class="sidebar-link sidebar-link" href="{{ route('admin.portfolio.index') }}" aria-expanded="false">
+                                <i data-feather="image" class="feather-icon"></i>
+                                <span class="hide-menu">Portofolio</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
                             <a class="sidebar-link has-arrow" href="javascript:void(0)" aria-expanded="false">
                                 <i data-feather="box" class="feather-icon"></i>
                                 <span class="hide-menu">Produk Terlaris</span>

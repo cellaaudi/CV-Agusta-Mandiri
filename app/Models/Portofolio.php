@@ -8,4 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Portofolio extends Model
 {
     use HasFactory;
+
+    protected $table = "portfolios";
+    protected $guarded = ['id'];
 }

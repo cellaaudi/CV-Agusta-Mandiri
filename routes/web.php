@@ -12,6 +12,7 @@ use App\Http\Controllers\CarCategoryController;
 use App\Http\Controllers\CarController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\IndonesiaController;
+use App\Http\Controllers\PortofolioController;
 use App\Http\Controllers\PropertyCartController;
 use App\Http\Controllers\PropertyController;
 use App\Http\Controllers\ReportController;
@@ -53,6 +54,7 @@ Route::middleware(['auth'])->group(function () {
             Route::resource('/category', CarCategoryController::class);
         });
         Route::resource('/property', PropertyController::class);
+        Route::resource('/portfolio', PortofolioController::class);
 
         // Appointments
         Route::prefix('appointment')->name('appointment.')->group(function () {

@@ -1,8 +1,5 @@
 @extends('layouts.admin')
 
-@section('css')
-@endsection
-
 @section('breadcrumb')
 <div class="page-breadcrumb">
     <div class="row">
@@ -95,20 +92,6 @@
 @section('jquery')
 <script>
     $(document).ready(function() {
-        // // PREVIEW IMAGE INPUTTED
-        // $('.inputPhoto').on('change', function() {
-        //     const file = this.files[0];
-
-        //     if (file) {
-        //         var reader = new FileReader();
-
-        //         reader.onload = function(event) {
-        //             $(".preview").html("<img id='photoPreview' class='img-fluid mx-auto d-block' src='" + event.target.result + "'>");
-        //         };
-        //         reader.readAsDataURL(file);
-        //     }
-        // });
-
         // ADD PHOTO SLOTS
         $('.btnAddPhoto').click(function() {
             $('#photos').append('<div class="col-sm-2 col-form-label"></div><div class="col-sm-10 mt-2"><div class="input-group flex-nowrap"><div class="custom-file w-100"><input class="form-control" type="file" name="photos[]"></div><button class="btn btn-outline-danger btnDelPhoto" type="button"><i class="fas fa-minus"></i></button></div></div>');

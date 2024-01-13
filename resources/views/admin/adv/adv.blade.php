@@ -1,15 +1,5 @@
 @extends('layouts.admin')
 
-@section('css')
-<!-- This page plugin CSS -->
-<!-- <link href="{{ asset('admin/extra-libs/datatables.net-bs4/css/dataTables.bootstrap4.css') }}" rel="stylesheet"> -->
-<link rel="stylesheet" href="{{ asset('admin/extra-libs/datatables.net-bs4/css/dataTables.bootstrap4.css') }}">
-<link rel="stylesheet" href="{{ asset('admin/extra-libs/datatables.net-bs4/css/responsive.dataTables.min.css') }}">
-<!-- Custom CSS -->
-<link href="{{ asset('admin/dist/css/style.min.css') }}" rel="stylesheet">
-<!-- <link rel="stylesheet" href="{{ asset('DataTables/datatables.min.js') }}"> -->
-@endsection
-
 @section('breadcrumb')
 <div class="page-breadcrumb">
     <div class="row">
@@ -97,32 +87,6 @@
 @endsection
 
 @section('jquery')
-<!-- All Jquery -->
-<!-- ============================================================== -->
-<!-- <script src="{{ asset('admin/libs/jquery/dist/jquery.min.js') }}">
-</script> -->
-<!-- Bootstrap tether Core JavaScript -->
-<script src="{{ asset('admin/libs/popper.js/dist/umd/popper.min.js') }}"></script>
-<script src="{{ asset('admin/libs/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script>
-<!-- apps -->
-<!-- apps -->
-<!-- <script src="{{ asset('admin/dist/js/app-style-switcher.js') }}"></script> -->
-<!-- <script src="{{ asset('admin/dist/js/feather.min.js') }}"></script> -->
-<!-- slimscrollbar scrollbar JavaScript -->
-<!-- <script src="{{ asset('admin/libs/perfect-scrollbar/dist/perfect-scrollbar.jquery.min.js') }}"></script> -->
-<script src="{{ asset('admin/extra-libs/sparkline/sparkline.js') }}"></script>
-<!--Wave Effects -->
-<!-- themejs -->
-<!--Menu sidebar -->
-<!-- <script src="{{ asset('admin/dist/js/sidebarmenu.js') }}"></script> -->
-<!--Custom JavaScript -->
-<!-- <script src="{{ asset('admin/dist/js/custom.min.js') }}"></script> -->
-<!--This page plugins -->
-<script src="{{ asset('admin/extra-libs/datatables.net/js/jquery.dataTables.min.js') }}"></script>
-<script src="{{ asset('admin/extra-libs/datatables.net-bs4/js/dataTables.responsive.min.js') }}"></script>
-<script src="{{ asset('admin/dist/js/pages/datatable/datatable-basic.init.js') }}"></script>
-<!-- <script src="{{ asset('DataTables/datatables.min.js') }}"></script> -->
-
 <script>
     function deleteSelected(button) {
         var data = $(button).data('adv');

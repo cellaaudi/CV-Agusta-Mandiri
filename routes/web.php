@@ -14,6 +14,7 @@ use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\IndonesiaController;
 use App\Http\Controllers\PropertyCartController;
 use App\Http\Controllers\PropertyController;
+use App\Http\Controllers\ReportController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -42,9 +43,7 @@ Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 Route::middleware(['auth'])->group(function () {
     // Route for Admin only
     Route::middleware("can:admin")->prefix('admin')->name('admin.')->group(function () {
-        Route::get('/home', function () {
-            return view('admin.index');
-        })->name('home');
+        Route::get('/home', function () { return view('admin.index'); })->name('home');
 
         // Products
         Route::resource('/advertising', AdvertisingController::class);
@@ -63,6 +62,17 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/{id}/detail', [AppointmentAdminController::class, 'detail'])->name('detail');
             Route::get('/{id}/edit', [AppointmentAdminController::class, 'edit'])->name('edit');
             Route::post('/update', [AppointmentAdminController::class, 'update'])->name('update');
+        });
+
+        // Reports
+        Route::prefix('report')->name('report.')->group(function () {
+            Route::get('/advertising', function () { return view('admin.report.produk.adv'); })->name('product.advInit');
+            Route::post('/advertising', [ReportController::class, 'adv'])->name('product.adv');
+            Route::get('/car', function () { return view('admin.report.produk.car'); })->name('product.carInit');
+            Route::post('/car', [ReportController::class, 'car'])->name('product.car');
+            Route::get('/property', function () { return view('admin.report.produk.prop'); })->name('product.propInit');
+            Route::post('/property', [ReportController::class, 'prop'])->name('product.prop');
+            Route::get('/user', [ReportController::class, 'user'])->name('user');
         });
     });
 

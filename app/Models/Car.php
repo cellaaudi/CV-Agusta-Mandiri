@@ -12,11 +12,6 @@ class Car extends Model
     protected $table = "car_products";
     protected $guarded = ['id'];
 
-    // public function appointment()
-    // {
-    //     return $this->belongsToMany("App\Models\Appointment", "car_carts", "car_product_id", "appointment_id");
-    // }
-
     public function car_brand()
     {
         return $this->belongsTo(CarBrand::class, "car_brand_id");

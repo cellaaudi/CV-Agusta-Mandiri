@@ -1,12 +1,5 @@
 @extends('layouts.admin')
 
-@section('css')
-<!-- Custom CSS -->
-<link href="{{ asset('admin/dist/css/style.min.css') }}" rel="stylesheet">
-<!-- This Page CSS -->
-<link rel="stylesheet" type="text/css" href="{{ asset('admin/extra-libs/prism/prism.css') }}">
-@endsection
-
 @section('breadcrumb')
 <div class="page-breadcrumb">
     <div class="row">
@@ -109,13 +102,6 @@
 @endsection
 
 @section('jquery')
-<!-- Bootstrap tether Core JavaScript -->
-<script src="{{ asset('admin/libs/popper.js/dist/umd/popper.min.js') }}"></script>
-<!-- slimscrollbar scrollbar JavaScript -->
-<script src="{{ asset('admin/extra-libs/sparkline/sparkline.js') }}"></script>
-<!-- This Page JS -->
-<script src="{{ asset('admin/extra-libs/prism/prism.js') }}"></script>
-
 <script>
     function deleteSelected(button) {
         var data = $(button).data('adv');

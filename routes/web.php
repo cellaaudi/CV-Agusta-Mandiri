@@ -111,9 +111,7 @@ Route::middleware(['auth'])->group(function () {
 
 // Route for Guest and All
 Route::name('customer.')->group(function () {
-    Route::get('/home', function () {
-        return view('index');
-    })->name('home');
+    Route::get('/home', [CustomerController::class, 'index'])->name('home');
     Route::get('/about', function () {
         return view('customer.about');
     })->name('about');

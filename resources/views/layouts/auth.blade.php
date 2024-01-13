@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('admin/images/favicon.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('storage/logo/logo-bg.png') }}">
     <title>CV Agusta Mandiri</title>
     <!-- Custom CSS -->
     <link href="{{ asset('admin/dist/css/style.min.css') }}" rel="stylesheet">
@@ -39,7 +39,10 @@
         <div class="auth-wrapper d-flex no-block justify-content-center align-items-center position-relative">
             <div class="auth-box row">
                 <div class="bg-white rounded-4">
-                    <div class="p-3">
+                    <div class="p-3 py-5">
+                        <div class="text-center">
+                            <img src="{{ asset('storage/logo/logo-text-bg.png') }}" alt="wrapkit" style="max-height: 100px;">
+                        </div>
 
                         @yield('content')
 

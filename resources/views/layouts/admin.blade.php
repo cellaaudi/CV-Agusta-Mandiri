@@ -10,7 +10,7 @@
     <meta name="author" content="">
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('storage/logo/logo-bg.png') }}">
-    <title>CV Agusta Mandiri</title>
+    <title>CV Agusta Mandiri - Admin</title>
     <!-- Custom CSS -->
     <link href="{{ asset('admin/extra-libs/c3/c3.min.css') }}" rel="stylesheet">
     <link href="{{ asset('admin/libs/chartist/dist/chartist.min.css') }}" rel="stylesheet">
@@ -93,27 +93,10 @@
                         <!-- ============================================================== -->
                         <!-- User profile and search -->
                         <!-- ============================================================== -->
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="javascript:void(0)" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <li class="nav-item">
+                            <div class="nav-link" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <img src="{{ asset('admin/images/users/profile-pic.jpg') }}" alt="user" class="rounded-circle" width="40">
-                                <span class="ms-2 d-none d-lg-inline-block"><span>Halo,</span> <span class="text-dark">{{ auth()->user()->name }}</span> <i data-feather="chevron-down" class="svg-icon"></i></span>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-end dropdown-menu-right user-dd animated flipInY">
-                                <a class="dropdown-item" href="javascript:void(0)"><i data-feather="user" class="svg-icon me-2 ms-1"></i>
-                                    My Profile</a>
-                                <a class="dropdown-item" href="javascript:void(0)"><i data-feather="credit-card" class="svg-icon me-2 ms-1"></i>
-                                    My Balance</a>
-                                <a class="dropdown-item" href="javascript:void(0)"><i data-feather="mail" class="svg-icon me-2 ms-1"></i>
-                                    Inbox</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="javascript:void(0)"><i data-feather="settings" class="svg-icon me-2 ms-1"></i>
-                                    Account Setting</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="{{route('logout')}}"><i data-feather="power" class="svg-icon me-2 ms-1"></i>
-                                    Logout</a>
-                                <div class="dropdown-divider"></div>
-                                <div class="pl-4 p-3"><a href="javascript:void(0)" class="btn btn-sm btn-info">View
-                                        Profile</a></div>
+                                <span class="ms-2 d-none d-lg-inline-block"><span>Halo,</span> <span class="text-dark">{{ auth()->user()->name }}</span></span>
                             </div>
                         </li>
                         <!-- ============================================================== -->

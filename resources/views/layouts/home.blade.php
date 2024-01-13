@@ -10,8 +10,8 @@
     <meta content="" name="keywords">
 
     <!-- Favicons -->
-    <link href="{{ asset('customer/img/favicon.png') }}" rel="icon">
-    <link href="{{ asset('customer/img/apple-touch-icon.png') }}" rel="apple-touch-icon">
+    <link href="{{ asset('storage/logo/logo-bg.png') }}" rel="icon">
+    <link href="{{ asset('storage/logo/logo-bg.png') }}" rel="apple-touch-icon">
 
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Roboto:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
@@ -55,7 +55,7 @@
                 <nav id="navbar" class="navbar">
                     <ul>
                         @if (Route::is('customer.home'))
-                        <li><a class="nav-link scrollto" href="#hero">Home</a></li>
+                        <li><a class="nav-link scrollto" href="#hero">Beranda</a></li>
                         <li><a class="nav-link scrollto" href="#about">Tentang</a></li>
                         <li><a class="nav-link scrollto" href="#services">Layanan</a></li>
                         <li><a class="nav-link scrollto " href="#portfolio">Portofolio</a></li>
@@ -112,33 +112,23 @@
                         </div>
 
                         <div class="col-lg-2 col-md-6 footer-links">
-                            <h4>Useful Links</h4>
+                            <h4>Tautan</h4>
                             <ul>
-                                <li><i class="bx bx-chevron-right"></i> <a href="#">Home</a></li>
-                                <li><i class="bx bx-chevron-right"></i> <a href="#">About us</a></li>
-                                <li><i class="bx bx-chevron-right"></i> <a href="#">Services</a></li>
-                                <li><i class="bx bx-chevron-right"></i> <a href="#">Terms of service</a></li>
-                                <li><i class="bx bx-chevron-right"></i> <a href="#">Privacy policy</a></li>
+                                <li><i class="bx bx-chevron-right"></i> <a href="#hero">Beranda</a></li>
+                                <li><i class="bx bx-chevron-right"></i> <a href="#about">Tentang</a></li>
+                                <li><i class="bx bx-chevron-right"></i> <a href="#portfolio">Portofolio</a></li>
+                                <li><i class="bx bx-chevron-right"></i> <a href="#pricing">Mitra</a></li>
+                                <li><i class="bx bx-chevron-right"></i> <a href="#contact">Kontak</a></li>
                             </ul>
                         </div>
 
                         <div class="col-lg-3 col-md-6 footer-links">
-                            <h4>Our Services</h4>
+                            <h4>Layanan Kami</h4>
                             <ul>
-                                <li><i class="bx bx-chevron-right"></i> <a href="#">Web Design</a></li>
-                                <li><i class="bx bx-chevron-right"></i> <a href="#">Web Development</a></li>
-                                <li><i class="bx bx-chevron-right"></i> <a href="#">Product Management</a></li>
-                                <li><i class="bx bx-chevron-right"></i> <a href="#">Marketing</a></li>
-                                <li><i class="bx bx-chevron-right"></i> <a href="#">Graphic Design</a></li>
+                                <li><i class="bx bx-chevron-right"></i> <a href="{{ route('customer.advertising') }}">Agusta Advertising</a></li>
+                                <li><i class="bx bx-chevron-right"></i> <a href="{{ route('customer.car') }}">Agusta Motor</a></li>
+                                <li><i class="bx bx-chevron-right"></i> <a href="{{ route('customer.property') }}">Agusta Properti</a></li>
                             </ul>
-                        </div>
-
-                        <div class="col-lg-4 col-md-6 footer-newsletter">
-                            <h4>Join Our Newsletter</h4>
-                            <p>Tamen quem nulla quae legam multos aute sint culpa legam noster magna</p>
-                            <form action="" method="post">
-                                <input type="email" name="email"><input type="submit" value="Subscribe">
-                            </form>
                         </div>
 
                     </div>
@@ -160,11 +150,10 @@
                         </div>
                     </div>
                     <div class="social-links text-center text-md-right pt-3 pt-md-0">
-                        <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
-                        <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
-                        <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
-                        <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>
-                        <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
+                        <a href="https://wa.me/6281318733001" target="_blank" class="whatsapp"><i class="bx bxl-whatsapp"></i></a>
+                        <a href="https://wa.me/6281916511427" target="_blank" class="whatsapp"><i class="bx bxl-whatsapp"></i></a>
+                        <a href="https://www.facebook.com/agusta.advertising" target="_blank" class="facebook"><i class="bx bxl-facebook"></i></a>
+                        <a href="https://www.instagram.com/agusta.advertising" target="_blank" class="instagram"><i class="bx bxl-instagram"></i></a>
                     </div>
                 </div>
 

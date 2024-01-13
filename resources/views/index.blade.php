@@ -57,23 +57,23 @@
             <div class="row counters">
 
                 <div class="col-lg-3 col-6 text-center">
-                    <span data-purecounter-start="0" data-purecounter-end="232" data-purecounter-duration="1" class="purecounter"></span>
-                    <p>Clients</p>
+                    <span data-purecounter-start="0" data-purecounter-end="{{ $users }}" data-purecounter-duration="1" class="purecounter"></span>
+                    <p>Pelanggan</p>
                 </div>
 
                 <div class="col-lg-3 col-6 text-center">
-                    <span data-purecounter-start="0" data-purecounter-end="521" data-purecounter-duration="1" class="purecounter"></span>
-                    <p>Projects</p>
+                    <span data-purecounter-start="0" data-purecounter-end="{{ $appointments }}" data-purecounter-duration="1" class="purecounter"></span>
+                    <p>Janji Temu Terbuat & Selesai</p>
                 </div>
 
                 <div class="col-lg-3 col-6 text-center">
-                    <span data-purecounter-start="0" data-purecounter-end="1463" data-purecounter-duration="1" class="purecounter"></span>
-                    <p>Hours Of Support</p>
+                    <span data-purecounter-start="0" data-purecounter-end="{{ $advs }}" data-purecounter-duration="1" class="purecounter"></span>
+                    <p>Jenis Advertising</p>
                 </div>
 
                 <div class="col-lg-3 col-6 text-center">
-                    <span data-purecounter-start="0" data-purecounter-end="15" data-purecounter-duration="1" class="purecounter"></span>
-                    <p>Hard Workers</p>
+                    <span data-purecounter-start="0" data-purecounter-end="{{ $cps }}" data-purecounter-duration="1" class="purecounter"></span>
+                    <p>Mobil dan Properti Terjual</p>
                 </div>
 
             </div>

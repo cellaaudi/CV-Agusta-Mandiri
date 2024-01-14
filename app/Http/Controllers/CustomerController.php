@@ -9,6 +9,7 @@ use App\Models\Car;
 use App\Models\CarBrand;
 use App\Models\CarCategory;
 use App\Models\CarPhoto;
+use App\Models\Portofolio;
 use App\Models\Property;
 use App\Models\PropertyPhoto;
 use App\Models\User;
@@ -23,8 +24,9 @@ class CustomerController extends Controller
         $cars = Car::where('sell_status', 'Sold')->count();
         $props = Property::where('status', 'Sold')->count();
         $cps = $cars + $props;
+        $portos = Portofolio::all();
 
-        return view('index', compact('users', 'appointments', 'advs', 'cps'));
+        return view('index', compact('users', 'appointments', 'advs', 'cps', 'portos'));
     }
 
     public function advs()
@@ -75,5 +77,12 @@ class CustomerController extends Controller
         $photos = PropertyPhoto::where('prop_product_id', $id)->get();
 
         return view('customer.prop.propdetail', compact('prop', 'photos'));
+    }
+
+    public function porto_detail($id)
+    {
+        $porto = Portofolio::find($id);
+
+        return view('customer.portfoliodetail', compact('porto'));
     }
 }

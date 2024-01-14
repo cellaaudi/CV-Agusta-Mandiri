@@ -123,6 +123,7 @@ Route::name('customer.')->group(function () {
     Route::get('/car/detail/{adv}', [CustomerController::class, 'car_detail'])->name('car.detail');
     Route::get('/property', [CustomerController::class, 'props'])->name('property');
     Route::get('/property/detail/{adv}', [CustomerController::class, 'prop_detail'])->name('property.detail');
+    Route::get('/portfolio/{id}', [CustomerController::class, 'porto_detail'])->name('portfolio.detail');
 });
 
 // Route for Indonesia.sql

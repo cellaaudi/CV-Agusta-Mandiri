@@ -23,5 +23,7 @@ class DatabaseSeeder extends Seeder
         $this->call(AdvPhotoSeeder::class);
         $this->call(CarPhotoSeeder::class);
         $this->call(PropPhotoSeeder::class);
+
+        $this->call(PortfolioSeeder::class);
     }
 }

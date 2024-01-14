@@ -38,7 +38,7 @@
             <div class="row row-cols-1 row-cols-md-3 g-4 card-container">
                 @foreach($advs as $adv)
                 <a href="{{ route('customer.advertising.detail', $adv) }}" class="col card-item filter-{{ $adv -> category }}">
-                    <div class=" card h-100">
+                    <div class=" card h-100 shadow border-0">
                         @foreach($photos as $photo)
                         @if ($adv -> id == $photo -> adv_product_id)
                         <img src="{{ asset('storage/' . $photo -> url) }}" class="card-img-top" alt="{{ $adv -> name }}">

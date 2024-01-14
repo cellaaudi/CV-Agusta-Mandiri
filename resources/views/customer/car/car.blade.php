@@ -95,7 +95,7 @@
                                 <a href="{{ route('customer.car.detail', $car) }}" class="col data-aos=" data-aos="fade-up"
                                     data-aos-delay="{{ $delay }}" data-brand-id="{{ $car->car_brand_id }}"
                                     data-category-id="{{ $car->car_category_id }}">
-                                    <div class=" card h-100">
+                                    <div class=" card h-100 border-0 shadow">
                                         @foreach ($photos as $photo)
                                             @if ($car->id == $photo->car_product_id)
                                                 <img src="{{ asset('storage/' . $photo->url) }}" class="card-img-top"

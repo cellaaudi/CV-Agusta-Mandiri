@@ -7,7 +7,7 @@
         <div class="container">
 
             <div class="d-flex justify-content-between align-items-center">
-                <h2></h2>
+                <h2>{{ $prop -> title }}</h2>
                 <ol>
                     <li><a href="{{ route('customer.home') }}">Halaman Utama</a></li>
                     <li><a href="{{ route('customer.property') }}">Agusta Properti</a></li>

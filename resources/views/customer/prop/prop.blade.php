@@ -117,7 +117,7 @@
                                     data-aos="fade-up" data-aos-delay="{{ $delay }}"
                                     data-category="{{ $prop->category }}" data-certificate="{{ $prop->certification }}"
                                     data-type="{{ $prop->type }}">
-                                    <div class=" card h-100">
+                                    <div class=" card h-100 border-0 shadow">
                                         @foreach ($photos as $photo)
                                             @if ($prop->id == $photo->prop_product_id)
                                                 <img src="{{ asset('storage/' . $photo->url) }}" class="card-img-top"

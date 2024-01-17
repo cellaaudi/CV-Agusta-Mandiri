@@ -34,7 +34,7 @@
                         <div class="form-group mb-3 row">
                             <label for="inputHorizontal" class="col-sm-2 col-form-label">Status</label>
                             <div class="col-sm-10">
-                                <label class="form-control {{ $app->order_status == 'Processed' ? 'bg-warning text-dark' : ($app->order_status == 'Finished' ? 'bg-success text-white' : 'bg-danger text-white') }}">{{ $app->order_status == 'Processed' ? 'Sedang diproses' : ($app->order_status == 'Finished' ? 'Selesai' : 'Dibatalkan') }}</label>
+                                <label class="form-control {{ $app->order_status == 'Processed' ? 'bg-warning text-dark' : ($app->order_status == 'Finished' ? 'bg-success text-white' : 'bg-danger text-white') }}">{{ $app->order_status == 'Processed' ? 'Sedang berjalan' : ($app->order_status == 'Finished' ? 'Selesai' : 'Dibatalkan') }}</label>
                             </div>
                         </div>
                         <div class="form-group mb-3 row">

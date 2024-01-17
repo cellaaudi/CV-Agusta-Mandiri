@@ -4,13 +4,13 @@
 <div class="page-breadcrumb">
     <div class="row">
         <div class="col-7 align-self-center">
-            <h4 class="page-title text-truncate text-dark font-weight-medium mb-1">Janji Temu: Sedang Berjalan</h4>
+            <h4 class="page-title text-truncate text-dark font-weight-medium mb-1">Janji Temu: Selesai</h4>
             <div class="d-flex align-items-center">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb m-0 p-0">
                         <li class="breadcrumb-item"><a href="{{ route('admin.home') }}" class="text-muted">Beranda</a></li>
                         <li class="breadcrumb-item text-muted active" aria-current="page">Janji Temu</li>
-                        <li class="breadcrumb-item text-muted active" aria-current="page">Sedang Berjalan</li>
+                        <li class="breadcrumb-item text-muted active" aria-current="page">Selesai</li>
                     </ol>
                 </nav>
             </div>

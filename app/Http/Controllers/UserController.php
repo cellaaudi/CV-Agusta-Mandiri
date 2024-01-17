@@ -80,6 +80,19 @@ class UserController extends Controller
         ]);
 
         $user = User::find($id);
+
+        if ($request->email !== $user->email) {
+            $this->validate($request, [
+                'email' => 'unique:users',
+            ]);
+        }
+
+        if ($request->telephone !== $user->telephone) {
+            $this->validate($request, [
+                'telephone' => 'unique:users',
+            ]);
+        }
+
         $user->name = $validateData['name'];
         $user->email = $validateData['email'];
         $user->telephone = $validateData['telephone'];

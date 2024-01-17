@@ -121,7 +121,7 @@
                         table.row.add($(row)).draw(false);
                     });
                 } else {
-                    tableBody.html('<tr><td colspan="7" class="text-center">Tidak ada data tercatat pada tanggal tersebut</td></tr>');
+                    tableBody.html('<tr><td colspan="8" class="text-center">Tidak ada data tercatat pada tanggal tersebut</td></tr>');
                 }
 
                 $('.rupiah').each(function() {

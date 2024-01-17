@@ -43,7 +43,7 @@ class AdvertisingController extends Controller
             'name' => 'required',
             'category' => 'required',
             'photos' => 'required|array',
-            'photos.*' => 'image|mimes:jpeg,jpg,png,svg,gif'
+            'photos.*' => 'image|mimes:jpeg,jpg,png,svg,gif,webp,jfif'
         ]);
 
         if ($request->hasFile('photos')) {
@@ -64,7 +64,7 @@ class AdvertisingController extends Controller
             }
         }
 
-        return redirect()->route('admin.advertising.index')->with('status', 'Produk berhasil ditambahkan');
+        return redirect()->route('admin.advertising.show', $product->id)->with('status', 'Produk berhasil ditambahkan');
     }
 
     /**
@@ -107,7 +107,7 @@ class AdvertisingController extends Controller
         $request->validate([
             'name' => 'required',
             'category' => 'required',
-            'photos.*' => 'image|mimes:jpeg,jpg,png,svg,gif'
+            'photos.*' => 'image|mimes:jpeg,jpg,png,svg,gif,webp,jfif'
         ]);
 
         $delPhotos = $request->del_photos[0];
@@ -151,7 +151,7 @@ class AdvertisingController extends Controller
             }
         }
 
-        return redirect()->route('admin.advertising.index');
+        return redirect()->route('admin.advertising.show', $id);
     }
 
     /**

@@ -32,7 +32,7 @@
                                 <label for="inputHorizontal" class="col-sm-2 col-form-label">Status</label>
                                 <div class="col-sm-10">
                                     <select class="form-select" name="order_status" id="order_status">
-                                        <option value="Processed" {{ $app->order_status == 'Processed' ? 'selected' : '' }}>Sedang diproses</option>
+                                        <option value="Processed" {{ $app->order_status == 'Processed' ? 'selected' : '' }}>Sedang berjalan</option>
                                         <option value="Finished" {{ $app->order_status == 'Finished' ? 'selected' : '' }}>Selesai</option>
                                         <option value="Cancelled" {{ $app->order_status == 'Cancelled' ? 'selected' : '' }}>Dibatalkan</option>
                                     </select>

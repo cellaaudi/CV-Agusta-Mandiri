@@ -61,7 +61,7 @@ class PropertyController extends Controller
             'certificate' => 'required|min:1',
             'desc' => 'required',
             'photos' => 'required',
-            'photos.*' => 'image|mimes:jpeg,jpg,png,svg,gif',
+            'photos.*' => 'image|mimes:jpeg,jpg,png,svg,gif,webp,jfif',
         ]);
 
         $cert = implode(", ", $request->certificate);
@@ -97,7 +97,7 @@ class PropertyController extends Controller
             }
         }
 
-        return redirect()->route('admin.property.index')->with('status', 'Produk berhasil ditambahkan');
+        return redirect()->route('admin.property.index', $product->id)->with('status', 'Produk berhasil ditambahkan');
     }
 
     /**
@@ -158,7 +158,7 @@ class PropertyController extends Controller
             'electricity' => 'nullable|numeric',
             'certificate' => 'required|min:1',
             'desc' => 'required',
-            'photos.*' => 'image|mimes:jpeg,jpg,png,svg,gif',
+            'photos.*' => 'image|mimes:jpeg,jpg,png,svg,gif,webp,jfif',
         ]);
 
         $cert = implode(", ", $request->certificate);
@@ -217,7 +217,7 @@ class PropertyController extends Controller
             }
         }
 
-        return redirect()->route('admin.property.index');
+        return redirect()->route('admin.property.show', $id);
     }
 
     /**

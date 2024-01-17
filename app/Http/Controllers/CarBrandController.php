@@ -41,11 +41,11 @@ class CarBrandController extends Controller
             'brand' => 'required',
         ]);
 
-        CarBrand::create([
+        $brand = CarBrand::create([
             'brand' => $request->brand,
         ]);
 
-        return redirect()->route('admin.car.brand.index')->with('status', 'Produk berhasil ditambahkan');
+        return redirect()->route('admin.car.brand.show', $brand->id)->with('status', 'Produk berhasil ditambahkan');
     }
 
     /**
@@ -89,7 +89,7 @@ class CarBrandController extends Controller
         $brand->brand = $request->brand;
         $brand->save();
 
-        return redirect()->route('admin.car.brand.index');
+        return redirect()->route('admin.car.brand.show', $id);
     }
 
     /**

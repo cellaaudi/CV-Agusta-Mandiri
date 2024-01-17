@@ -41,11 +41,11 @@ class CarCategoryController extends Controller
             'category' => 'required',
         ]);
 
-        CarCategory::create([
+        $category = CarCategory::create([
             'category' => $request->category,
         ]);
 
-        return redirect()->route('admin.car.category.index')->with('status', 'Produk berhasil ditambahkan');
+        return redirect()->route('admin.car.category.show', $category->id)->with('status', 'Produk berhasil ditambahkan');
     }
 
     /**
@@ -89,7 +89,7 @@ class CarCategoryController extends Controller
         $category->category = $request->category;
         $category->save();
 
-        return redirect()->route('admin.car.category.index');
+        return redirect()->route('admin.car.category.show', $id);
     }
 
     /**

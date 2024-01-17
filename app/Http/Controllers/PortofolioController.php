@@ -43,7 +43,7 @@ class PortofolioController extends Controller
             'description' => 'required',
             'category' => 'required',
             'photo' => 'required',
-            'photo.*' => 'image|mimes:jpeg,jpg,png,svg,gif'
+            'photo.*' => 'image|mimes:jpeg,jpg,png,svg,gif,webp,jfif'
         ]);
 
         try {
@@ -51,7 +51,7 @@ class PortofolioController extends Controller
                 $file = $request->file('photo');
                 $filename = $file->store('porto');
 
-                Portofolio::create([
+                $porto = Portofolio::create([
                     'title' => $request->title,
                     'description' => $request->description,
                     'category' => $request->category,
@@ -59,7 +59,7 @@ class PortofolioController extends Controller
                 ]);
             }
 
-            return redirect()->route('admin.portfolio.index');
+            return redirect()->route('admin.portfolio.show', $porto->id);
         } catch (PDOException $e) {
             return response()->json([
                 'status' => 'Failed',
@@ -108,7 +108,7 @@ class PortofolioController extends Controller
             'description' => 'required',
             'category' => 'required',
             'photo' => 'required',
-            'photo.*' => 'image|mimes:jpeg,jpg,png,svg,gif'
+            'photo.*' => 'image|mimes:jpeg,jpg,png,svg,gif,webp,jfif'
         ]);
 
         try {
@@ -131,7 +131,7 @@ class PortofolioController extends Controller
 
             $port->save();
 
-            return redirect()->route('admin.portfolio.index');
+            return redirect()->route('admin.portfolio.show', $id);
         } catch (PDOException $e) {
             return response()->json([
                 'status' => 'Failed',

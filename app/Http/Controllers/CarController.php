@@ -55,7 +55,7 @@ class CarController extends Controller
             'fuel' => 'required',
             'desc' => 'required',
             'photos' => 'required',
-            'photos.*' => 'image|mimes:jpeg,jpg,png,svg,gif'
+            'photos.*' => 'image|mimes:jpeg,jpg,png,svg,gif,webp,jfif'
         ]);
 
         if ($request->hasFile('photos')) {
@@ -85,7 +85,7 @@ class CarController extends Controller
             }
         }
 
-        return redirect()->route('admin.car.sell.index')->with('status', 'Produk berhasil ditambahkan');
+        return redirect()->route('admin.car.sell.show', $product->id)->with('status', 'Produk berhasil ditambahkan');
     }
 
     /**
@@ -139,7 +139,7 @@ class CarController extends Controller
             'fuel' => 'required',
             'desc' => 'required',
             'sell_status' => 'required',
-            'photos.*' => 'image|mimes:jpeg,jpg,png,svg,gif'
+            'photos.*' => 'image|mimes:jpeg,jpg,png,svg,gif,webp,jfif'
         ]);
 
         $delPhotos = $request->del_photos[0];
@@ -192,7 +192,7 @@ class CarController extends Controller
             }
         }
 
-        return redirect()->route('admin.car.sell.index');
+        return redirect()->route('admin.car.sell.show', $id);
     }
 
     /**
